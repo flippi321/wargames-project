@@ -1,3 +1,8 @@
+/**
+ * Abstract Unit Class
+ * @author  chribrev
+ * @version 1.0
+ */
 abstract class Unit {
     private String name;
     private int health;
@@ -9,7 +14,7 @@ abstract class Unit {
      * @param name the name of the unit
      * @param health how much damage this unit can withstand
      * @param attack how much damage this unit can afflict
-     * @param armour how much damage this unit can resist
+     * @param armour how much damage this unit can resist, before loosing health
      */
     public Unit(String name, int health, int attack, int armour) {
         this.name = name;
@@ -19,7 +24,9 @@ abstract class Unit {
     }
 
     /**
-     * Fuction for checking how much damage this unit does to another unit
+     * Method representing this unit attacking another unit and afflicting damage
+     * Using the formula:
+     * healthOpponent – (attack + attackBonus)this + (armor + resistBonus)opponent
      * @param opponent the unit under attack
      */
     public void attack(Unit opponent){
