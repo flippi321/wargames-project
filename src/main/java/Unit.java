@@ -12,7 +12,7 @@ abstract class Unit {
     /**
      * Abstract class representing a unit in a battle
      * @param name the name of the unit
-     * @param health how much damage this unit can withstand
+     * @param health how much damage this unit can sustain
      * @param attack how much damage this unit can afflict
      * @param armour how much damage this unit can resist, before loosing health
      */
