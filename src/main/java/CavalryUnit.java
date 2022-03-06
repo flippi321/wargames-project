@@ -8,7 +8,7 @@ public class CavalryUnit extends Unit{
      * @param health the damage this unit can sustain
      */
     public CavalryUnit(String name, int health) {
-        super(name, health, 20, 12);
+        super(name, health,20, 12);
         Charges = true;
     }
 

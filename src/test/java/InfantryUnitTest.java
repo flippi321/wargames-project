@@ -6,10 +6,21 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class InfantryUnitTest {
     @Test
     @DisplayName("Testing for correct automatic armour values")
-    public void checkInfantryAutomaticValues() {
+    public void checkInfantryAutomaticArmourValues() {
         try {
             Unit newInfantry = new InfantryUnit("Generic Spearmen", 10);
             assertEquals(10, newInfantry.getArmour());
+        } catch (Exception e) {
+            fail("checkInfantryAutomaticValues failed");
+        }
+    }
+
+    @Test
+    @DisplayName("Testing for correct automatic armour values")
+    public void checkInfantryAutomaticAttackValues() {
+        try {
+            Unit newInfantry = new InfantryUnit("Generic Spearmen", 10);
+            assertEquals(15, newInfantry.getAttack());
         } catch (Exception e) {
             fail("checkInfantryAutomaticValues failed");
         }
