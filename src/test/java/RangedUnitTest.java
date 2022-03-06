@@ -88,7 +88,7 @@ public class RangedUnitTest {
     @DisplayName("Testing Defence and attack")
     public void checkFighting() {
         try {
-            int originalHealth = 100;
+            int originalHealth = 150;
             Unit rangedDefender = new RangedUnit("Deserter", originalHealth);
             Unit rangedAggressor = new RangedUnit("Town archer", 100);
             rangedAggressor.attack(rangedDefender);
