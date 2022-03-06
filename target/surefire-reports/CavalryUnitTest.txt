@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: CavalryUnitTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.016 s <<< FAILURE! - in CavalryUnitTest
+CavalryUnitTest.checkCavalryName  Time elapsed: 0.008 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Hussars> but was: <Hussar>
+	at CavalryUnitTest.checkCavalryName(CavalryUnitTest.java:45)
+
