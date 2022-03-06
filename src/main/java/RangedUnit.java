@@ -1,14 +1,26 @@
 public class RangedUnit extends Unit{
-    private int numberOfTimesAttacked = 0;
+    private int numberOfTimesAttacked;
 
     /**
      * Creates an object which represents a ranged unit in the battle
-     * @param  name the name of the unit
+     * @param name the name of the unit
      * @param health the damage this unit can sustain
      */
     public RangedUnit(String name, int health) {
         super(name, health, 15, 8);
+        numberOfTimesAttacked = 0;
+    }
 
+    /**
+     * Creates an object which represents a ranged unit in the battle
+     * @param name the name of the unit
+     * @param health the damage this unit can sustain
+     * @param attack how much damage this unit can afflict
+     * @param armour how much damage this unit can resist, before loosing health
+     */
+    public RangedUnit(String name, int health, int attack, int armour) {
+        super(name, health, attack, armour);
+        numberOfTimesAttacked = 0;
     }
 
     /**
