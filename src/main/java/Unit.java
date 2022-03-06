@@ -62,11 +62,9 @@ abstract class Unit {
 
     @Override
     public String toString() {
-        return "Unit{" +
-                "name='" + name + '\'' +
-                ", health=" + health +
-                ", attack=" + attack +
-                ", armour=" + armour +
-                '}';
+        return "This unit, called " + name +
+                "has a health value of " + health +
+                ", attack value of " + attack +
+                " and an armour value of " + armour;
     }
 }

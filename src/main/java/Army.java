@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -8,7 +9,7 @@ public class Army {
 
     public Army(String name) {
         this.name = name;
-        this.units = null;
+        this.units = new ArrayList<>();
     }
 
     public Army(String name, List<Unit> units) {
@@ -56,7 +57,8 @@ public class Army {
 
     @Override
     public String toString() {
-        return "Army :" + name + ", with units: " + units;
+        return "This army is called " + name +
+                " and has the units: " + units;
     }
 
     @Override
