@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: RangedUnitTest
--------------------------------------------------------------------------------
-Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.016 s <<< FAILURE! - in RangedUnitTest
-RangedUnitTest.checkRangedName  Time elapsed: 0 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <Sharpshooters> but was: <Sharpshooter>
-	at RangedUnitTest.checkRangedName(RangedUnitTest.java:45)
-
