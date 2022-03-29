@@ -1,3 +1,8 @@
+/**
+ * Cavalry Unit
+ * @author  chribrev
+ * @version 1.0
+ */
 public class CavalryUnit extends Unit{
     boolean Charges;
 

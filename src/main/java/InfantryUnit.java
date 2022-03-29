@@ -1,3 +1,8 @@
+/**
+ * Infantry Unit
+ * @author  chribrev
+ * @version 1.0
+ */
 public class InfantryUnit extends Unit{
 
     /**

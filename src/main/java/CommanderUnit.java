@@ -1,3 +1,8 @@
+/**
+ * Commander Unit
+ * @author  chribrev
+ * @version 1.0
+ */
 public class CommanderUnit extends CavalryUnit{
 
     /**

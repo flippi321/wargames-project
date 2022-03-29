@@ -1,3 +1,8 @@
+/**
+ * Battle Calss
+ * @author  chribrev
+ * @version 1.0
+ */
 public class Battle {
     Army armyOne;
     Army armyTwo;

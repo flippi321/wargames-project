@@ -1,3 +1,8 @@
+/**
+ * Ranged Unit
+ * @author  chribrev
+ * @version 1.0
+ */
 public class RangedUnit extends Unit{
     private int numberOfTimesAttacked;
 
