@@ -35,7 +35,10 @@ public class Battle {
         if (armyOne.hasUnits()){
             return armyOne;
         }
-        return armyTwo;
+        if (armyTwo.hasUnits()){
+            return armyTwo;
+        }
+        return null;
     }
 
     @Override

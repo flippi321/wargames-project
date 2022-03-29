@@ -42,7 +42,7 @@ public class RangedUnitTest {
     public void checkRangedName() {
         try {
             Unit newRanged = new RangedUnit("Sharpshooter", 100);
-            assertEquals("Sharpshooters", newRanged.getName());
+            assertEquals("Sharpshooter", newRanged.getName());
         } catch (Exception e) {
             fail("checkRangedName failed");
         }

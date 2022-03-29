@@ -42,7 +42,7 @@ public class CavalryUnitTest {
     public void checkCavalryName() {
         try {
             Unit newCavalry = new CavalryUnit("Hussar", 100);
-            assertEquals("Hussars", newCavalry.getName());
+            assertEquals("Hussar", newCavalry.getName());
         } catch (Exception e) {
             fail("checkCavalryName failed");
         }
