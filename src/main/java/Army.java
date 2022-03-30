@@ -92,6 +92,22 @@ public class Army {
         return units.get(unitNumber);
     }
 
+    public List<Unit> getInfantryUnits(){
+        return units.stream().filter(unit -> unit.getClass().equals(InfantryUnit.class)).toList();
+    }
+
+    public List<Unit> getCavalryUnits(){
+        return units.stream().filter(unit -> unit.getClass().equals(CavalryUnit.class)).toList();
+    }
+
+    public List<Unit> getCommanderUnits(){
+        return units.stream().filter(unit -> unit.getClass().equals(CommanderUnit.class)).toList();
+    }
+
+    public List<Unit> getRangedUnits(){
+        return units.stream().filter(unit -> unit.getClass().equals(RangedUnit.class)).toList();
+    }
+
     /**
      * Method used to represent an army's information in the form of a string
      * @return a string of information relating to the army
