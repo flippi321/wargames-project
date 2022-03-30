@@ -44,7 +44,6 @@ public class BattleTest {
             //Battle
             Battle epicBattle = new Battle(armyOne, armyTwo);
             assertEquals(armyOne, epicBattle.simulate());
-
         } catch (Exception e) {
             fail("checkHasUnitsWhenNotEmpty failed");
         }
