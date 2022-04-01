@@ -1,7 +1,4 @@
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 
 public class Army {
@@ -125,8 +122,12 @@ public class Army {
     }
 
     public void loadArmy(String fileLocation){
+        fileLocation = fileLocation.trim();
         if (!fileLocation.endsWith(".csv")){
             fileLocation = (fileLocation + ".csv");
+        }
+        if (!fileLocation.startsWith("src/main/resources/")){
+            fileLocation = ("src/main/resources/"  + fileLocation);
         }
         if(fileLocation.contains("\\")){
             throw new IllegalArgumentException("You used \\ when / was applicable, please change this");
@@ -135,47 +136,49 @@ public class Army {
         try{
             FileInputStream fileInput = new FileInputStream(fileLocation);
             Scanner scanner = new Scanner(fileInput);
-            Army army = new Army(scanner.nextLine());
-            int line = 1;
+            List<Unit> newUnits = new ArrayList<>();
 
+            //Removing current units and adding name
+            name = scanner.nextLine();
+            units.clear();
+
+            //Adding saved units
             while(scanner.hasNextLine())
             {
-                if(line>1 && !scanner.nextLine().isEmpty()){
-                    String thisLine = scanner.nextLine();
-                    String[] lineVariables = thisLine.split(", ");
-
+                String thisLine = scanner.nextLine();
+                String[] lineVariables = thisLine.split(",");
+                if(lineVariables.length>1 && !thisLine.isBlank()){
                     // Making the unit
-                    switch (lineVariables[0]) {
+                    switch (lineVariables[0].trim()) {
                         case "InfantryUnit" -> {
                             InfantryUnit unit = new InfantryUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
-                            army.add(unit);
+                            newUnits.add(unit);
                         }
                         case "RangedUnit" -> {
                             RangedUnit unit = new RangedUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
-                            army.add(unit);
+                            newUnits.add(unit);
                         }
                         case "CavalryUnit" -> {
                             CavalryUnit unit = new CavalryUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
-                            army.add(unit);
+                            newUnits.add(unit);
                         }
                         case "CommanderUnit" -> {
                             CommanderUnit unit = new CommanderUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
-                            army.add(unit);
+                            newUnits.add(unit);
                         }
                         default -> throw new IllegalArgumentException("Unit must have a valid name");
                     }
                 }
-                line++;
             }
             scanner.close();
-            System.out.println(army.getInfantryUnits().toString());
+            setUnits(newUnits);
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
     }
 
     public void saveArmy(){
-        String fileLocation = getName();
+        String fileLocation = getName().trim();
 
         if (!fileLocation.endsWith(".csv")){
             fileLocation = (fileLocation + ".csv");
@@ -191,12 +194,29 @@ public class Army {
             PrintWriter writer = new PrintWriter(fileLocation);
             writer.println(name);
             for (Unit unit : units){
-                writer.println(String.format("%s, %s, %s", unit.getClass().getSimpleName(), unit.getName(), unit.getHealth()));
+                writer.println(String.format("%s,%s,%s", unit.getClass().getSimpleName(), unit.getName(), unit.getHealth()));
             }
             writer.close();
             System.out.println("Saved File");
         } catch (IOException e){
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void removeSavedArmy(String fileLocation){
+        if (!fileLocation.endsWith(".csv")){
+            fileLocation = (fileLocation + ".csv");
+        }
+        if (!fileLocation.startsWith("src/main/resources/")){
+            fileLocation = ("src/main/resources/"  + fileLocation);
+        }
+
+        File file = new File(fileLocation);
+        if (file.delete()) {
+            System.out.println("File deleted successfully");
+        }
+        else {
+            throw new IllegalArgumentException("Failed to delete the file");
         }
     }
 
@@ -207,20 +227,7 @@ public class Army {
     @Override
     public String toString() {
         return "This army is called " + name +
-                " and has the units: " + units;
-    }
-
-    /**
-     * Method for checking if to classes share the same name, which is the identifying factor of an army
-     * @param o the class who the army is compared to
-     * @return true if the armies share the same name, false if not they don't
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Army army = (Army) o;
-        return name.equals(army.name) && units.equals(army.units);
+                " and has the units: " + units.toString();
     }
 
     @Override
@@ -229,15 +236,18 @@ public class Army {
     }
 
     /**
-
+     * Main class used for saving an army as a csv file in the "resources" folder
+     * Is not a final main, just a tool so that you can see that saving a
      */
-
     public static void main(String[] args){
-        Army army = new Army("TestArmy2");
+        Army army = new Army("TestArmy");
         army.add(new CommanderUnit("Geralt", 5000));
-        for(int i = 0; i < 20; i++){
-            army.add(new InfantryUnit("Swordsmen", 150));
+        for(int i = 0; i < 10; i++){
+            army.add(new InfantryUnit("Witchers", 1500));
         }
         army.saveArmy();
+
+        Army army2 = new Army("Name That Should Be Changed");
+        army2.loadArmy("TestArmy.csv");
     }
 }

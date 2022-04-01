@@ -20,6 +20,9 @@ abstract class Unit {
         if (name.isBlank()){
             throw new IllegalArgumentException("Must have a name");
         }
+        if (name.contains(",")){
+            throw new IllegalArgumentException("The name cannot contain a comma");
+        }
         if (health <= 0){
             throw new IllegalArgumentException("Must have a health value above 0");
         }
@@ -103,9 +106,9 @@ abstract class Unit {
      */
     @Override
     public String toString() {
-        return "This unit, called " + name +
-                "has a health value of " + health +
-                ", attack value of " + attack +
-                " and an armour value of " + armour;
+        return  name + "; " +
+                "HP: " + health + ", " +
+                "Attack: " + attack + ", " +
+                "Armour: " + armour;
     }
 }

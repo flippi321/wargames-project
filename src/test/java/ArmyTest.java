@@ -1,6 +1,4 @@
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,7 +170,7 @@ public class ArmyTest {
     @DisplayName("Testing getUnit functions")
     class getUnitFunctions  {
         @Test
-        @DisplayName("Testing getInfantry Function returns all infantry units")
+        @DisplayName("Testing that getInfantry Function returns all infantry units")
         public void checkGetInfantryUnits(){
             Army newArmy = new Army("Confederacy of Independent States");
             Unit newInfantry = new InfantryUnit("Robot knights", 100);
@@ -187,7 +185,7 @@ public class ArmyTest {
         }
 
         @Test
-        @DisplayName("Testing getCavalry Function returns all cavalry units")
+        @DisplayName("Testing that getCavalry Function returns all cavalry units")
         public void checkGetCavalryUnits(){
             Army newArmy = new Army("Confederacy of Independent States");
             Unit newInfantry = new InfantryUnit("Robot knights", 100);
@@ -202,7 +200,7 @@ public class ArmyTest {
         }
 
         @Test
-        @DisplayName("Testing getCommander Function returns the commander unit")
+        @DisplayName("Testing that getCommander Function returns the commander unit")
         public void checkGetCommanderUnits(){
             Army newArmy = new Army("Confederacy of Independent States");
             Unit newInfantry = new InfantryUnit("Robot knights", 100);
@@ -219,7 +217,7 @@ public class ArmyTest {
         }
 
         @Test
-        @DisplayName("Testing getRanged Function returns all infantry units")
+        @DisplayName("Testing that getRanged Function returns all infantry units")
         public void checkGetRangedUnits(){
             Army newArmy = new Army("Confederacy of Independent States");
             Unit newInfantry = new InfantryUnit("Robot knights", 100);
@@ -231,6 +229,77 @@ public class ArmyTest {
                 newArmy.add(newRanged);
             }
             assertEquals(25,newArmy.getRangedUnits().size());
+        }
+    }
+
+    @Nested
+    @DisplayName("Tests for Saving and Loading Files")
+    class saveAndLoadFunctions{
+        @Test
+        @DisplayName("Tests that it is possible to save a file")
+        public void savingAnArmyFile(){
+            Army newArmy = new Army("TestingArmyFile");
+            newArmy.add(new CommanderUnit("Town Chieftain", 250));
+            for (int i = 0; i < 10; i++){
+                newArmy.add(new InfantryUnit("Town Swordsmen", 100));
+                newArmy.add(new CavalryUnit("Hussars", 150));
+                newArmy.add(new RangedUnit("Novice Archers", 50));
+            }
+
+            try {
+                newArmy.saveArmy();
+                assertTrue(true);
+            } catch (Exception e){
+                fail("could not save to file");
+            }
+        }
+
+        @Test
+        @DisplayName("Tests that it is possible to load a file")
+        public void loadsFileTest(){
+            Army newArmy = new Army("TestingArmy");
+            try {
+                newArmy.loadArmy("TestingArmyFile");
+                assertTrue(true);
+            } catch (Exception e){
+                fail("Could not remove file");
+            }
+        }
+
+        @Test
+        @DisplayName("Tests that it is possible to remove a file")
+        public void removingFileUsedForTesting(){
+            Army newArmy = new Army("TestingArmy");
+            try {
+                newArmy.removeSavedArmy("TestingArmyFile");
+                assertTrue(true);
+            } catch (Exception e){
+                fail("Could not remove file");
+            }
+        }
+
+        @Test
+        @DisplayName("Tests that a loaded army will be identical to the source army")
+        public void armyLoadingWillBeEqualToSource(){
+            Army army1 = new Army("Army One");
+            army1.add(new CommanderUnit("Town Chieftain", 250));
+            for (int i = 0; i < 5; i++){
+                army1.add(new InfantryUnit("Town Swordsmen", 100));
+                army1.add(new CavalryUnit("Hussars", 150));
+                army1.add(new RangedUnit("Novice Archers", 50));
+            }
+            army1.saveArmy();
+            Army army2 = new Army("Army Two");
+
+            army2.loadArmy("Army One");
+            assertEquals(army1.getAllUnits().toString(), army2.getAllUnits().toString());
+        }
+
+        @Test
+        @DisplayName("Removing File from last Test")
+        public void removingLastTestFile(){
+            Army army2 = new Army("Army Two");
+            army2.removeSavedArmy("Army One");
         }
     }
 }
