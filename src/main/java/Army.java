@@ -1,3 +1,6 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +15,9 @@ public class Army {
      * @param name what the army is called
      */
     public Army(String name) {
+        if(name.isBlank()){
+            throw new IllegalArgumentException("Name cannot be blank");
+        }
         this.name = name;
         this.units = new ArrayList<>();
     }
@@ -107,6 +113,44 @@ public class Army {
     public List<Unit> getRangedUnits(){
         return units.stream().filter(unit -> unit.getClass().equals(RangedUnit.class)).toList();
     }
+    public void loadArmy(String fileLocation){
+        if (!fileLocation.endsWith(".csv")){
+            fileLocation = (fileLocation + ".csv");
+        }
+        if(fileLocation.contains("\\")){
+            throw new IllegalArgumentException("You used \\ when / was applicable, please change this");
+        }
+
+        try{
+            FileReader reader = new FileReader(String.format("%s.csv", name));
+            int c;
+            while ((c = reader.read())!=1){
+
+            }
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    };
+
+    public void saveArmy(String fileLocation){
+        if (!fileLocation.endsWith(".csv")){
+            fileLocation = (fileLocation + ".csv");
+        }
+        if(fileLocation.contains("\\")){
+            throw new IllegalArgumentException("You used \\ when / was applicable, please change this");
+        }
+
+        try{
+            PrintWriter writer = new PrintWriter(String.format("%s.csv", name));
+            writer.println(name);
+            for (Unit unit : units){
+                writer.println(String.format("%s, %s, %s", unit.getClass().toString().replaceAll("class ", ""), unit.getName(), unit.getHealth()));
+            }
+            writer.close();
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    };
 
     /**
      * Method used to represent an army's information in the form of a string
@@ -134,5 +178,14 @@ public class Army {
     @Override
     public int hashCode() {
         return Objects.hash(name, units);
+    }
+
+    public static void main(String[] args){
+        Army army = new Army("NewArmy.csv");
+        for (int i = 0; i < 10; i++){
+            army.add(new InfantryUnit("Swordsman", 100));
+            army.add(new CavalryUnit("Horse Archer", 150));
+        }
+        army.saveArmy("NewArmy.csv");
     }
 }
