@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 public class Army {
     private String name;
@@ -12,6 +10,9 @@ public class Army {
      * @param name what the army is called
      */
     public Army(String name) {
+        if(name.isBlank()){
+            throw new IllegalArgumentException("Name cannot be blank");
+        }
         this.name = name;
         this.units = new ArrayList<>();
     }
@@ -92,6 +93,139 @@ public class Army {
         return units.get(unitNumber);
     }
 
+    public List<Unit> getInfantryUnits(){
+        return units.stream().filter(unit -> unit.getClass().equals(InfantryUnit.class)).toList();
+    }
+
+    public List<Unit> getCavalryUnits(){
+        return units.stream().filter(unit -> unit.getClass().equals(CavalryUnit.class)).toList();
+    }
+
+    public List<Unit> getCommanderUnits(){
+        return units.stream().filter(unit -> unit.getClass().equals(CommanderUnit.class)).toList();
+    }
+
+    public List<Unit> getRangedUnits(){
+        return units.stream().filter(unit -> unit.getClass().equals(RangedUnit.class)).toList();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUnits(List<Unit> units) {
+        this.units = units;
+    }
+
+    /**
+     * Method to test and correct a file location
+     * @param fileLocation the file location, may only be the name of the file or the full location and type
+     * @return a sorted and corrected file location, type only using '/'
+     */
+    private String testFileLocation(String fileLocation){
+        String fixedFileLocation = fileLocation;
+        //Making sure the location ends with .csv
+        if (!fixedFileLocation.endsWith(".csv")){
+            fixedFileLocation = (fixedFileLocation + ".csv");
+        }
+        //Making sure the file ends up in the resources folder
+        if (!fixedFileLocation.startsWith("src/main/resources/")){
+            fixedFileLocation = ("src/main/resources/"  + fixedFileLocation);
+        }
+        //Using '/' instead of '\' so that the application can be used on Linux and MacOS
+        if(fixedFileLocation.contains("\\")){
+            throw new IllegalArgumentException("You used \\ when / was applicable, please change this");
+        }
+        return fixedFileLocation;
+    }
+
+    /**
+     * Method to load an army from a file location
+     * Will be called upon by an army to change its unit list and name to match the army from the file
+     * @param fileLocation the file location, may only be the name of the file or the full location and type
+     */
+    public void loadArmy(String fileLocation){
+        //Fixing potential errors with the location
+        fileLocation = testFileLocation(fileLocation);
+
+        try{
+            FileInputStream fileInput = new FileInputStream(fileLocation);
+            Scanner scanner = new Scanner(fileInput);
+            List<Unit> newUnits = new ArrayList<>();
+
+            //Removing current units and adding name
+            name = scanner.nextLine();
+            units.clear();
+
+            //Adding saved units
+            while(scanner.hasNextLine())
+            {
+                String thisLine = scanner.nextLine();
+                String[] lineVariables = thisLine.split(",");
+                if(lineVariables.length>1 && !thisLine.isBlank()){
+                    // Making the unit
+                    switch (lineVariables[0].trim()) {
+                        case "InfantryUnit" -> {
+                            InfantryUnit unit = new InfantryUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
+                            newUnits.add(unit);
+                        }
+                        case "RangedUnit" -> {
+                            RangedUnit unit = new RangedUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
+                            newUnits.add(unit);
+                        }
+                        case "CavalryUnit" -> {
+                            CavalryUnit unit = new CavalryUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
+                            newUnits.add(unit);
+                        }
+                        case "CommanderUnit" -> {
+                            CommanderUnit unit = new CommanderUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
+                            newUnits.add(unit);
+                        }
+                        default -> throw new IllegalArgumentException("Unit must have a valid name");
+                    }
+                }
+            }
+            //Closing file and changing units in the Army file
+            scanner.close();
+            setUnits(newUnits);
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Method to save an army as a CSV file
+     * The army will be saved in the resources folder
+     */
+    public void saveArmy(){
+        String fileLocation = testFileLocation(getName().trim());
+        try{
+            PrintWriter writer = new PrintWriter(fileLocation);
+            writer.println(name);
+            for (Unit unit : units){
+                writer.println(String.format("%s,%s,%s", unit.getClass().getSimpleName(), unit.getName(), unit.getHealth()));
+            }
+            writer.close();
+            System.out.println("Saved File");
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Method to remove a saved file
+     * Used primarily for removing the test file after testing is done
+     * @param fileLocation the location of the saved army
+     */
+    public void removeSavedArmy(String fileLocation){
+        String fixedFileLocation = testFileLocation(fileLocation);
+        File file = new File(fixedFileLocation);
+        // Will try to remove file, if not possible, it will throw new Exception
+        if (!file.delete()) {
+            throw new IllegalArgumentException("Failed to delete the file");
+        }
+    }
+
     /**
      * Method used to represent an army's information in the form of a string
      * @return a string of information relating to the army
@@ -99,24 +233,27 @@ public class Army {
     @Override
     public String toString() {
         return "This army is called " + name +
-                " and has the units: " + units;
-    }
-
-    /**
-     * Method for checking if to classes share the same name, which is the identifying factor of an army
-     * @param o the class who the army is compared to
-     * @return true if the armies share the same name, false if not they don't
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Army army = (Army) o;
-        return name.equals(army.name) && units.equals(army.units);
+                " and has the units: " + units.toString();
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(name, units);
+    }
+
+    /**
+     * Main class used for saving an army as a csv file in the "resources" folder
+     * Is not a final main, just a tool so that you can see that saving a
+     */
+    public static void main(String[] args){
+        Army army = new Army("Ghoul Armada");
+        army.add(new CommanderUnit("Litch", 5000));
+        for(int i = 0; i < 5000; i++){
+            army.add(new InfantryUnit("Zomies", 50));
+        }
+        army.saveArmy();
+
+        Army army2 = new Army("Name That Should Be Changed");
+        army2.loadArmy("Witcher.csv");
     }
 }
