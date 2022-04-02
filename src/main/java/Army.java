@@ -206,7 +206,6 @@ public class Army {
                 writer.println(String.format("%s,%s,%s", unit.getClass().getSimpleName(), unit.getName(), unit.getHealth()));
             }
             writer.close();
-            System.out.println("Saved File");
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
@@ -254,6 +253,6 @@ public class Army {
         army.saveArmy();
 
         Army army2 = new Army("Name That Should Be Changed");
-        army2.loadArmy("Witcher.csv");
+        army2.loadArmy("Witcher");
     }
 }
