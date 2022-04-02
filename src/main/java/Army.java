@@ -113,25 +113,40 @@ public class Army {
         this.name = name;
     }
 
-    public List<Unit> getUnits() {
-        return units;
-    }
-
     public void setUnits(List<Unit> units) {
         this.units = units;
     }
 
-    public void loadArmy(String fileLocation){
-        fileLocation = fileLocation.trim();
-        if (!fileLocation.endsWith(".csv")){
-            fileLocation = (fileLocation + ".csv");
+    /**
+     * Method to test and correct a file location
+     * @param fileLocation the file location, may only be the name of the file or the full location and type
+     * @return a sorted and corrected file location, type only using '/'
+     */
+    private String testFileLocation(String fileLocation){
+        String fixedFileLocation = fileLocation;
+        //Making sure the location ends with .csv
+        if (!fixedFileLocation.endsWith(".csv")){
+            fixedFileLocation = (fixedFileLocation + ".csv");
         }
-        if (!fileLocation.startsWith("src/main/resources/")){
-            fileLocation = ("src/main/resources/"  + fileLocation);
+        //Making sure the file ends up in the resources folder
+        if (!fixedFileLocation.startsWith("src/main/resources/")){
+            fixedFileLocation = ("src/main/resources/"  + fixedFileLocation);
         }
-        if(fileLocation.contains("\\")){
+        //Using '/' instead of '\' so that the application can be used on Linux and MacOS
+        if(fixedFileLocation.contains("\\")){
             throw new IllegalArgumentException("You used \\ when / was applicable, please change this");
         }
+        return fixedFileLocation;
+    }
+
+    /**
+     * Method to load an army from a file location
+     * Will be called upon by an army to change its unit list and name to match the army from the file
+     * @param fileLocation the file location, may only be the name of the file or the full location and type
+     */
+    public void loadArmy(String fileLocation){
+        //Fixing potential errors with the location
+        fileLocation = testFileLocation(fileLocation);
 
         try{
             FileInputStream fileInput = new FileInputStream(fileLocation);
@@ -170,6 +185,7 @@ public class Army {
                     }
                 }
             }
+            //Closing file and changing units in the Army file
             scanner.close();
             setUnits(newUnits);
         } catch (IOException e){
@@ -177,19 +193,12 @@ public class Army {
         }
     }
 
+    /**
+     * Method to save an army as a CSV file
+     * The army will be saved in the resources folder
+     */
     public void saveArmy(){
-        String fileLocation = getName().trim();
-
-        if (!fileLocation.endsWith(".csv")){
-            fileLocation = (fileLocation + ".csv");
-        }
-        if (!fileLocation.startsWith("src/main/resources/")){
-            fileLocation = ("src/main/resources/"  + fileLocation);
-        }
-        if(fileLocation.contains("\\")){
-            throw new IllegalArgumentException("You used \\ when / was applicable, please change this");
-        }
-
+        String fileLocation = testFileLocation(getName().trim());
         try{
             PrintWriter writer = new PrintWriter(fileLocation);
             writer.println(name);
@@ -203,19 +212,16 @@ public class Army {
         }
     }
 
+    /**
+     * Method to remove a saved file
+     * Used primarily for removing the test file after testing is done
+     * @param fileLocation the location of the saved army
+     */
     public void removeSavedArmy(String fileLocation){
-        if (!fileLocation.endsWith(".csv")){
-            fileLocation = (fileLocation + ".csv");
-        }
-        if (!fileLocation.startsWith("src/main/resources/")){
-            fileLocation = ("src/main/resources/"  + fileLocation);
-        }
-
-        File file = new File(fileLocation);
-        if (file.delete()) {
-            System.out.println("File deleted successfully");
-        }
-        else {
+        String fixedFileLocation = testFileLocation(fileLocation);
+        File file = new File(fixedFileLocation);
+        // Will try to remove file, if not possible, it will throw new Exception
+        if (!file.delete()) {
             throw new IllegalArgumentException("Failed to delete the file");
         }
     }
@@ -240,14 +246,14 @@ public class Army {
      * Is not a final main, just a tool so that you can see that saving a
      */
     public static void main(String[] args){
-        Army army = new Army("TestArmy");
-        army.add(new CommanderUnit("Geralt", 5000));
-        for(int i = 0; i < 10; i++){
-            army.add(new InfantryUnit("Witchers", 1500));
+        Army army = new Army("Ghoul Armada");
+        army.add(new CommanderUnit("Litch", 5000));
+        for(int i = 0; i < 5000; i++){
+            army.add(new InfantryUnit("Zomies", 50));
         }
         army.saveArmy();
 
         Army army2 = new Army("Name That Should Be Changed");
-        army2.loadArmy("TestArmy.csv");
+        army2.loadArmy("Witcher.csv");
     }
 }
