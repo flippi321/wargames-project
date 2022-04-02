@@ -239,20 +239,4 @@ public class Army {
     public int hashCode() {
         return Objects.hash(name, units);
     }
-
-    /**
-     * Main class used for saving an army as a csv file in the "resources" folder
-     * Is not a final main, just a tool so that you can see that saving a
-     */
-    public static void main(String[] args){
-        Army army = new Army("Ghoul Armada");
-        army.add(new CommanderUnit("Litch", 5000));
-        for(int i = 0; i < 5000; i++){
-            army.add(new InfantryUnit("Zomies", 50));
-        }
-        army.saveArmy();
-
-        Army army2 = new Army("Name That Should Be Changed");
-        army2.loadArmy("Witcher");
-    }
 }
