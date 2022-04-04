@@ -1,5 +1,5 @@
 /**
- * Battle Calss
+ * Battle Class
  * @author  chribrev
  * @version 1.0
  */
@@ -7,11 +7,20 @@ public class Battle {
     Army armyOne;
     Army armyTwo;
 
+    /**
+     * Constructor for a class that represents a battle between two armies
+     * @param armyOne the first army in the battle
+     * @param armyTwo the second army in the battle
+     */
     public Battle(Army armyOne, Army armyTwo) {
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
     }
 
+    /**
+     * Method to simulate a battle between army1 and army2
+     * @return the army that wins the battle
+     */
     public Army simulate(){
         while (armyOne.hasUnits() && armyTwo.hasUnits()){
             // One unit from armyOne attacks one from armyTwo
