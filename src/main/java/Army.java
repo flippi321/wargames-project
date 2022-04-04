@@ -93,26 +93,51 @@ public class Army {
         return units.get(unitNumber);
     }
 
+    /**
+     * Method to get all Infantry Units in the army
+     * @return a list of all InfantryUnits
+     */
     public List<Unit> getInfantryUnits(){
         return units.stream().filter(unit -> unit.getClass().equals(InfantryUnit.class)).toList();
     }
 
+    /**
+     * Method to get all Cavalry Units in the army
+     * Will not return CommanderUnits
+     * @return a list of all CavalryUnits
+     */
     public List<Unit> getCavalryUnits(){
         return units.stream().filter(unit -> unit.getClass().equals(CavalryUnit.class)).toList();
     }
 
+    /**
+     * Method to get all Commander Units in the army
+     * @return a list of all CommanderUnits
+     */
     public List<Unit> getCommanderUnits(){
         return units.stream().filter(unit -> unit.getClass().equals(CommanderUnit.class)).toList();
     }
 
+    /**
+     * Method to get all Ranged Units in the army
+     * @return a list of all RangedUnits
+     */
     public List<Unit> getRangedUnits(){
         return units.stream().filter(unit -> unit.getClass().equals(RangedUnit.class)).toList();
     }
 
+    /**
+     * Method to change name of the army
+     * @param name that the army should be called
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Method to change all units in the army
+     * @param units the units that the army should compose of
+     */
     public void setUnits(List<Unit> units) {
         this.units = units;
     }
