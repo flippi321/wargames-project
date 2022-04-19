@@ -6,15 +6,17 @@
 public class Battle {
     Army armyOne;
     Army armyTwo;
+    Terrain terrain;
 
     /**
      * Constructor for a class that represents a battle between two armies
      * @param armyOne the first army in the battle
      * @param armyTwo the second army in the battle
      */
-    public Battle(Army armyOne, Army armyTwo) {
+    public Battle(Army armyOne, Army armyTwo, Terrain terrain) {
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
+        this.terrain = terrain;
     }
 
     /**

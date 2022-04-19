@@ -46,7 +46,7 @@ public class BattleTest {
                     i++;
                 }
                 //Battle
-                Battle epicBattle = new Battle(armyOne, armyTwo);
+                Battle epicBattle = new Battle(armyOne, armyTwo, Terrain.FOREST);
                 assertEquals(armyOne, epicBattle.simulate());
             } catch (Exception e) {
                 fail("checkHasUnitsWhenNotEmpty failed");
@@ -91,7 +91,7 @@ public class BattleTest {
                     i++;
                 }
                 //Battle
-                Battle epicBattle = new Battle(armyOne, armyTwo);
+                Battle epicBattle = new Battle(armyOne, armyTwo, Terrain.FOREST);
                 assertEquals(armyOne, epicBattle.simulate());
 
             } catch (Exception e) {
@@ -110,7 +110,7 @@ public class BattleTest {
             Army ghouls = new Army("Ghouls");
             witchers.loadArmy("Witcher");
             ghouls.loadArmy("Ghoul Army");
-            Battle witcherGhoulBattle = new Battle(witchers, ghouls);
+            Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST);
             assertEquals(witchers.getName(),witcherGhoulBattle.simulate().getName());
         }
 
@@ -121,7 +121,7 @@ public class BattleTest {
             Army ghouls = new Army("Ghouls");
             witchers.loadArmy("Witcher");
             ghouls.loadArmy("Ghoul Armada");
-            Battle witcherGhoulBattle = new Battle(witchers, ghouls);
+            Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST);
             assertEquals(ghouls.getName(),witcherGhoulBattle.simulate().getName());
         }
     }
