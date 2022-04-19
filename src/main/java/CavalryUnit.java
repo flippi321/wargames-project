@@ -32,7 +32,7 @@ public class CavalryUnit extends Unit{
 
     /**
      * The Cavalry units Resist bonus
-     * This unit does not have Resist Bonus
+     * This unit does not have high Resist Bonus
      * @return the Resist bonus of this unit
      */
     @Override
