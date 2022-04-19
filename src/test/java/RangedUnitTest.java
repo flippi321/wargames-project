@@ -63,7 +63,7 @@ public class RangedUnitTest {
         public void checkFirstResistBonus() {
             try {
                 Unit newRanged = new RangedUnit("Sharpshooter", 100);
-                assertEquals(6, newRanged.getResistBonus(Terrain.FOREST));
+                assertEquals(6, newRanged.getResistBonus("Forest"));
             } catch (Exception e) {
                 fail("checkFirstResistBonus failed");
             }
@@ -74,8 +74,8 @@ public class RangedUnitTest {
         public void checkSecondResistBonus() {
             try {
                 Unit newRanged = new RangedUnit("Sharpshooter", 100);
-                newRanged.getResistBonus(Terrain.FOREST);
-                assertEquals(4, newRanged.getResistBonus(Terrain.FOREST));
+                newRanged.getResistBonus("Forest");
+                assertEquals(4, newRanged.getResistBonus("Forest"));
             } catch (Exception e) {
                 fail("checkSecondResistBonus failed");
             }
@@ -86,9 +86,9 @@ public class RangedUnitTest {
         public void checkThirdResistBonus() {
             try {
                 Unit newRanged = new RangedUnit("Sharpshooter", 100);
-                newRanged.getResistBonus(Terrain.FOREST);
-                newRanged.getResistBonus(Terrain.FOREST);
-                assertEquals(2, newRanged.getResistBonus(Terrain.FOREST));
+                newRanged.getResistBonus("Forest");
+                newRanged.getResistBonus("Forest");
+                assertEquals(2, newRanged.getResistBonus("Forest"));
             } catch (Exception e) {
                 fail("checkThirdResistBonus failed");
             }
@@ -101,7 +101,7 @@ public class RangedUnitTest {
                 int originalHealth = 150;
                 Unit rangedDefender = new RangedUnit("Deserter", originalHealth);
                 Unit rangedAggressor = new RangedUnit("Town archer", 100);
-                rangedAggressor.attack(rangedDefender, Terrain.HILL);
+                rangedAggressor.attack(rangedDefender, "Hill");
                 assertTrue(rangedDefender.getHealth() < originalHealth);
             } catch (Exception e) {
                 fail("checkInfantryName failed");
@@ -117,7 +117,7 @@ public class RangedUnitTest {
         public void checkAttackBonusOutsideHill() {
             try {
                 Unit newRanged = new RangedUnit("Archer", 100);
-                assertEquals(3, newRanged.getAttackBonus(Terrain.PLAINS));
+                assertEquals(3, newRanged.getAttackBonus("Plains"));
             } catch (Exception e) {
                 fail("checkAttackBonusOutsideHill failed");
             }
@@ -128,7 +128,7 @@ public class RangedUnitTest {
         public void checkAttackBonusOnHill() {
             try {
                 Unit newRanged = new RangedUnit("Archer", 100);
-                assertEquals(7, newRanged.getAttackBonus(Terrain.HILL));
+                assertEquals(7, newRanged.getAttackBonus("Hill"));
             } catch (Exception e) {
                 fail("checkAttackBonusOnHill failed");
             }

@@ -52,7 +52,7 @@ public class CommanderUnitTest {
                 int originalHealth = 180;
                 Unit commanderDefender = new CavalryUnit("Mongol Warlord", originalHealth);
                 Unit commanderAggressor = new CavalryUnit("Queen Consort", 150);
-                commanderAggressor.attack(commanderDefender, Terrain.PLAINS);
+                commanderAggressor.attack(commanderDefender, "Plains");
                 assertTrue((commanderDefender.getHealth() < originalHealth));
             } catch (Exception e) {
                 fail("checkInfantryName failed");

@@ -62,7 +62,7 @@ public class CavalryUnitTest {
         public void checkCavalryChargeBonus() {
             try {
                 Unit newCavalry = new CavalryUnit("Hussar", 100);
-                assertEquals(6, newCavalry.getAttackBonus(Terrain.FOREST));
+                assertEquals(6, newCavalry.getAttackBonus("Forest"));
             } catch (Exception e) {
                 fail("checkCavalryChargeBonuse failed");
             }
@@ -73,9 +73,8 @@ public class CavalryUnitTest {
         public void checkRemovalOfChargeBonus() {
             try {
                 Unit newCavalry = new CavalryUnit("Hussar", 100);
-                Terrain terrain = Terrain.FOREST;
-                newCavalry.getAttackBonus(terrain);
-                assertEquals(2, newCavalry.getAttackBonus(terrain));
+                newCavalry.getAttackBonus("Forest");
+                assertEquals(2, newCavalry.getAttackBonus("Forest"));
             } catch (Exception e) {
                 fail("checkRemovalOfChargeBonus failed");
             }
@@ -88,7 +87,7 @@ public class CavalryUnitTest {
                 int originalHealth = 150;
                 Unit cavalryDefender = new CavalryUnit("Mongol Horde", originalHealth);
                 Unit cavalryAggressor = new CavalryUnit("Royal Knight", 100);
-                cavalryAggressor.attack(cavalryDefender, Terrain.PLAINS);
+                cavalryAggressor.attack(cavalryDefender, "Plains");
                 assertTrue((cavalryDefender.getHealth() < originalHealth));
             } catch (Exception e) {
                 fail("checkInfantryName failed");
@@ -104,7 +103,7 @@ public class CavalryUnitTest {
         public void checkAttackBonusOutsidePlains() {
             try {
                 Unit newCavalry = new CavalryUnit("Hussar", 100);
-                assertEquals(6, newCavalry.getAttackBonus(Terrain.HILL));
+                assertEquals(6, newCavalry.getAttackBonus("Hill"));
             } catch (Exception e) {
                 fail("checkAttackBonusOutsidePlains failed");
             }
@@ -115,7 +114,7 @@ public class CavalryUnitTest {
         public void checkAttackBonusOnPlains() {
             try {
                 Unit newCavalry = new CavalryUnit("Hussar", 100);
-                assertEquals(10, newCavalry.getAttackBonus(Terrain.PLAINS));
+                assertEquals(10, newCavalry.getAttackBonus("Plains"));
             } catch (Exception e) {
                 fail("checkAttackBonusOnPlains failed");
             }
@@ -126,7 +125,7 @@ public class CavalryUnitTest {
         public void checkResistBonusOutsideForest() {
             try {
                 Unit newCavalry = new CavalryUnit("Hussar", 100);
-                assertEquals(1, newCavalry.getResistBonus(Terrain.PLAINS));
+                assertEquals(1, newCavalry.getResistBonus("Plains"));
             } catch (Exception e) {
                 fail("checkResistBonusOutsideForest failed");
             }
@@ -137,7 +136,7 @@ public class CavalryUnitTest {
         public void checkResistBonusInForest() {
             try {
                 Unit newCavalry = new CavalryUnit("Hussar", 100);
-                assertEquals(0, newCavalry.getResistBonus(Terrain.FOREST));
+                assertEquals(0, newCavalry.getResistBonus("Forest"));
             } catch (Exception e) {
                 fail("checkResistBonusInForest failed");
             }

@@ -7,4 +7,6 @@ public enum Terrain {
     Terrain(int bonus) {
         this.bonus = bonus;
     }
+
+
 }

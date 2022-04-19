@@ -63,7 +63,7 @@ public class InfantryUnitTest {
                 int originalHealth = 150;
                 Unit infantryDefender = new InfantryUnit("Town Guard", originalHealth);
                 Unit infantryAggressor = new InfantryUnit("Bandit", 100);
-                infantryAggressor.attack(infantryDefender, Terrain.FOREST);
+                infantryAggressor.attack(infantryDefender, "Forest");
                 assertTrue((infantryDefender.getHealth() < originalHealth));
             } catch (Exception e) {
                 fail("checkInfantryName failed");
@@ -79,7 +79,7 @@ public class InfantryUnitTest {
         public void checkAttackBonusOutsideForest() {
             try {
                 Unit newInfantry = new InfantryUnit("Swordsman", 100);
-                assertEquals(2, newInfantry.getAttackBonus(Terrain.PLAINS));
+                assertEquals(2, newInfantry.getAttackBonus("Plains"));
             } catch (Exception e) {
                 fail("checkAttackBonusOutsideForest failed");
             }
@@ -90,7 +90,7 @@ public class InfantryUnitTest {
         public void checkAttackBonusInForest() {
             try {
                 Unit newInfantry = new InfantryUnit("Swordsman", 100);
-                assertEquals(6, newInfantry.getAttackBonus(Terrain.FOREST));
+                assertEquals(6, newInfantry.getAttackBonus("Forest"));
             } catch (Exception e) {
                 fail("checkAttackBonusInForest failed");
             }
@@ -101,7 +101,7 @@ public class InfantryUnitTest {
         public void checkResistBonusOutsideForest() {
             try {
                 Unit newInfantry = new InfantryUnit("Swordsman", 100);
-                assertEquals(1, newInfantry.getResistBonus(Terrain.PLAINS));
+                assertEquals(1, newInfantry.getResistBonus("Plains"));
             } catch (Exception e) {
                 fail("checkResistBonusOutsideForest failed");
             }
@@ -112,7 +112,7 @@ public class InfantryUnitTest {
         public void checkResistBonusInForest() {
             try {
                 Unit newInfantry = new InfantryUnit("Swordsman", 100);
-                assertEquals(5, newInfantry.getResistBonus(Terrain.FOREST));
+                assertEquals(5, newInfantry.getResistBonus("Forest"));
             } catch (Exception e) {
                 fail("checkResistBonusInForest failed");
             }

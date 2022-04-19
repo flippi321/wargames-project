@@ -39,7 +39,7 @@ abstract class Unit {
      * healthOpponent – (attack + attackBonus)this + (armor + resistBonus)opponent
      * @param opponent the unit under attack
      */
-    public void attack(Unit opponent, Terrain terrain){
+    public void attack(Unit opponent, String terrain){
         int Defence = opponent.getArmour() + opponent.getResistBonus(terrain);
         int Attack = this.getAttack() + this.getAttackBonus(terrain);
         int newHealth = opponent.getHealth() + Defence - Attack;
@@ -91,14 +91,14 @@ abstract class Unit {
      * Abstract since this value varies between unit types
      * @return the current resist value of the unit
      */
-    public abstract int getResistBonus(Terrain terrain);
+    public abstract int getResistBonus(String terrain);
 
     /**
      * Method to acquire attack bonus,
      * Abstract since this value varies between unit types
      * @return the current attack bonus value of the unit
      */
-    public abstract int getAttackBonus(Terrain terrain);
+    public abstract int getAttackBonus(String terrain);
 
     /**
      * Method used to represent a unit's information in the form of a string
