@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RangedUnitTest {
     @Nested
-    @DisplayName("Constructors")
+    @DisplayName("Constructor tests")
     class constructors {
         @Test
         @DisplayName("Testing for correct automatic armour values")
@@ -56,7 +56,7 @@ public class RangedUnitTest {
     //TODO:
     // Teste resist bonus og attack bonus med forskjellige terreng
     @Nested
-    @DisplayName("Combat Stats")
+    @DisplayName("Combat tests")
     class combatStats   {
         @Test
         @DisplayName("Testing First Resist bonus")
@@ -105,6 +105,32 @@ public class RangedUnitTest {
                 assertTrue(rangedDefender.getHealth() < originalHealth);
             } catch (Exception e) {
                 fail("checkInfantryName failed");
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("Terrain and bonuses")
+    class terrainValues {
+        @Test
+        @DisplayName("Default attack bonus on plains")
+        public void checkAttackBonusOutsideHill() {
+            try {
+                Unit newRanged = new RangedUnit("Archer", 100);
+                assertEquals(3, newRanged.getAttackBonus(Terrain.PLAINS));
+            } catch (Exception e) {
+                fail("checkAttackBonusOutsideHill failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Attack bonus changes on hill")
+        public void checkAttackBonusOnHill() {
+            try {
+                Unit newRanged = new RangedUnit("Archer", 100);
+                assertEquals(7, newRanged.getAttackBonus(Terrain.HILL));
+            } catch (Exception e) {
+                fail("checkAttackBonusOnHill failed");
             }
         }
     }

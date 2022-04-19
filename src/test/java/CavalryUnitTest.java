@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CavalryUnitTest {
     @Nested
-    @DisplayName("Constructors")
+    @DisplayName("Constructor tests")
     class constructors  {
         @Test
         @DisplayName("Testing for correct automatic armour values")
@@ -55,7 +55,7 @@ public class CavalryUnitTest {
     }
 
     @Nested
-    @DisplayName("Combat methods")
+    @DisplayName("Combat tests")
     class combatStats{
         @Test
         @DisplayName("Testing Charge Bonus")
@@ -92,6 +92,54 @@ public class CavalryUnitTest {
                 assertTrue((cavalryDefender.getHealth() < originalHealth));
             } catch (Exception e) {
                 fail("checkInfantryName failed");
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("Terrain and bonuses")
+    class terrainValues {
+        @Test
+        @DisplayName("Default attack bonus on Hill")
+        public void checkAttackBonusOutsidePlains() {
+            try {
+                Unit newCavalry = new CavalryUnit("Hussar", 100);
+                assertEquals(6, newCavalry.getAttackBonus(Terrain.HILL));
+            } catch (Exception e) {
+                fail("checkAttackBonusOutsidePlains failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Attack bonus changes on Plains")
+        public void checkAttackBonusOnPlains() {
+            try {
+                Unit newCavalry = new CavalryUnit("Hussar", 100);
+                assertEquals(10, newCavalry.getAttackBonus(Terrain.PLAINS));
+            } catch (Exception e) {
+                fail("checkAttackBonusOnPlains failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Default resist bonus on plains")
+        public void checkResistBonusOutsideForest() {
+            try {
+                Unit newCavalry = new CavalryUnit("Hussar", 100);
+                assertEquals(1, newCavalry.getResistBonus(Terrain.PLAINS));
+            } catch (Exception e) {
+                fail("checkResistBonusOutsideForest failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Resist bonus is 0 in forest")
+        public void checkResistBonusInForest() {
+            try {
+                Unit newCavalry = new CavalryUnit("Hussar", 100);
+                assertEquals(0, newCavalry.getResistBonus(Terrain.FOREST));
+            } catch (Exception e) {
+                fail("checkResistBonusInForest failed");
             }
         }
     }

@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class InfantryUnitTest {
     @Nested
-    @DisplayName("Constructors")
+    @DisplayName("Constructor tests")
     class constructors {
         @Test
-        @DisplayName("Testing for correct automatic armour values")
+        @DisplayName("Correct automatic armour values")
         public void checkInfantryAutomaticArmourValues() {
             try {
                 Unit newInfantry = new InfantryUnit("Generic Spearman", 10);
@@ -20,7 +20,7 @@ public class InfantryUnitTest {
         }
 
         @Test
-        @DisplayName("Testing for correct automatic armour values")
+        @DisplayName("Correct automatic attack values")
         public void checkInfantryAutomaticAttackValues() {
             try {
                 Unit newInfantry = new InfantryUnit("Generic Spearman", 10);
@@ -31,7 +31,7 @@ public class InfantryUnitTest {
         }
 
         @Test
-        @DisplayName("Testing extended Constructor")
+        @DisplayName("Extended Constructor works")
         public void checkInfantryConstructor() {
             try {
                 Unit newInfantry = new InfantryUnit("Kings Guard", 100, 2, 5);
@@ -42,7 +42,7 @@ public class InfantryUnitTest {
         }
 
         @Test
-        @DisplayName("Testing name is correct")
+        @DisplayName("Name is correct")
         public void checkInfantryName() {
             try {
                 Unit newInfantry = new InfantryUnit("Swordsman", 100);
@@ -54,10 +54,10 @@ public class InfantryUnitTest {
     }
 
     @Nested
-    @DisplayName("Combat Stats")
+    @DisplayName("Combat tests")
     class combatStats {
         @Test
-        @DisplayName("Testing Defence and attack")
+        @DisplayName("Defence and attack works as intended")
         public void checkFighting() {
             try {
                 int originalHealth = 150;
@@ -67,6 +67,54 @@ public class InfantryUnitTest {
                 assertTrue((infantryDefender.getHealth() < originalHealth));
             } catch (Exception e) {
                 fail("checkInfantryName failed");
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("Terrain and bonuses")
+    class terrainValues {
+        @Test
+        @DisplayName("Default attack bonus on plains")
+        public void checkAttackBonusOutsideForest() {
+            try {
+                Unit newInfantry = new InfantryUnit("Swordsman", 100);
+                assertEquals(2, newInfantry.getAttackBonus(Terrain.PLAINS));
+            } catch (Exception e) {
+                fail("checkAttackBonusOutsideForest failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Attack bonus changes in forest")
+        public void checkAttackBonusInForest() {
+            try {
+                Unit newInfantry = new InfantryUnit("Swordsman", 100);
+                assertEquals(6, newInfantry.getAttackBonus(Terrain.FOREST));
+            } catch (Exception e) {
+                fail("checkAttackBonusInForest failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Default resist bonus on plains")
+        public void checkResistBonusOutsideForest() {
+            try {
+                Unit newInfantry = new InfantryUnit("Swordsman", 100);
+                assertEquals(1, newInfantry.getResistBonus(Terrain.PLAINS));
+            } catch (Exception e) {
+                fail("checkResistBonusOutsideForest failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Resist bonus changes in forest")
+        public void checkResistBonusInForest() {
+            try {
+                Unit newInfantry = new InfantryUnit("Swordsman", 100);
+                assertEquals(5, newInfantry.getResistBonus(Terrain.FOREST));
+            } catch (Exception e) {
+                fail("checkResistBonusInForest failed");
             }
         }
     }
