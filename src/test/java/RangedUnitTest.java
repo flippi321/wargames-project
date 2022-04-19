@@ -53,8 +53,6 @@ public class RangedUnitTest {
         }
     }
 
-    //TODO:
-    // Teste resist bonus og attack bonus med forskjellige terreng
     @Nested
     @DisplayName("Combat tests")
     class combatStats   {
