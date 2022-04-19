@@ -34,7 +34,10 @@ public class RangedUnit extends Unit{
      * @return the Attack bonus of this unit
      */
     @Override
-    public int getAttackBonus() {
+    public int getAttackBonus(Terrain terrain) {
+        if (terrain.equals(Terrain.HILL)) return 3 + terrain.bonus;
+        else if (terrain.equals(Terrain.FOREST)) return 3 + terrain.bonus / 2;
+
         return 3;
     }
 
@@ -45,7 +48,7 @@ public class RangedUnit extends Unit{
      * @return the Resist bonus of this unit
      */
     @Override
-    public int getResistBonus() {
+    public int getResistBonus(Terrain terrain) {
         numberOfTimesAttacked++;
         if (numberOfTimesAttacked == 1){
             return 6;

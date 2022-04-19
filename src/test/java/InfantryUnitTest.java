@@ -63,7 +63,7 @@ public class InfantryUnitTest {
                 int originalHealth = 150;
                 Unit infantryDefender = new InfantryUnit("Town Guard", originalHealth);
                 Unit infantryAggressor = new InfantryUnit("Bandit", 100);
-                infantryAggressor.attack(infantryDefender);
+                infantryAggressor.attack(infantryDefender, Terrain.FOREST);
                 assertTrue((infantryDefender.getHealth() < originalHealth));
             } catch (Exception e) {
                 fail("checkInfantryName failed");

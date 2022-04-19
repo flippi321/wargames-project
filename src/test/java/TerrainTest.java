@@ -9,20 +9,27 @@ public class TerrainTest {
     @DisplayName("Testing Hill value")
     public void checkHillValue(){
         Terrain hill = Terrain.HILL;
-        assertEquals(2, hill.bonus);
+        assertEquals(4, hill.bonus);
     }
 
     @Test
     @DisplayName("Testing Forest value")
     public void checkForestValue(){
         Terrain forest = Terrain.FOREST;
-        assertEquals(2, forest.bonus);
+        assertEquals(4, forest.bonus);
     }
 
     @Test
     @DisplayName("Testing Hill value")
     public void checkPlainsValue(){
         Terrain plains = Terrain.PLAINS;
-        assertEquals(2, plains.bonus);
+        assertEquals(4, plains.bonus);
+    }
+
+    @Test
+    @DisplayName("Testing Equals Method")
+    public void checkEqualMethod(){
+        Terrain hill = Terrain.HILL;
+        assertEquals(Terrain.HILL, hill);
     }
 }

@@ -53,6 +53,8 @@ public class RangedUnitTest {
         }
     }
 
+    //TODO:
+    // Teste resist bonus og attack bonus med forskjellige terreng
     @Nested
     @DisplayName("Combat Stats")
     class combatStats   {
@@ -61,7 +63,7 @@ public class RangedUnitTest {
         public void checkFirstResistBonus() {
             try {
                 Unit newRanged = new RangedUnit("Sharpshooter", 100);
-                assertEquals(6, newRanged.getResistBonus());
+                assertEquals(6, newRanged.getResistBonus(Terrain.FOREST));
             } catch (Exception e) {
                 fail("checkFirstResistBonus failed");
             }
@@ -72,8 +74,8 @@ public class RangedUnitTest {
         public void checkSecondResistBonus() {
             try {
                 Unit newRanged = new RangedUnit("Sharpshooter", 100);
-                newRanged.getResistBonus();
-                assertEquals(4, newRanged.getResistBonus());
+                newRanged.getResistBonus(Terrain.FOREST);
+                assertEquals(4, newRanged.getResistBonus(Terrain.FOREST));
             } catch (Exception e) {
                 fail("checkSecondResistBonus failed");
             }
@@ -84,9 +86,9 @@ public class RangedUnitTest {
         public void checkThirdResistBonus() {
             try {
                 Unit newRanged = new RangedUnit("Sharpshooter", 100);
-                newRanged.getResistBonus();
-                newRanged.getResistBonus();
-                assertEquals(2, newRanged.getResistBonus());
+                newRanged.getResistBonus(Terrain.FOREST);
+                newRanged.getResistBonus(Terrain.FOREST);
+                assertEquals(2, newRanged.getResistBonus(Terrain.FOREST));
             } catch (Exception e) {
                 fail("checkThirdResistBonus failed");
             }
@@ -99,7 +101,7 @@ public class RangedUnitTest {
                 int originalHealth = 150;
                 Unit rangedDefender = new RangedUnit("Deserter", originalHealth);
                 Unit rangedAggressor = new RangedUnit("Town archer", 100);
-                rangedAggressor.attack(rangedDefender);
+                rangedAggressor.attack(rangedDefender, Terrain.HILL);
                 assertTrue(rangedDefender.getHealth() < originalHealth);
             } catch (Exception e) {
                 fail("checkInfantryName failed");

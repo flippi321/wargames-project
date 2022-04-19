@@ -31,7 +31,10 @@ public class InfantryUnit extends Unit{
      * @return the Resist bonus of this unit
      */
     @Override
-    public int getResistBonus() {
+    public int getResistBonus(Terrain terrain) {
+        if (terrain.equals(Terrain.FOREST)) {
+            return 1 + terrain.bonus;
+        }
         return 1;
     }
 
@@ -41,7 +44,10 @@ public class InfantryUnit extends Unit{
      * @return the Attack bonus of this unit
      */
     @Override
-    public int getAttackBonus() {
+    public int getAttackBonus(Terrain terrain) {
+        if (terrain.equals(Terrain.FOREST)) {
+            return 2 + terrain.bonus;
+        }
         return 2;
     }
 }

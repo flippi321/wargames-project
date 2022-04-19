@@ -62,7 +62,7 @@ public class CavalryUnitTest {
         public void checkCavalryChargeBonus() {
             try {
                 Unit newCavalry = new CavalryUnit("Hussar", 100);
-                assertEquals(6, newCavalry.getAttackBonus());
+                assertEquals(6, newCavalry.getAttackBonus(Terrain.FOREST));
             } catch (Exception e) {
                 fail("checkCavalryChargeBonuse failed");
             }
@@ -73,8 +73,9 @@ public class CavalryUnitTest {
         public void checkRemovalOfChargeBonus() {
             try {
                 Unit newCavalry = new CavalryUnit("Hussar", 100);
-                newCavalry.getAttackBonus();
-                assertEquals(2, newCavalry.getAttackBonus());
+                Terrain terrain = Terrain.FOREST;
+                newCavalry.getAttackBonus(terrain);
+                assertEquals(2, newCavalry.getAttackBonus(terrain));
             } catch (Exception e) {
                 fail("checkRemovalOfChargeBonus failed");
             }
@@ -87,7 +88,7 @@ public class CavalryUnitTest {
                 int originalHealth = 150;
                 Unit cavalryDefender = new CavalryUnit("Mongol Horde", originalHealth);
                 Unit cavalryAggressor = new CavalryUnit("Royal Knight", 100);
-                cavalryAggressor.attack(cavalryDefender);
+                cavalryAggressor.attack(cavalryDefender, Terrain.PLAINS);
                 assertTrue((cavalryDefender.getHealth() < originalHealth));
             } catch (Exception e) {
                 fail("checkInfantryName failed");

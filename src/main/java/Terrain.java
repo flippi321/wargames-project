@@ -1,7 +1,7 @@
 public enum Terrain {
-    HILL(2),
-    PLAINS(2),
-    FOREST(2);
+    HILL(4),
+    PLAINS(4),
+    FOREST(4);
     int bonus;
 
     Terrain(int bonus) {
