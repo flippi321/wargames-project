@@ -1,5 +1,5 @@
 public enum Terrain {
-    HILL(),
-    PLAINS(),
-    FOREST()
+    HILL,
+    PLAINS,
+    FOREST
 }
