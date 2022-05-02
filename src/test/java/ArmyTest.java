@@ -271,7 +271,7 @@ public class ArmyTest {
         public void removingFileUsedForTesting(){
             Army newArmy = new Army("TestingArmy");
             try {
-                newArmy.removeSavedArmy("TestingArmyFile");
+                newArmy.deleteArmy("TestingArmyFile");
                 assertTrue(true);
             } catch (Exception e){
                 fail("Could not remove file");
@@ -299,7 +299,7 @@ public class ArmyTest {
         @DisplayName("Removing File from last Test")
         public void removingLastTestFile(){
             Army army2 = new Army("Army Two");
-            army2.removeSavedArmy("Army One");
+            army2.deleteArmy("Army One");
         }
     }
 }
