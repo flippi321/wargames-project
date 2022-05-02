@@ -42,7 +42,11 @@ public class FileHandler {
             List<Unit> newUnits = new ArrayList<>();
 
             //Creating army with name
-            Army newArmy = new Army(scanner.nextLine());
+            String name = scanner.nextLine();
+            if(name.isBlank()){
+                throw new IllegalArgumentException("The army name is Blank");
+            }
+            Army newArmy = new Army(name);
 
             //Adding saved units
             while(scanner.hasNextLine())

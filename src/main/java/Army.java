@@ -148,32 +148,51 @@ public class Army {
     /**
      * Method to load an army from a file location
      * Will use fileHandler to get an army class from a file, and then change current values to old values
-     * @param fileLocation the file location, may only be the name of the file or the full location and type
      */
-    public void loadArmy(String fileLocation){
-        Army newArmy = fileHandler.loadArmy(fileLocation);
-        setName(newArmy.getName());
-        setUnits(newArmy.getAllUnits());
+    public boolean loadArmy(){
+        return loadArmy(name);
+    }
+
+    /**
+     * Method to load an army from a file location
+     * Will use fileHandler to get an army class from a file, and then change current values to old values
+     * @param name name of the Army
+     */
+    public boolean loadArmy(String name){
+        try {
+            units.clear();
+            Army newArmy = fileHandler.loadArmy(name);
+            setUnits(newArmy.getAllUnits());
+        } catch (Exception e) {
+           System.out.println(e.getMessage());
+        }
+        return true;
     }
 
     /**
      * Method to save an army as a CSV file using fileHandler
      * The army will be saved in the resources folder
      */
-    public void saveArmy(){
-        fileHandler.saveArmy(name, units);
+    public boolean saveArmy(){
+        try {
+            fileHandler.saveArmy(name, units);
+            return true;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     /**
      * Method to remove a saved file
-     * Used primarily for removing the test file after testing is done
-     * @param fileLocation the location of the saved army
      */
-    public void deleteArmy(String fileLocation){
+    public boolean deleteArmy(){
         try {
-            fileHandler.deleteArmy(fileLocation);
+            fileHandler.deleteArmy(name);
+            return true;
         } catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 

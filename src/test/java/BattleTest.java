@@ -107,9 +107,9 @@ public class BattleTest {
         @DisplayName("Testing Withcer Victory")
         public void checkWitcherVictory(){
             Army witchers = new Army("Witchers");
-            Army ghouls = new Army("Ghouls");
-            witchers.loadArmy("Witcher");
-            ghouls.loadArmy("Ghoul Army");
+            Army ghouls = new Army("Ghoul Army");
+            witchers.loadArmy();
+            ghouls.loadArmy();
             Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST);
             assertEquals(witchers.getName(),witcherGhoulBattle.simulate().getName());
         }
@@ -118,9 +118,9 @@ public class BattleTest {
         @DisplayName("Testing Ghoul Victory")
         public void checkGhoulVictory(){
             Army witchers = new Army("Witchers");
-            Army ghouls = new Army("Ghouls");
-            witchers.loadArmy("Witcher");
-            ghouls.loadArmy("Ghoul Armada");
+            Army ghouls = new Army("Ghoul Armada");
+            witchers.loadArmy();
+            ghouls.loadArmy();
             Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST);
             assertEquals(ghouls.getName(),witcherGhoulBattle.simulate().getName());
         }

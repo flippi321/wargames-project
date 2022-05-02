@@ -238,15 +238,15 @@ public class ArmyTest {
         @Test
         @DisplayName("Tests that it is possible to save a file")
         public void savingAnArmyFile(){
-            Army newArmy = new Army("TestingArmyFile");
-            newArmy.add(new CommanderUnit("Town Chieftain", 250));
-            for (int i = 0; i < 10; i++){
-                newArmy.add(new InfantryUnit("Town Swordsmen", 100));
-                newArmy.add(new CavalryUnit("Hussars", 150));
-                newArmy.add(new RangedUnit("Novice Archers", 50));
-            }
-
             try {
+                Army newArmy = new Army("TestingArmy");
+                newArmy.add(new CommanderUnit("Town Chieftain", 250));
+                for (int i = 0; i < 10; i++){
+                    newArmy.add(new InfantryUnit("Town Swordsmen", 100));
+                    newArmy.add(new CavalryUnit("Hussars", 150));
+                    newArmy.add(new RangedUnit("Novice Archers", 50));
+                }
+
                 newArmy.saveArmy();
                 assertTrue(true);
             } catch (Exception e){
@@ -256,25 +256,13 @@ public class ArmyTest {
 
         @Test
         @DisplayName("Tests that it is possible to load a file")
-        public void loadsFileTest(){
+        public void loadFileTest(){
             Army newArmy = new Army("TestingArmy");
+            newArmy.add(new InfantryUnit("Swordsman", 100));
             try {
-                newArmy.loadArmy("TestingArmyFile");
-                assertTrue(true);
+                assertTrue(newArmy.loadArmy());
             } catch (Exception e){
-                fail("Could not remove file");
-            }
-        }
-
-        @Test
-        @DisplayName("Tests that it is possible to remove a file")
-        public void removingFileUsedForTesting(){
-            Army newArmy = new Army("TestingArmy");
-            try {
-                newArmy.deleteArmy("TestingArmyFile");
-                assertTrue(true);
-            } catch (Exception e){
-                fail("Could not remove file");
+                fail(e.getMessage());
             }
         }
 
@@ -296,10 +284,28 @@ public class ArmyTest {
         }
 
         @Test
-        @DisplayName("Removing File from last Test")
-        public void removingLastTestFile(){
+        @DisplayName("Tests that it is possible to delete a saved army")
+        public void deletingAnArmy(){
+            Army army = new Army("DeleteThisArmy");
+            for(int i = 0; i < 20; i++){
+                army.add(new InfantryUnit("Swordsman", 100));
+            }
+            army.saveArmy();
+
+            //Checks that army is deleted
+            assertTrue(army.deleteArmy());
+        }
+
+        @AfterAll
+        public static void removingFileUsedForTesting(){
+            Army army1 = new Army("TestingArmy");
             Army army2 = new Army("Army Two");
-            army2.deleteArmy("Army One");
+            try {
+                army1.deleteArmy();
+                army2.deleteArmy();
+            } catch (Exception e){
+                fail("Could not remove file");
+            }
         }
     }
 }
