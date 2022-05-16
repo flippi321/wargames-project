@@ -149,6 +149,7 @@ public class Army {
 
     /**
      * Method to load an army from a file location
+     * The empty constructor will check for a file matching the name of the Army
      * Will use fileHandler to get an army class from a file, and then change current values to old values
      */
     public boolean loadArmy(){
@@ -163,6 +164,7 @@ public class Army {
     public boolean loadArmy(String name){
         try {
             units.clear();
+            setName(name);
             Army newArmy = fileHandler.loadArmy(name);
             setUnits(newArmy.getAllUnits());
         } catch (Exception e) {

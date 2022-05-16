@@ -1,3 +1,4 @@
+package no.ntnu.idatt2001.Wargames;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,15 +12,15 @@ public class WargamesApplication extends Application {
     @Override
     public void start(Stage stage) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("hello-view.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("Wargames-view.fxml"));
         try {
             stage.setScene(new Scene(loader.load()));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        stage.setTitle("Poker Simulation Application");
+        stage.setTitle("Wargames");
         stage.show();
-        stage.setMinWidth(550);
-        stage.setMinHeight(350);
+        stage.setMinWidth(600);
+        stage.setMinHeight(400);
     }
 }

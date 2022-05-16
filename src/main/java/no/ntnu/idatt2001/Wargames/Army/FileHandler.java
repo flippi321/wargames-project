@@ -1,7 +1,5 @@
 package no.ntnu.idatt2001.Wargames.Army;
-
 import no.ntnu.idatt2001.Wargames.Units.*;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,8 +24,8 @@ public class FileHandler {
             fixedFileLocation = (fixedFileLocation + ".csv");
         }
         //Making sure the file ends up in the resources folder
-        if (!fixedFileLocation.startsWith("src/main/resources/")){
-            fixedFileLocation = ("src/main/resources/"  + fixedFileLocation);
+        if (!fixedFileLocation.startsWith("src/main/resources/ArmyFiles/")){
+            fixedFileLocation = ("src/main/resources/ArmyFiles/"  + fixedFileLocation);
         }
         //Using '/' instead of '\' so that the application can be used on Linux and MacOS
         if(fixedFileLocation.contains("\\")){
