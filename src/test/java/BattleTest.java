@@ -1,7 +1,9 @@
+import no.ntnu.idatt2001.Wargames.Army.*;
+import no.ntnu.idatt2001.Wargames.Battle.*;
+import no.ntnu.idatt2001.Wargames.Units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BattleTest {

@@ -1,9 +1,12 @@
+package no.ntnu.idatt2001.Wargames.Units;
 /**
  * Abstract Unit Class
  * @author  chribrev
  * @version 1.0
  */
-abstract class Unit {
+
+
+public abstract class Unit {
     private String name;
     private int health;
     private int attack;

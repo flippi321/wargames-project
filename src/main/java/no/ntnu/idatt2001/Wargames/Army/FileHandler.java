@@ -1,3 +1,7 @@
+package no.ntnu.idatt2001.Wargames.Army;
+
+import no.ntnu.idatt2001.Wargames.Units.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

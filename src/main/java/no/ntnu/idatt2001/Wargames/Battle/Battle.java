@@ -1,3 +1,7 @@
+package no.ntnu.idatt2001.Wargames.Battle;
+import no.ntnu.idatt2001.Wargames.Army.Army;
+import no.ntnu.idatt2001.Wargames.Units.*;
+
 /**
  * Battle Class
  * @author  chribrev

@@ -1,5 +1,6 @@
+import no.ntnu.idatt2001.Wargames.Army.*;
+import no.ntnu.idatt2001.Wargames.Units.*;
 import org.junit.jupiter.api.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

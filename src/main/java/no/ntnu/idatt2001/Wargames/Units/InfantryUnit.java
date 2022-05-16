@@ -1,3 +1,4 @@
+package no.ntnu.idatt2001.Wargames.Units;
 /**
  * Infantry Unit
  * @author  chribrev

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="55.0" prefWidth="173.0" text="Simulate Battle" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <VBox prefHeight="400.0" prefWidth="180.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="59.0" prefWidth="150.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army 1:">
+                     <font>
+                        <Font name="Felix Titling" size="45.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="53.0" prefWidth="150.0">
+               <children>
+                  <TextFlow prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry Units:          " />
+                  <TextArea prefHeight="22.0" prefWidth="44.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry Units:           " />
+                  <TextArea prefHeight="22.0" prefWidth="44.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged Units:          " wrappingWidth="135.92724609375" />
+                  <TextArea prefHeight="39.0" prefWidth="47.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commander Units:   " wrappingWidth="135.49072265625" />
+                  <TextArea prefHeight="39.0" prefWidth="47.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="15.0" prefWidth="180.0" />
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Units:" wrappingWidth="135.49072265625" />
+                  <TextArea editable="false" prefHeight="39.0" prefWidth="47.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:" wrappingWidth="135.49072265625" />
+                  <TextArea editable="false" prefHeight="39.0" prefWidth="47.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="15.0" prefWidth="180.0" />
+            <SplitPane dividerPositions="0.5" prefHeight="69.0" prefWidth="180.0">
+               <items>
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="85.0" text="Save" />
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="80.0" text="Load" />
+               </items>
+            </SplitPane>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="400.0" prefWidth="180.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="59.0" prefWidth="150.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army 2:">
+                     <font>
+                        <Font name="Felix Titling" size="45.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="53.0" prefWidth="150.0">
+               <children>
+                  <TextFlow prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry Units:          " />
+                  <TextArea prefHeight="22.0" prefWidth="44.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry Units:           " />
+                  <TextArea prefHeight="22.0" prefWidth="44.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged Units:          " wrappingWidth="135.92724609375" />
+                  <TextArea prefHeight="39.0" prefWidth="47.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commander Units:   " />
+                  <TextArea prefHeight="39.0" prefWidth="47.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="15.0" prefWidth="180.0" />
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Units:" wrappingWidth="135.49072265625" />
+                  <TextArea editable="false" prefHeight="39.0" prefWidth="47.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="151.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:" wrappingWidth="135.49072265625" />
+                  <TextArea editable="false" prefHeight="39.0" prefWidth="47.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="15.0" prefWidth="180.0" />
+            <SplitPane dividerPositions="0.5" prefHeight="69.0" prefWidth="180.0">
+               <items>
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="85.0" text="Save" />
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="80.0" text="Load" />
+               </items>
+            </SplitPane>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

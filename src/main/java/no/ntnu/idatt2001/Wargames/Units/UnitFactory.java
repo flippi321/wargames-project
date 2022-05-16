@@ -1,5 +1,5 @@
+package no.ntnu.idatt2001.Wargames.Units;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UnitFactory {
     public UnitFactory() {
