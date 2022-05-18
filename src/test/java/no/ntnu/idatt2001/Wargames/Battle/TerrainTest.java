@@ -1,3 +1,5 @@
+package no.ntnu.idatt2001.Wargames.Battle;
+
 import no.ntnu.idatt2001.Wargames.Battle.Terrain;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;

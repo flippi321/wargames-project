@@ -1,3 +1,5 @@
+package no.ntnu.idatt2001.Wargames.Army;
+
 import no.ntnu.idatt2001.Wargames.Units.*;
 import no.ntnu.idatt2001.Wargames.Army.*;
 import org.junit.jupiter.api.AfterAll;

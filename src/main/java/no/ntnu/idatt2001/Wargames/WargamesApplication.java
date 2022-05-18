@@ -12,7 +12,7 @@ public class WargamesApplication extends Application {
     @Override
     public void start(Stage stage) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("Wargames-view.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("Main-page.fxml"));
         try {
             stage.setScene(new Scene(loader.load()));
         } catch (Exception e){

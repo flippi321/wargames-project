@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The WARGAMES" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="40.0" />
+         </font>
+      </Text>
+   </top>
+   <left>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="200.0" spacing="6.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Name:" />
+            <TextField minHeight="20.0" minWidth="150.0" promptText="Insert Army Name" />
+            <Line endX="100.0" startX="-100.0" />
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry:                       " />
+                  <TextField prefWidth="50.0" promptText="0" text="0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="74.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry:                        " />
+                  <TextField prefWidth="50.0" text="0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="111.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged:                       " />
+                  <TextField prefWidth="50.0" promptText="0" text="0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="148.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commander:                " />
+                  <TextField prefWidth="50.0" promptText="0" text="0" />
+               </children>
+            </HBox>
+            <Line endX="100.0" startX="-100.0" />
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:        ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <TextField editable="false" prefWidth="50.0" promptText="0" />
+               </children>
+            </HBox>
+            <Line endX="100.0" startX="-100.0" />
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Save" />
+                  <Button mnemonicParsing="false" text="Load" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="200.0" spacing="6.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Name:" />
+            <TextField minHeight="20.0" minWidth="150.0" promptText="Insert Army Name" />
+            <Line endX="100.0" startX="-100.0" />
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry:                       " />
+                  <TextField prefWidth="50.0" promptText="0" text="0" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry:                        " />
+                  <TextField prefWidth="50.0" text="0" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged:                       " />
+                  <TextField prefWidth="50.0" promptText="0" text="0" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commander:                " />
+                  <TextField prefWidth="50.0" promptText="0" text="0" />
+               </children>
+            </HBox>
+            <Line endX="100.0" startX="-100.0" />
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:        ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <TextField editable="false" prefWidth="50.0" promptText="0" />
+               </children>
+            </HBox>
+            <Line endX="100.0" startX="-100.0" />
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Save" />
+                  <Button mnemonicParsing="false" text="Load" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </padding>
+      </VBox>
+   </right>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+            <Button mnemonicParsing="false" text="Fight">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="275.0" spacing="5.0">
+               <children>
+                  <ComboBox prefWidth="125.0" promptText="Terrain" />
+                  <ComboBox prefWidth="125.0" promptText="Weather" />
+               </children>
+            </HBox>
+            <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Made by Christoffer Brevik at the Norwigean University of Technology and Science" BorderPane.alignment="BOTTOM_CENTER">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+   </bottom>
+</BorderPane>
