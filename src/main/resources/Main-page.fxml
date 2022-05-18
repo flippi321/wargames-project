@@ -10,8 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.MainController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The WARGAMES" BorderPane.alignment="CENTER">
          <font>
@@ -23,30 +22,30 @@
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="200.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Name:" />
-            <TextField minHeight="20.0" minWidth="150.0" promptText="Insert Army Name" />
+            <TextField fx:id="army1Name" minHeight="20.0" minWidth="150.0" promptText="Insert Army Name" />
             <Line endX="100.0" startX="-100.0" />
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry:                       " />
-                  <TextField prefWidth="50.0" promptText="0" text="0" />
+                  <TextField fx:id="army1Infantry" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="74.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry:                        " />
-                  <TextField prefWidth="50.0" text="0" />
+                  <TextField fx:id="army1Cavalry" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="111.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged:                       " />
-                  <TextField prefWidth="50.0" promptText="0" text="0" />
+                  <TextField fx:id="army1Ranged" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="148.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commander:                " />
-                  <TextField prefWidth="50.0" promptText="0" text="0" />
+                  <TextField fx:id="army1Commander" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
@@ -57,7 +56,7 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <TextField editable="false" prefWidth="50.0" promptText="0" />
+                  <TextField fx:id="army1Value" editable="false" prefWidth="50.0" promptText="0" />
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
@@ -80,30 +79,30 @@
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="200.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Name:" />
-            <TextField minHeight="20.0" minWidth="150.0" promptText="Insert Army Name" />
+            <TextField fx:id="army2Name" minHeight="20.0" minWidth="150.0" promptText="Insert Army Name" />
             <Line endX="100.0" startX="-100.0" />
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry:                       " />
-                  <TextField prefWidth="50.0" promptText="0" text="0" />
+                  <TextField fx:id="army2Infantry" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry:                        " />
-                  <TextField prefWidth="50.0" text="0" />
+                  <TextField fx:id="army2Cavalry" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged:                       " />
-                  <TextField prefWidth="50.0" promptText="0" text="0" />
+                  <TextField fx:id="army2Ranged" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
             <HBox>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commander:                " />
-                  <TextField prefWidth="50.0" promptText="0" text="0" />
+                  <TextField fx:id="army2Commander" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
@@ -114,7 +113,7 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <TextField editable="false" prefWidth="50.0" promptText="0" />
+                  <TextField fx:id="army2Value" editable="false" prefWidth="50.0" promptText="0" />
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
@@ -136,7 +135,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Fight">
+            <Button mnemonicParsing="false" onAction="#Simulate" text="Fight">
                <font>
                   <Font size="20.0" />
                </font>

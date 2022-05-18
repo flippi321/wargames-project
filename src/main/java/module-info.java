@@ -7,4 +7,7 @@ module no.ntnu.idatt2001.Wargames {
 
     opens no.ntnu.idatt2001.Wargames to javafx.fxml;
     exports no.ntnu.idatt2001.Wargames;
+
+    opens no.ntnu.idatt2001.Wargames.Controllers to javafx.fxml;
+    exports no.ntnu.idatt2001.Wargames.Controllers;
 }
