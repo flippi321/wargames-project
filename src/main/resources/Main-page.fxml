@@ -62,8 +62,8 @@
             <Line endX="100.0" startX="-100.0" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
-                  <Button mnemonicParsing="false" text="Load" />
+                  <Button mnemonicParsing="false" onAction="#saveArmy1" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#loadArmy1" text="Load" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -119,8 +119,8 @@
             <Line endX="100.0" startX="-100.0" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
-                  <Button mnemonicParsing="false" text="Load" />
+                  <Button mnemonicParsing="false" onAction="#saveArmy2" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#loadArmy2" text="Load" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -142,8 +142,8 @@
             </Button>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="275.0" spacing="5.0">
                <children>
-                  <ComboBox prefWidth="125.0" promptText="Terrain" />
-                  <ComboBox prefWidth="125.0" promptText="Weather" />
+                  <ComboBox fx:id="Terrain" prefWidth="125.0" promptText="Terrain" />
+                  <ComboBox fx:id="Weather" prefWidth="125.0" promptText="Weather" />
                </children>
             </HBox>
             <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
