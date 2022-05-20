@@ -143,11 +143,12 @@
             </Button>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="275.0" spacing="5.0">
                <children>
-                  <ComboBox fx:id="terrain" prefWidth="125.0" promptText="Terrain" />
-                  <ComboBox fx:id="weather" prefWidth="125.0" promptText="Weather" />
+                  <ChoiceBox fx:id="terrain" prefWidth="150.0" />
+                  <ChoiceBox fx:id="weather" prefWidth="150.0" />
                </children>
             </HBox>
-            <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chosen Terrain:" />
+            <ImageView fx:id="mainImage" fitHeight="150.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </VBox>
    </center>

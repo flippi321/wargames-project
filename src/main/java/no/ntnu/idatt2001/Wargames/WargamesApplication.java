@@ -14,13 +14,20 @@ public class WargamesApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        //TODO
+        // DELETE:
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("Main-page.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        /*
         try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("Main-page.fxml"));
             stage.setScene(new Scene(loader.load()));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
+        */
 
         stage.setTitle("Wargames: BattleSimulation");
         stage.show();

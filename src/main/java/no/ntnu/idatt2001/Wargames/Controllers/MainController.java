@@ -1,11 +1,14 @@
 package no.ntnu.idatt2001.Wargames.Controllers;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import no.ntnu.idatt2001.Wargames.Army.Army;
 import no.ntnu.idatt2001.Wargames.Battle.Battle;
@@ -14,18 +17,16 @@ import no.ntnu.idatt2001.Wargames.Battle.Weather;
 import no.ntnu.idatt2001.Wargames.Units.InfantryUnit;
 import no.ntnu.idatt2001.Wargames.Units.UnitFactory;
 import no.ntnu.idatt2001.Wargames.Units.UnitType;
-
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainController implements Initializable {
     private Army Army1;
     private Army Army2;
     private Battle battle;
     private UnitFactory unitFactory;
+    private final String[] TERRAINS = {"Forest", "Hill", "Plains"};
+    private final String[] WEATHERS = {"Sunny", "Rainstorm", "Blizzard", "Heavy Fog"};
 
     @FXML
     private TextField army2Commander;
@@ -52,11 +53,13 @@ public class MainController implements Initializable {
     @FXML
     private TextField army1Commander;
     @FXML
-    private ComboBox<String> weather;
+    private ChoiceBox<String> weather;
     @FXML
-    private ComboBox<String> terrain;
+    private ChoiceBox<String> terrain;
     @FXML
     private Text errorMessage;
+    @FXML
+    private ImageView mainImage;
 
     @Deprecated
     private int Army1Value(ActionEvent actionEvent) {
@@ -238,12 +241,56 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method for changing the image on the applicaiton main page
+     * The image depends on the weather and terrain chosen by the user
+     * The default values are Sunny and Forest.
+     */
+    private void changeImage(){
+        String imageLink = "file:src/main/resources/Images/";
+
+        //Decide Weather
+        switch (weather.getValue()) {
+            default -> {
+                imageLink += "Sunny ";
+            }
+            case "Rainstorm" -> {
+                imageLink += "Rainy ";
+            }
+            case "Heavy Fog" -> {
+                imageLink += "Foggy ";
+            }
+            case "Blizzard" -> {
+                imageLink += "Snowy ";
+            }
+        }
+
+        //Decide terrain
+        switch (terrain.getValue()) {
+            default -> {
+                imageLink += "Forest.jpg";
+            }
+            case "Hill" -> {
+                imageLink += "Hills.jpg";
+            }
+            case "Plains" -> {
+                imageLink += "Plains.jpg";
+            }
+        }
+
+        Image loadedImage = new Image(imageLink, 270, 0, true, true);
+        mainImage.setImage(loadedImage);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        terrain = new ComboBox<String>();
-        weather = new ComboBox<String>();
-        terrain.getItems().setAll("Forest", "Hill", "Plains");
-        weather.getItems().setAll("Sunny", "Rainstorm", "Blizzard");
-
+        terrain.getItems().addAll(TERRAINS);
+        weather.getItems().addAll(WEATHERS);
+        terrain.setValue(TERRAINS[0]);
+        weather.setValue(WEATHERS[0]);
+        changeImage();
     }
+
+    //TODO
+    // Function to initiate changeImage() when chosen either Weather or Terrain
 }
