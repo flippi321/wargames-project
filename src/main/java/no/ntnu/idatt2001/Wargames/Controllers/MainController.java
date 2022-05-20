@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import no.ntnu.idatt2001.Wargames.Army.Army;
 import no.ntnu.idatt2001.Wargames.Battle.Battle;
 import no.ntnu.idatt2001.Wargames.Battle.Terrain;
+import no.ntnu.idatt2001.Wargames.Battle.Weather;
 import no.ntnu.idatt2001.Wargames.Units.InfantryUnit;
 import no.ntnu.idatt2001.Wargames.Units.UnitFactory;
 import no.ntnu.idatt2001.Wargames.Units.UnitType;
@@ -25,8 +26,6 @@ public class MainController implements Initializable {
     private Army Army2;
     private Battle battle;
     private UnitFactory unitFactory;
-    private ArrayList weatherChoices;
-    private ArrayList terrainChoices;
 
     @FXML
     private TextField army2Commander;
@@ -53,9 +52,11 @@ public class MainController implements Initializable {
     @FXML
     private TextField army1Commander;
     @FXML
-    private ComboBox<Terrain> weather;
+    private ComboBox<String> weather;
     @FXML
-    private ComboBox<Terrain> terrain;
+    private ComboBox<String> terrain;
+    @FXML
+    private Text errorMessage;
 
     @Deprecated
     private int Army1Value(ActionEvent actionEvent) {
@@ -68,11 +69,15 @@ public class MainController implements Initializable {
     }
 
     private Army generateArmy(String name, int infantry, int cavalry, int ranged, int commander) {
-        unitFactory = new UnitFactory();
-        Army army = new Army(name);
-        army.setUnits(new ArrayList<>());
         if (name.isBlank()) {
             throw new IllegalArgumentException("Army must have a valid name");
+        }
+
+        Army army = new Army(name);
+        unitFactory = new UnitFactory();
+        army.setUnits(new ArrayList<>());
+        if(infantry < 0 | cavalry < 0 | ranged < 0 | commander < 0){
+            throw new IllegalArgumentException("Cannot use negative values in an army");
         }
         if (infantry > 0) {
             army.addAll(unitFactory.getMultipleUnits(UnitType.INFANTRY, infantry,
@@ -99,16 +104,18 @@ public class MainController implements Initializable {
 
     @FXML
     private void Simulate(ActionEvent actionEvent) {
+        errorMessage.setText("");
         try {
             Army1 = generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
                     valueOf(army1Commander));
             Army2 = generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
                     valueOf(army2Commander));
+            battle = new Battle(Army1, Army2, decideTerrain());
+            System.out.println(battle.simulate().getName());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            errorMessage.setText(e.getMessage());
+            return;
         }
-        battle = new Battle(Army1, Army2, decideTerrain());
-        System.out.println(battle.simulate().getName());
 
         //Update units
         updateArmy1();
@@ -120,7 +127,9 @@ public class MainController implements Initializable {
 
     @FXML
     public boolean loadArmy2(ActionEvent actionEvent) {
+        errorMessage.setText("");
         if (army2Name.getText().isBlank()) {
+            errorMessage.setText("Army name is empty");
             return false;
         }
 
@@ -141,7 +150,9 @@ public class MainController implements Initializable {
 
     @FXML
     public boolean saveArmy2(ActionEvent actionEvent) {
+        errorMessage.setText("");
         if (army2Name.getText().isBlank()) {
+            errorMessage.setText("Army name is empty");
             return false;
         }
 
@@ -161,7 +172,9 @@ public class MainController implements Initializable {
 
     @FXML
     public boolean loadArmy1(ActionEvent actionEvent) {
+        errorMessage.setText("");
         if (army1Name.getText().isBlank()) {
+            errorMessage.setText("Army name is empty");
             return false;
         }
 
@@ -178,7 +191,9 @@ public class MainController implements Initializable {
 
     @FXML
     public boolean saveArmy1(ActionEvent actionEvent) {
+        errorMessage.setText("");
         if (army1Name.getText().isBlank()) {
+            errorMessage.setText("Army name is empty");
             return false;
         }
 
@@ -225,6 +240,10 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        terrain = new ComboBox<String>();
+        weather = new ComboBox<String>();
+        terrain.getItems().setAll("Forest", "Hill", "Plains");
+        weather.getItems().setAll("Sunny", "Rainstorm", "Blizzard");
 
     }
 }

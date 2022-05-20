@@ -129,4 +129,7 @@ public class BattleTest {
             assertEquals(ghouls.getName(),witcherGhoulBattle.simulate().getName());
         }
     }
+
+    //TODO
+    // Add exeption handling tests
 }

@@ -135,6 +135,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="BOTTOM_CENTER">
          <children>
+            <Text fx:id="errorMessage" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Button mnemonicParsing="false" onAction="#Simulate" text="Fight">
                <font>
                   <Font size="20.0" />
@@ -142,8 +143,8 @@
             </Button>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="275.0" spacing="5.0">
                <children>
-                  <ComboBox fx:id="Terrain" prefWidth="125.0" promptText="Terrain" />
-                  <ComboBox fx:id="Weather" prefWidth="125.0" promptText="Weather" />
+                  <ComboBox fx:id="terrain" prefWidth="125.0" promptText="Terrain" />
+                  <ComboBox fx:id="weather" prefWidth="125.0" promptText="Weather" />
                </children>
             </HBox>
             <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />

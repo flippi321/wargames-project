@@ -28,6 +28,9 @@ public class Battle {
      * @return the army that wins the battle
      */
     public Army simulate(){
+        if(!armyOne.hasUnits() & !armyTwo.hasUnits()){
+            throw new IllegalArgumentException("At least one army must have units");
+        }
         while (armyOne.hasUnits() && armyTwo.hasUnits()){
             // One unit from armyOne attacks one from armyTwo
             Unit unitOne = armyOne.getRandom();

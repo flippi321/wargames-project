@@ -18,14 +18,14 @@ public class WargamesApplication extends Application {
         loader.setLocation(getClass().getClassLoader().getResource("Main-page.fxml"));
         try {
             stage.setScene(new Scene(loader.load()));
-            //stage.getIcons().add(new Image(this.getClass().getResource("icon.png").toExternalForm()));        //TODO: FIX
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
 
-        stage.setTitle("Wargames");
+        stage.setTitle("Wargames: BattleSimulation");
         stage.show();
         stage.setMinWidth(700);
         stage.setMinHeight(400);
+        //stage.getIcons().add(new Image(this.getClass().getResource("icon.png").toExternalForm()));        //TODO: FIX
     }
 }
