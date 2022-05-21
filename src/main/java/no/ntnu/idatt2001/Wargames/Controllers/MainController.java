@@ -1,30 +1,29 @@
 package no.ntnu.idatt2001.Wargames.Controllers;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import no.ntnu.idatt2001.Wargames.Army.Army;
 import no.ntnu.idatt2001.Wargames.Battle.Battle;
 import no.ntnu.idatt2001.Wargames.Battle.Terrain;
-import no.ntnu.idatt2001.Wargames.Battle.Weather;
-import no.ntnu.idatt2001.Wargames.Units.InfantryUnit;
 import no.ntnu.idatt2001.Wargames.Units.UnitFactory;
 import no.ntnu.idatt2001.Wargames.Units.UnitType;
 import java.net.URL;
 import java.util.*;
 
 public class MainController implements Initializable {
-    private Army Army1;
-    private Army Army2;
+    private Army army1;
+    private Army army2;
     private Battle battle;
     private UnitFactory unitFactory;
+    private String log;
     private final String[] TERRAINS = {"Forest", "Hill", "Plains"};
     private final String[] WEATHERS = {"Sunny", "Rainstorm", "Blizzard", "Heavy Fog"};
 
@@ -102,19 +101,44 @@ public class MainController implements Initializable {
     }
 
     private Terrain decideTerrain() {
-        return Terrain.FOREST;
+        switch (terrain.getValue()) {
+            default -> {
+                return Terrain.FOREST;
+            }
+            case "Hill" -> {
+                return Terrain.HILL;
+            }
+            case "Plains" -> {
+                return Terrain.PLAINS;
+            }
+        }
     }
 
     @FXML
     private void Simulate(ActionEvent actionEvent) {
         errorMessage.setText("");
         try {
-            Army1 = generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
+            army1 = generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
                     valueOf(army1Commander));
-            Army2 = generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
+            army2 = generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
                     valueOf(army2Commander));
-            battle = new Battle(Army1, Army2, decideTerrain());
-            System.out.println(battle.simulate().getName());
+            battle = new Battle(army1, army2, decideTerrain());
+            Army winner = battle.simulate();
+
+            //Open Victory Screen
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Victory-Screen.fxml"));
+            VictoryController victoryController = loader.getController();
+            victoryController.setWinnerValues(winner.getName(), 0, 0);
+            //TODO
+            // Calculate kills and losses
+            // Fix error here
+
+            //Open Screen
+            Stage stage = new Stage();
+            stage.setTitle("Battle Results");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+
         } catch (Exception e) {
             errorMessage.setText(e.getMessage());
             return;
@@ -123,9 +147,6 @@ public class MainController implements Initializable {
         //Update units
         updateArmy1();
         updateArmy2();
-        //TODO
-        // Add multiple terrains
-        // Add pop up for who wins
     }
 
     @FXML
@@ -137,9 +158,9 @@ public class MainController implements Initializable {
         }
 
         // If there is an army with the right name saved, it will be loaded automatically
-        Army2 = new Army(army2Name.getText());
+        army2 = new Army(army2Name.getText());
         try {
-            if (Army2.loadArmy()) {
+            if (army2.loadArmy()) {
                 return updateArmy2();
             }
         } catch (Exception e) {
@@ -160,11 +181,11 @@ public class MainController implements Initializable {
         }
 
         // Will try to Save army
-        Army2 = new Army(army2Name.getText());
+        army2 = new Army(army2Name.getText());
         try {
-            Army2 = generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
+            army2 = generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
                     valueOf(army2Commander));
-            return Army2.saveArmy();
+            return army2.saveArmy();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -182,8 +203,8 @@ public class MainController implements Initializable {
         }
 
         // If there is an army with the right name saved, it will be loaded automatically
-        Army1 = new Army(army1Name.getText());
-        if (Army1.loadArmy()) {
+        army1 = new Army(army1Name.getText());
+        if (army1.loadArmy()) {
             return updateArmy1();
         }
 
@@ -202,9 +223,9 @@ public class MainController implements Initializable {
 
         // Will try to Save army
         try {
-            Army1 = generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
+            army1 = generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
                     valueOf(army1Commander));
-            return Army1.saveArmy();
+            return army1.saveArmy();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -215,11 +236,11 @@ public class MainController implements Initializable {
 
     private boolean updateArmy1() {
         try {
-            army1Name.setText(Army1.getName());
-            army1Cavalry.setText(String.valueOf(Army1.getCavalryUnits().size()));
-            army1Infantry.setText(String.valueOf(Army1.getInfantryUnits().size()));
-            army1Ranged.setText(String.valueOf(Army1.getRangedUnits().size()));
-            army1Commander.setText(String.valueOf(Army1.getCommanderUnits().size()));
+            army1Name.setText(army1.getName());
+            army1Cavalry.setText(String.valueOf(army1.getCavalryUnits().size()));
+            army1Infantry.setText(String.valueOf(army1.getInfantryUnits().size()));
+            army1Ranged.setText(String.valueOf(army1.getRangedUnits().size()));
+            army1Commander.setText(String.valueOf(army1.getCommanderUnits().size()));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -229,11 +250,11 @@ public class MainController implements Initializable {
 
     private boolean updateArmy2() {
         try {
-            army2Name.setText(Army2.getName());
-            army2Cavalry.setText(String.valueOf(Army2.getCavalryUnits().size()));
-            army2Infantry.setText(String.valueOf(Army2.getInfantryUnits().size()));
-            army2Ranged.setText(String.valueOf(Army2.getRangedUnits().size()));
-            army2Commander.setText(String.valueOf(Army2.getCommanderUnits().size()));
+            army2Name.setText(army2.getName());
+            army2Cavalry.setText(String.valueOf(army2.getCavalryUnits().size()));
+            army2Infantry.setText(String.valueOf(army2.getInfantryUnits().size()));
+            army2Ranged.setText(String.valueOf(army2.getRangedUnits().size()));
+            army2Commander.setText(String.valueOf(army2.getCommanderUnits().size()));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());

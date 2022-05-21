@@ -11,9 +11,7 @@ import no.ntnu.idatt2001.Wargames.Units.UnitFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class VictoryController(Army army_one, Army army_two) implements Initializable {
-    Army army1 = new Army(army_one);
-    Army army2 = new Army(army_two);
+public class VictoryController implements Initializable {
     @FXML
     private TextField winnerKills;
     @FXML
@@ -22,7 +20,15 @@ public class VictoryController(Army army_one, Army army_two) implements Initiali
     private TextField winnerLosses;
     @FXML
     private Button seeLog;
+    Army army1;
+    Army army2;
+    String log;
 
+    public void setWinnerValues(String winnerName, int winnerKills, int winnerLosses){
+        this.winnerName.setText(winnerName);
+        this.winnerKills.setText(String.valueOf(winnerKills));
+        this.winnerLosses.setText(String.valueOf(winnerLosses));
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

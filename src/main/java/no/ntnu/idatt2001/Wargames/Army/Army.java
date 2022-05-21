@@ -21,6 +21,20 @@ public class Army {
         this.fileHandler = new FileHandler();
     }
 
+
+    //TODO
+    // REMOVE?
+    /**
+     * Constructor for an object representing an empty army
+     * This constructor is used to copy another army
+     * @param army the army that should be copied
+     */
+    public Army(Army army) {
+        this.name = army.getName();
+        this.units = army.getAllUnits();
+        this.fileHandler = new FileHandler();
+    }
+
     /**
      * Constructor for an object representing an army of units
      * @param name what the army is called
