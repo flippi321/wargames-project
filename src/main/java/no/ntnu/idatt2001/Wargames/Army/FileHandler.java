@@ -27,68 +27,65 @@ public class FileHandler {
         if (!fixedFileLocation.startsWith("src/main/resources/ArmyFiles/")){
             fixedFileLocation = ("src/main/resources/ArmyFiles/"  + fixedFileLocation);
         }
+        /*
         //Using '/' instead of '\' so that the application can be used on Linux and MacOS
         if(fixedFileLocation.contains("\\")){
             throw new IllegalArgumentException("You used \\ when / was applicable, please change this");
         }
+         */
         return fixedFileLocation;
     }
 
-    public Army loadArmy(String fileLocation){
+    public Army loadArmy(String fileLocation) throws Exception{
         //Fixing potential errors with the location
         fileLocation = testFileLocation(fileLocation);
 
-        try{
-            FileInputStream fileInput = new FileInputStream(fileLocation);
-            Scanner scanner = new Scanner(fileInput);
-            List<Unit> newUnits = new ArrayList<>();
+        FileInputStream fileInput = new FileInputStream(fileLocation);
+        Scanner scanner = new Scanner(fileInput);
+        List<Unit> newUnits = new ArrayList<>();
 
-            //Creating army with name
-            String name = scanner.nextLine();
-            if(name.isBlank()){
-                throw new IllegalArgumentException("The army name is Blank");
-            }
-            Army newArmy = new Army(name);
+        //Creating army with name
+        String name = scanner.nextLine();
+        if(name.isBlank()){
+            throw new IllegalArgumentException("The army name is Blank");
+        }
+        Army newArmy = new Army(name);
 
-            //Adding saved units
-            while(scanner.hasNextLine())
-            {
-                String thisLine = scanner.nextLine();
-                String[] lineVariables = thisLine.split(",");
-                if(lineVariables.length>1 && !thisLine.isBlank()){
-                    // Making the unit
-                    switch (lineVariables[0].trim()) {
-                        case "InfantryUnit" -> {
-                            InfantryUnit unit = new InfantryUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
-                            newUnits.add(unit);
-                        }
-                        case "RangedUnit" -> {
-                            RangedUnit unit = new RangedUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
-                            newUnits.add(unit);
-                        }
-                        case "CavalryUnit" -> {
-                            CavalryUnit unit = new CavalryUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
-                            newUnits.add(unit);
-                        }
-                        case "CommanderUnit" -> {
-                            CommanderUnit unit = new CommanderUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
-                            newUnits.add(unit);
-                        }
-                        default -> throw new IllegalArgumentException("Unit must have a valid name");
+        //Adding saved units
+        while(scanner.hasNextLine())
+        {
+            String thisLine = scanner.nextLine();
+            String[] lineVariables = thisLine.split(",");
+            if(lineVariables.length>1 && !thisLine.isBlank()){
+                // Making the unit
+                switch (lineVariables[0].trim()) {
+                    case "InfantryUnit" -> {
+                        InfantryUnit unit = new InfantryUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
+                        newUnits.add(unit);
                     }
+                    case "RangedUnit" -> {
+                        RangedUnit unit = new RangedUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
+                        newUnits.add(unit);
+                    }
+                    case "CavalryUnit" -> {
+                        CavalryUnit unit = new CavalryUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
+                        newUnits.add(unit);
+                    }
+                    case "CommanderUnit" -> {
+                        CommanderUnit unit = new CommanderUnit(lineVariables[1], Integer.parseInt(lineVariables[2]));
+                        newUnits.add(unit);
+                    }
+                    default -> throw new IllegalArgumentException("Unit must have a valid name");
                 }
             }
-
-            //Closing file and changing units in the Army file
-            scanner.close();
-            newArmy.setUnits(newUnits);
-
-            // Returning Army
-            return newArmy;
-        } catch (IOException e){
-            System.out.println(e.getMessage());
-            return null;
         }
+
+        //Closing file and changing units in the Army file
+        scanner.close();
+        newArmy.setUnits(newUnits);
+
+        // Returning Army
+        return newArmy;
     }
 
     /**

@@ -20,16 +20,21 @@ public class VictoryController implements Initializable {
     private TextField winnerLosses;
     @FXML
     private Button seeLog;
-    Army army1;
-    Army army2;
+    /*
+    String winner = winnerName.getText();
+    int losses = Integer.parseInt(winnerLosses.getText());
+    int kills = Integer.parseInt(winnerKills.getText());
     String log;
 
     public void setWinnerValues(String winnerName, int winnerKills, int winnerLosses){
         this.winnerName.setText(winnerName);
         this.winnerKills.setText(String.valueOf(winnerKills));
         this.winnerLosses.setText(String.valueOf(winnerLosses));
-    }
 
+        //TODO
+        // Send info from MainController to VicotryController
+    }
+*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

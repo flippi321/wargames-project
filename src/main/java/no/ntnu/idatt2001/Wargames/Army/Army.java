@@ -181,10 +181,11 @@ public class Army {
             setName(name);
             Army newArmy = fileHandler.loadArmy(name);
             setUnits(newArmy.getAllUnits());
+            return true;
         } catch (Exception e) {
            System.out.println(e.getMessage());
         }
-        return true;
+        return false;
     }
 
     /**

@@ -51,12 +51,22 @@
             <Line endX="100.0" startX="-100.0" />
             <HBox>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:        ">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:     ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="army1Value" editable="false" prefWidth="50.0" promptText="0" />
+                  <TextField fx:id="army1Quality" promptText="0-5" text="1" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:       ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="army1Value" editable="false" promptText="0" />
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
@@ -69,6 +79,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
+            <Line endX="100.0" startX="-100.0" />
          </children>
          <BorderPane.margin>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
@@ -108,12 +119,22 @@
             <Line endX="100.0" startX="-100.0" />
             <HBox>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:        ">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:     ">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="army2Value" editable="false" prefWidth="50.0" promptText="0" />
+                  <TextField fx:id="army2Quality" promptText="0-5" text="1" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:       ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="army2Value" editable="false" promptText="0" />
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
@@ -126,6 +147,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
+            <Line endX="100.0" startX="-100.0" />
          </children>
          <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
@@ -144,7 +166,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="275.0" spacing="5.0">
                <children>
                   <ChoiceBox fx:id="terrain" prefWidth="150.0" />
-                  <ChoiceBox fx:id="weather" prefWidth="150.0" />
+                  <ChoiceBox fx:id="weather" onMouseReleased="#changeImage" prefWidth="150.0" />
                </children>
             </HBox>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chosen Terrain:" />
