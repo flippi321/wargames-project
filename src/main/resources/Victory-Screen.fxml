@@ -9,39 +9,39 @@
 
 
 <BorderPane maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.VictoryController">
-   <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Battle over!" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Copperplate Gothic Bold" size="40.0" />
-         </font>
-      </Text>
-   </top>
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Winner:" />
-            <TextField fx:id="winnerName" editable="false" promptText="Army name Here" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Units killed:" />
-            <AnchorPane prefHeight="31.0" prefWidth="147.0">
-               <children>
-                  <TextField fx:id="winnerKills" editable="false" layoutX="25.0" layoutY="3.0" prefHeight="30.0" prefWidth="100.0" promptText="Nuber here" />
-               </children>
-            </AnchorPane>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Units Lost:" />
-            <AnchorPane>
-               <children>
-                  <TextField fx:id="winnerLosses" editable="false" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="100.0" promptText="Nuber here" />
-               </children>
-            </AnchorPane>
-            <Button fx:id="seeLog" mnemonicParsing="false" prefHeight="37.0" prefWidth="80.0" text="See Log" />
-         </children>
-      </VBox>
-   </center>
-   <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </right>
-   <left>
-      <VBox prefHeight="255.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </left>
+    <top>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Battle over!" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Copperplate Gothic Bold" size="40.0" />
+            </font>
+        </Text>
+    </top>
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0" BorderPane.alignment="CENTER">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Winner:" />
+                <TextField fx:id="winnerName" editable="false" promptText="Army name Here" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Units killed:" />
+                <AnchorPane prefHeight="31.0" prefWidth="147.0">
+                    <children>
+                        <TextField fx:id="winnerKills" editable="false" layoutX="25.0" layoutY="3.0" prefHeight="30.0" prefWidth="100.0" promptText="Nuber here" />
+                    </children>
+                </AnchorPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Units Lost:" />
+                <AnchorPane>
+                    <children>
+                        <TextField fx:id="winnerLosses" editable="false" layoutX="25.0" layoutY="-1.0" prefHeight="30.0" prefWidth="100.0" promptText="Nuber here" />
+                    </children>
+                </AnchorPane>
+                <Button fx:id="seeLog" mnemonicParsing="false" prefHeight="37.0" prefWidth="80.0" text="See Log" />
+            </children>
+        </VBox>
+    </center>
+    <right>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+    </right>
+    <left>
+        <VBox prefHeight="255.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+    </left>
 </BorderPane>

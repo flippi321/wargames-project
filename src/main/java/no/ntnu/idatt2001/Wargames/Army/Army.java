@@ -263,11 +263,21 @@ public class Army {
      */
     @Override
     public String toString() {
+        int i = 1;
         StringBuilder sb = new StringBuilder();
         ArrayList<Unit> newList = new ArrayList<>(getAllUnits());
-        sb.append(String.format("| %-40s | %-15s | %-15s | %-15s |\n", "Name:", "Health:", "Attack:", "Armour:"));
+        String startMessage = ("ARMY INFO:\n" + "This army is called" + name + "\nIt consists of " + units.size() +
+                " units, divided into:\n" +
+                "    -" + getInfantryUnits().size() + " infantry units\n" +
+                "    -" + getRangedUnits().size() + " ranged units\n" +
+                "    -" + getCavalryUnits().size() + " cavalry units\n" +
+                "    -" + getCommanderUnits().size() + " commander units\n\n" +
+                "ALL UNITS IN ARMY:\n");
+        sb.append(startMessage);
         for (Unit unit : newList) {
+            sb.append("\nUnit ").append(i).append("\n");
             sb.append(unit);
+            i++;
         }
         return sb.toString();
     }

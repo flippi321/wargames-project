@@ -112,6 +112,10 @@ public abstract class Unit {
      */
     @Override
     public String toString() {
-        return  String.format("| %-40s | %-15d | %-15d | %-15d |\n", name, health, attack, armour);
+        return  (name + "\n" +
+                "Type  : " + getClass().getSimpleName() + "\n" +
+                "Health: " + health + "\n" +
+                "Attack: " + attack + "\n" +
+                "Armour: " + armour + "\n");
     }
 }

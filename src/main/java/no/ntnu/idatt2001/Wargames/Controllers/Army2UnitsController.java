@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Army2UnitsController implements Initializable {
-
     @FXML
     private TextArea armyText;
 

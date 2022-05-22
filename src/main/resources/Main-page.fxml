@@ -53,7 +53,7 @@
             <HBox />
             <Slider fx:id="army1Quality" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Naming Convention" />
-            <ChoiceBox prefWidth="150.0" />
+            <ChoiceBox fx:id="army1NameType" prefWidth="150.0" />
             <HBox />
             <Line endX="100.0" startX="-100.0" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
@@ -108,7 +108,7 @@
             <Slider fx:id="army2Quality" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
             <HBox />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Naming Convention" />
-            <ChoiceBox prefWidth="150.0" />
+            <ChoiceBox fx:id="army2NameType" prefWidth="150.0" />
             <HBox />
             <Line endX="100.0" startX="-100.0" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
@@ -148,6 +148,7 @@
             <ImageView fx:id="mainImage" fitHeight="250.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Size Comparison" />
             <ProgressBar fx:id="armyComparison" prefWidth="350.0" progress="0.53" />
+            <Button mnemonicParsing="false" onAction="#updateSizeComparisonButton" text="Compute" />
          </children>
       </VBox>
    </center>
