@@ -264,8 +264,8 @@ public class Army {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        ArrayList<Unit> newList = new ArrayList<>(getAllUnits());                            // Shallow copy
-        sb.append(String.format("\n| %-20s | %-20s | %-20s | %-20s |\n", "Name:", "Health:", "Attack:", "Armour:"));  // Top Text
+        ArrayList<Unit> newList = new ArrayList<>(getAllUnits());
+        sb.append(String.format("\n| %-20s | %-20s | %-20s | %-20s |\n", "Name:", "Health:", "Attack:", "Armour:"));
         for (Unit unit : newList) {
             sb.append(unit);
         }

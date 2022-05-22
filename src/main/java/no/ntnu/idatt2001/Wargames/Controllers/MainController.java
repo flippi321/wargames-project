@@ -341,15 +341,19 @@ public class MainController implements Initializable {
 
     @FXML
     public void viewArmy1Units(ActionEvent actionEvent) {
-        wargamesAdmin.setArmy1(generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
-                valueOf(army1Commander), (int) Math.round(army1Quality.getValue())));
+        if(wargamesAdmin.getArmy1().getAllUnits().size()==0){
+            wargamesAdmin.setArmy1(generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry),
+                    valueOf(army1Ranged), valueOf(army1Commander), (int) Math.round(army1Quality.getValue())));
+        }
         viewArmyUnit(wargamesAdmin.getArmy1());
     }
 
     @FXML
     public void viewArmy2Units(ActionEvent actionEvent) {
-        wargamesAdmin.setArmy2(generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
-                valueOf(army2Commander), (int) Math.round(army2Quality.getValue())));
+        if(wargamesAdmin.getArmy2().getAllUnits().size()==0){
+            wargamesAdmin.setArmy2(generateArmy(army1Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry),
+                    valueOf(army2Ranged), valueOf(army2Commander), (int) Math.round(army2Quality.getValue())));
+        }
         viewArmyUnit(wargamesAdmin.getArmy2());
     }
 
