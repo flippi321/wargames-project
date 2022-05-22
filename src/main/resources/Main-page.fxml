@@ -67,6 +67,7 @@
                </opaqueInsets>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
+            <Button mnemonicParsing="false" onAction="#clearArmy1" text="Clear" textFill="RED" />
          </children>
          <BorderPane.margin>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
@@ -122,6 +123,7 @@
                </opaqueInsets>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
+            <Button mnemonicParsing="false" onAction="#clearArmy2" text="Clear" textFill="RED" />
          </children>
          <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />

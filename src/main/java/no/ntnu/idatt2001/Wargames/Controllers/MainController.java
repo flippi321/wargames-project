@@ -214,7 +214,7 @@ public class MainController implements Initializable {
             updateArmy2();
 
             //Open Victory Screen
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Victory-Screen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Winner-Page.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Battle Results");
             stage.setScene(new Scene(loader.load()));
@@ -433,16 +433,25 @@ public class MainController implements Initializable {
 
     @FXML
     public void updateValuesButton(Event event) {
+        changeImage();
+    }
+
+    @FXML
+    public void updateSizeComparisonButton(ActionEvent actionEvent) {
         try {
-            changeImage();
             wargamesAdmin.setArmy1(generateArmy1());
             wargamesAdmin.setArmy2(generateArmy2());
-            double army1Size = wargamesAdmin.getArmy1().getAllUnits().size();
-            double army2Size = wargamesAdmin.getArmy2().getAllUnits().size();
-            if(army1Size<=0 & army2Size <= 0){
-                armyComparison.setProgress(0.5);
-            } else {
-                armyComparison.setProgress(army1Size/(army1Size+army2Size));
+            if (wargamesAdmin.getArmy1()!=null & wargamesAdmin.getArmy2()!=null){
+                double army1Size = wargamesAdmin.getArmy1().getAllUnits().size();
+                double army2Size = wargamesAdmin.getArmy2().getAllUnits().size();
+                if(army1Size<=0 & army2Size <= 0){
+                    armyComparison.setProgress(0.5);
+                } else {
+                    armyComparison.setProgress(army1Size/(army1Size+army2Size));
+                }
+            }
+            else{
+                throw new IllegalArgumentException("Armies can't be empty");
             }
         } catch (Exception e){
             errorMessage.setText(e.getMessage());
@@ -475,6 +484,14 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void updateSizeComparisonButton(ActionEvent actionEvent) {
+    public void clearArmy2(ActionEvent actionEvent) {
+        wargamesAdmin.setArmy2(new Army("Army 1"));
+        updateArmy2();
+    }
+
+    @FXML
+    public void clearArmy1(ActionEvent actionEvent) {
+        wargamesAdmin.setArmy1(new Army("Army 1"));
+        updateArmy1();
     }
 }
