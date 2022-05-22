@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -69,9 +70,31 @@ public class MainController implements Initializable {
     private Slider army2Quality;
     @FXML
     private Slider army1Quality;
+    @FXML
+    private ProgressBar ArmyComparison;
 
     private int valueOf(TextField text) {
         return Integer.parseInt(text.getText());
+    }
+
+    private Army generateArmy1(){
+        try {
+            return generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
+                    valueOf(army1Commander), (int) Math.round(army1Quality.getValue()));
+        } catch (Exception e) {
+            errorMessage.setText(e.getMessage());
+            return null;
+        }
+    }
+
+    private Army generateArmy2(){
+        try {
+            return generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
+                    valueOf(army2Commander), (int) Math.round(army2Quality.getValue()));
+        } catch (Exception e) {
+            errorMessage.setText(e.getMessage());
+            return null;
+        }
     }
 
     private Army generateArmy(String name, int infantry, int cavalry, int ranged, int commander, int quality)
@@ -142,13 +165,9 @@ public class MainController implements Initializable {
     @FXML
     private void Simulate(ActionEvent actionEvent) {
         errorMessage.setText("");
-        int quality1 = (int) Math.round(army1Quality.getValue());
-        int quality2 = (int) Math.round(army2Quality.getValue());
         try {
-            wargamesAdmin.setArmy1(generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
-                    valueOf(army1Commander), quality1));
-            wargamesAdmin.setArmy2(generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
-                    valueOf(army2Commander), quality2));
+            wargamesAdmin.setArmy1(generateArmy1());
+            wargamesAdmin.setArmy2(generateArmy2());
             battle = new Battle(wargamesAdmin.getArmy1(), wargamesAdmin.getArmy2(), decideTerrain(), decideWeather());
             Army winner = battle.simulate();
 
@@ -207,11 +226,10 @@ public class MainController implements Initializable {
         // Will try to Save army
         wargamesAdmin.setArmy2(new Army(army2Name.getText()));
         try {
-            wargamesAdmin.setArmy2(generateArmy(army2Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry), valueOf(army2Ranged),
-                    valueOf(army2Commander),(int) Math.round(army2Quality.getValue())));
+            wargamesAdmin.setArmy2(generateArmy2());
             return wargamesAdmin.getArmy2().saveArmy();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            errorMessage.setText((e.getMessage()));
         }
 
         //If nothing above works
@@ -249,11 +267,10 @@ public class MainController implements Initializable {
 
         // Will try to Save army
         try {
-            wargamesAdmin.setArmy1(generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry), valueOf(army1Ranged),
-                    valueOf(army1Commander), (int) Math.round(army1Quality.getValue())));
+            wargamesAdmin.setArmy1(generateArmy1());
             return wargamesAdmin.getArmy1().saveArmy();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            errorMessage.setText(e.getMessage());
         }
 
         //If nothing above works
@@ -341,18 +358,27 @@ public class MainController implements Initializable {
 
     @FXML
     public void viewArmy1Units(ActionEvent actionEvent) {
-        if(wargamesAdmin.getArmy1().getAllUnits().size()==0){
-            wargamesAdmin.setArmy1(generateArmy(army1Name.getText(), valueOf(army1Infantry), valueOf(army1Cavalry),
-                    valueOf(army1Ranged), valueOf(army1Commander), (int) Math.round(army1Quality.getValue())));
+        try {
+            // Army will be updated if not already
+            if(wargamesAdmin.getArmy1().getAllUnits().size()==0){
+                wargamesAdmin.setArmy1(generateArmy1());
+            }
+
+            //Open Victory Screen
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Army1-Units.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Battle Results");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (Exception e){
+            errorMessage.setText(e.getMessage());
         }
-        viewArmyUnit(wargamesAdmin.getArmy1());
     }
 
     @FXML
     public void viewArmy2Units(ActionEvent actionEvent) {
         if(wargamesAdmin.getArmy2().getAllUnits().size()==0){
-            wargamesAdmin.setArmy2(generateArmy(army1Name.getText(), valueOf(army2Infantry), valueOf(army2Cavalry),
-                    valueOf(army2Ranged), valueOf(army2Commander), (int) Math.round(army2Quality.getValue())));
+            wargamesAdmin.setArmy2(generateArmy2());
         }
         viewArmyUnit(wargamesAdmin.getArmy2());
     }

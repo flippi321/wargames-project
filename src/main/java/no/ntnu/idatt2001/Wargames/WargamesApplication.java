@@ -14,25 +14,18 @@ public class WargamesApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //TODO
-        // DELETE:
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("Main-page.fxml"));
-        stage.setScene(new Scene(loader.load()));
-        /*
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("Main-page.fxml"));
+            loader.setLocation(getClass().getClassLoader().getResource("Start-Page.fxml"));
             stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Wargames: BattleSimulation");
+            stage.show();
+            stage.setMinWidth(800);
+            stage.setMinHeight(500);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        */
 
-        stage.setTitle("Wargames: BattleSimulation");
-        stage.show();
-        stage.setMinWidth(800);
-        stage.setMinHeight(500);
         //stage.getIcons().add(new Image(this.getClass().getResource("icon.png").toExternalForm()));        //TODO: FIX
     }
 }

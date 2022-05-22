@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.FrontPageController">
+   <center>
+      <ImageView fitWidth="600.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../../../../Desktop/mwe66kz-3059891180.jpg" />
+         </image></ImageView>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button minHeight="50.0" mnemonicParsing="false" onAction="#startApplication" prefWidth="200.0" text="Start Application" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

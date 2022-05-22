@@ -139,14 +139,15 @@
             </Button>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="275.0" spacing="5.0">
                <children>
-                  <ChoiceBox fx:id="terrain" prefWidth="150.0" />
-                  <ChoiceBox fx:id="weather" onMouseReleased="#changeImage" prefWidth="150.0" />
+                  <ChoiceBox fx:id="terrain" prefWidth="130.0" />
+                  <ChoiceBox fx:id="weather" prefWidth="130.0" />
+                  <Button mnemonicParsing="false" onAction="#changeImage" text="Update" />
                </children>
             </HBox>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chosen Terrain:" />
             <ImageView fx:id="mainImage" fitHeight="250.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Size Comparison" />
-            <ProgressBar prefWidth="350.0" progress="0.0" />
+            <ProgressBar fx:id="ArmyComparison" prefWidth="350.0" progress="0.53" />
          </children>
       </VBox>
    </center>

@@ -265,7 +265,7 @@ public class Army {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         ArrayList<Unit> newList = new ArrayList<>(getAllUnits());
-        sb.append(String.format("\n| %-20s | %-20s | %-20s | %-20s |\n", "Name:", "Health:", "Attack:", "Armour:"));
+        sb.append(String.format("| %-40s | %-15s | %-15s | %-15s |\n", "Name:", "Health:", "Attack:", "Armour:"));
         for (Unit unit : newList) {
             sb.append(unit);
         }
