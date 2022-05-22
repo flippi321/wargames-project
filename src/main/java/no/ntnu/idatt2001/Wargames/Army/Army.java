@@ -5,6 +5,8 @@ import java.util.*;
 
 public class Army {
     private String name;
+    private int losses;
+    private int kills;
     private List<Unit> units;
     private FileHandler fileHandler;
 
@@ -20,7 +22,6 @@ public class Army {
         this.units = new ArrayList<>();
         this.fileHandler = new FileHandler();
     }
-
 
     //TODO
     // REMOVE?
@@ -52,6 +53,25 @@ public class Army {
      */
     public String getName() {
         return name;
+    }
+
+    //TODO
+    // JavaDoc
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public void addLoss() {
+        losses++;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void addKill() {
+        kills++;
     }
 
     /**
@@ -188,6 +208,28 @@ public class Army {
         return false;
     }
 
+    public void damageAll(int damage){
+        for(Unit unit : getAllUnits()){
+            unit.setHealth(unit.getHealth()-2);
+            if (unit.getHealth()<1){
+                remove(unit);
+            }
+        }
+    }
+
+    //TODO
+    // Optimize
+    public void removeAllCavalry(){
+        CavalryUnit cavalry = new CavalryUnit("Horse", 100);
+        for(Unit unit : getAllUnits()){
+            if(unit.getClass().equals(cavalry.getClass()))
+            unit.setHealth(unit.getHealth()-2);
+            if (unit.getHealth()<1){
+                remove(unit);
+            }
+        }
+    }
+
     /**
      * Method to save an army as a CSV file using fileHandler
      * The army will be saved in the resources folder
@@ -221,8 +263,13 @@ public class Army {
      */
     @Override
     public String toString() {
-        return "This army is called " + name +
-                " and has the units: " + units.toString();
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Unit> newList = new ArrayList<>(getAllUnits());                            // Shallow copy
+        sb.append(String.format("\n| %-20s | %-20s | %-20s | %-20s |\n", "Name:", "Health:", "Attack:", "Armour:"));  // Top Text
+        for (Unit unit : newList) {
+            sb.append(unit);
+        }
+        return sb.toString();
     }
 
     @Override

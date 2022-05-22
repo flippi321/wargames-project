@@ -32,7 +32,7 @@ public class InfantryUnit extends Unit{
      * @return the Resist bonus of this unit
      */
     @Override
-    public int getResistBonus(String terrain) {
+    public int getResistBonus(String terrain, String weather) {
         if (terrain.equalsIgnoreCase("Forest")) {
             return 5;
         }
@@ -45,7 +45,7 @@ public class InfantryUnit extends Unit{
      * @return the Attack bonus of this unit
      */
     @Override
-    public int getAttackBonus(String terrain) {
+    public int getAttackBonus(String terrain, String weather) {
         if (terrain.equalsIgnoreCase("Forest")) {
             return 6;
         }

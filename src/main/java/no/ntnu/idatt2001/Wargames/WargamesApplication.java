@@ -31,8 +31,8 @@ public class WargamesApplication extends Application {
 
         stage.setTitle("Wargames: BattleSimulation");
         stage.show();
-        stage.setMinWidth(700);
-        stage.setMinHeight(400);
+        stage.setMinWidth(800);
+        stage.setMinHeight(500);
         //stage.getIcons().add(new Image(this.getClass().getResource("icon.png").toExternalForm()));        //TODO: FIX
     }
 }

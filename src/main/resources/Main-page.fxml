@@ -10,11 +10,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.MainController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The WARGAMES" BorderPane.alignment="CENTER">
          <font>
-            <Font name="Copperplate Gothic Bold" size="40.0" />
+            <Font name="Copperplate Gothic Bold" size="50.0" />
          </font>
       </Text>
    </top>
@@ -22,7 +22,7 @@
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="200.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Name:" />
-            <TextField fx:id="army1Name" minHeight="20.0" minWidth="150.0" promptText="Insert Army Name" />
+            <TextField fx:id="army1Name" minHeight="25.0" minWidth="150.0" promptText="Insert Army Name" />
             <Line endX="100.0" startX="-100.0" />
             <HBox>
                <children>
@@ -49,31 +49,18 @@
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
-            <HBox>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:     ">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="army1Quality" promptText="0-5" text="1" />
-               </children>
-            </HBox>
-            <HBox>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:       ">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="army1Value" editable="false" promptText="0" />
-               </children>
-            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:" />
+            <HBox />
+            <Slider fx:id="army1Quality" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Naming Convention" />
+            <ChoiceBox prefWidth="150.0" />
+            <HBox />
             <Line endX="100.0" startX="-100.0" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#saveArmy1" text="Save" />
                   <Button mnemonicParsing="false" onAction="#loadArmy1" text="Load" />
+                  <Button mnemonicParsing="false" onAction="#viewArmy1Units" text="Units" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -90,7 +77,7 @@
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="200.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Name:" />
-            <TextField fx:id="army2Name" minHeight="20.0" minWidth="150.0" promptText="Insert Army Name" />
+            <TextField fx:id="army2Name" minHeight="25.0" minWidth="150.0" promptText="Insert Army Name" />
             <Line endX="100.0" startX="-100.0" />
             <HBox>
                <children>
@@ -117,31 +104,18 @@
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
-            <HBox>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:     ">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="army2Quality" promptText="0-5" text="1" />
-               </children>
-            </HBox>
-            <HBox>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Value:       ">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="army2Value" editable="false" promptText="0" />
-               </children>
-            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:" />
+            <Slider fx:id="army2Quality" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+            <HBox />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Naming Convention" />
+            <ChoiceBox prefWidth="150.0" />
+            <HBox />
             <Line endX="100.0" startX="-100.0" />
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#saveArmy2" text="Save" />
                   <Button mnemonicParsing="false" onAction="#loadArmy2" text="Load" />
+                  <Button mnemonicParsing="false" onAction="#viewArmy2Units" text="Units" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -170,7 +144,9 @@
                </children>
             </HBox>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chosen Terrain:" />
-            <ImageView fx:id="mainImage" fitHeight="150.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="mainImage" fitHeight="250.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Size Comparison" />
+            <ProgressBar prefWidth="350.0" progress="0.0" />
          </children>
       </VBox>
    </center>

@@ -37,7 +37,7 @@ public class CavalryUnit extends Unit{
      * @return the Resist bonus of this unit
      */
     @Override
-    public int getResistBonus(String terrain) {
+    public int getResistBonus(String terrain, String weather) {
         if(terrain.equalsIgnoreCase("Forest")){
             return 0;
         }
@@ -50,7 +50,7 @@ public class CavalryUnit extends Unit{
      * @return the Attack bonus of this unit
      */
     @Override
-    public int getAttackBonus(String terrain) {
+    public int getAttackBonus(String terrain, String weather) {
         int bonus = 0;
         if (terrain.equalsIgnoreCase("Plains")) bonus += 4;
         if (Charges) {

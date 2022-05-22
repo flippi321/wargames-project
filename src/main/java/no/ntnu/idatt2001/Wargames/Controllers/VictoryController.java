@@ -37,6 +37,6 @@ public class VictoryController implements Initializable {
 */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        winnerName.setText(wargamesAdmin.getWinnerArmy().getName());
     }
 }
