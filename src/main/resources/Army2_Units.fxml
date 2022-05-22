@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.Army2UnitsController">
+    <center>
+        <TextArea fx:id="armyText" editable="false" prefHeight="333.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+    </center>
+    <top>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All Units In Army:" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Text>
+    </top>
+    <right>
+        <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+    </right>
+    <left>
+        <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+    </left>
+    <bottom>
+        <HBox prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>

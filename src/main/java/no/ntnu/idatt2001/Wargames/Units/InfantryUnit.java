@@ -46,9 +46,13 @@ public class InfantryUnit extends Unit{
      */
     @Override
     public int getAttackBonus(String terrain, String weather) {
+        int attackBonus = 2;
         if (terrain.equalsIgnoreCase("Forest")) {
-            return 6;
+            attackBonus+=4;
         }
-        return 2;
+        if (weather.equalsIgnoreCase("Sunny")){             //TODO Test
+            attackBonus+=2;
+        }
+        return attackBonus;
     }
 }

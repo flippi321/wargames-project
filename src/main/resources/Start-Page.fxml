@@ -10,16 +10,26 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.FrontPageController">
    <center>
-      <ImageView fitWidth="600.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fitWidth="1200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@../../../../../Desktop/mwe66kz-3059891180.jpg" />
+            <Image url="@Images/MainPageBackround.jpg" />
          </image></ImageView>
    </center>
    <bottom>
       <HBox alignment="CENTER" prefHeight="60.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button minHeight="50.0" mnemonicParsing="false" onAction="#startApplication" prefWidth="200.0" text="Start Application" />
+            <Button defaultButton="true" minHeight="50.0" mnemonicParsing="false" onAction="#startApplication" opacity="0.75" prefWidth="200.0" text="Start">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
          </children>
       </HBox>
    </bottom>
+   <top>
+      <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="THE WARGAMES" BorderPane.alignment="BOTTOM_CENTER">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="48.0" />
+         </font>
+      </Text>
+   </top>
 </BorderPane>

@@ -71,7 +71,7 @@ public class MainController implements Initializable {
     @FXML
     private Slider army1Quality;
     @FXML
-    private ProgressBar ArmyComparison;
+    private ProgressBar armyComparison;
 
     private int valueOf(TextField text) {
         return Integer.parseInt(text.getText());
@@ -383,11 +383,22 @@ public class MainController implements Initializable {
         viewArmyUnit(wargamesAdmin.getArmy2());
     }
 
-    //TODO
-    // Function to initiate changeImage() when chosen either Weather or Terrain
     @FXML
-    public void changeImage(Event event) {
-        changeImage();
+    public void updateValuesButton(Event event) {
+        try {
+            changeImage();
+            wargamesAdmin.setArmy1(generateArmy1());
+            wargamesAdmin.setArmy2(generateArmy2());
+            double army1Size = wargamesAdmin.getArmy1().getAllUnits().size();
+            double army2Size = wargamesAdmin.getArmy2().getAllUnits().size();
+            if(army1Size<=0 & army2Size <= 0){
+                armyComparison.setProgress(0.5);
+            } else {
+                armyComparison.setProgress(army1Size/(army1Size+army2Size));
+            }
+        } catch (Exception e){
+            errorMessage.setText(e.getMessage());
+        }
     }
 
     @Override

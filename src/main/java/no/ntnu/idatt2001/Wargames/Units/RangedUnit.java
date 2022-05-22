@@ -36,9 +36,12 @@ public class RangedUnit extends Unit{
      */
     @Override
     public int getAttackBonus(String terrain, String weather) {
-        if (terrain.equalsIgnoreCase("Hill")) return 7;
-        else if (terrain.equalsIgnoreCase("Forest")) return 5;
-        return 3;
+        int attackbonus = 3;
+        if (terrain.equalsIgnoreCase("Hill")) attackbonus+=4;
+        else if (terrain.equalsIgnoreCase("Forest")) attackbonus+=2;
+        if (weather.equalsIgnoreCase("Rainstorm")) attackbonus-=2;           //TODO Test
+        else if (weather.equalsIgnoreCase("Heavy_fog")) return 0;            //TODO Test
+        return attackbonus;
     }
 
     /**

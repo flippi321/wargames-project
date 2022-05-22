@@ -43,6 +43,9 @@ public class Battle {
         if(!armyOne.hasUnits() & !armyTwo.hasUnits()){
             throw new IllegalArgumentException("At least one army must have units");
         }
+        if(armyOne.equals(armyTwo)){
+            throw new IllegalArgumentException("Armies must be different");
+        }
         while (armyOne.hasUnits() && armyTwo.hasUnits()){
             round++;
             // Every 50 rounds, the weather will affect the units

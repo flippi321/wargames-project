@@ -38,7 +38,7 @@ public class CavalryUnit extends Unit{
      */
     @Override
     public int getResistBonus(String terrain, String weather) {
-        if(terrain.equalsIgnoreCase("Forest")){
+        if(terrain.equalsIgnoreCase("Forest") | weather.equalsIgnoreCase("Heavy_fog")){     //TODO Test
             return 0;
         }
         return 1;
