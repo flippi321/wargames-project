@@ -293,7 +293,7 @@ public class MainController implements Initializable {
             army1Defined = true;
         }
 
-        return wargamesAdmin.getArmy1().saveArmy();
+        return fileHandler.saveArmy(wargamesAdmin.getArmy1());
     }
 
     @FXML
@@ -309,7 +309,7 @@ public class MainController implements Initializable {
             wargamesAdmin.setArmy2(generateArmy2());
             army2Defined = true;
         }
-        return wargamesAdmin.getArmy2().saveArmy();
+        return fileHandler.saveArmy(wargamesAdmin.getArmy2());
     }
 
     @FXML

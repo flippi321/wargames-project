@@ -227,10 +227,7 @@ public class Army {
         }
     }
 
-    /**
-     * Method to save an army as a CSV file using fileHandler
-     * The army will be saved in the resources folder
-     */
+    /*
     public boolean saveArmy(){
         try {
             fileHandler.saveArmy(name, units);
@@ -241,9 +238,7 @@ public class Army {
         }
     }
 
-    /**
-     * Method to remove a saved file
-     */
+
     public boolean deleteArmy(){
         try {
             fileHandler.deleteArmy(name);
@@ -253,6 +248,7 @@ public class Army {
             return false;
         }
     }
+    */
 
     public double getArmyValue(){
         double armyValue = 0;

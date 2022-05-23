@@ -108,15 +108,15 @@ public class BattleTest {
     @DisplayName("Loading two armies who should fight")
     class testingBattlesWithLoadedArmies{
         @Test
-        @DisplayName("Testing Withcer Victory")
+        @DisplayName("Testing Witcher Victory")
         public void checkWitcherVictory(){
             try {
                 Army witchers = new Army("Witchers");
                 Army ghouls = new Army("Ghoul Army");
                 witchers.loadArmy();
                 ghouls.loadArmy();
-                Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST, Weather.Sunny);
-                assertEquals(witchers.getName(),witcherGhoulBattle.simulate().getName());
+                Battle witchersVsGhouls = new Battle(witchers, ghouls, Terrain.FOREST, Weather.Heavy_Fog);
+                assertEquals(witchers.getName(), witchersVsGhouls.simulate().getName());
             } catch (Exception e){
                 fail("checkWitcherVictory failed");
             }

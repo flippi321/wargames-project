@@ -6,44 +6,54 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileHandlerTest {
+    /**
+     * Saving an army which will be utilized later
+     */
     @Test
     @DisplayName("Tests that it is possible to save a file")
     public void savingAnArmyFile(){
         try {
+            UnitFactory factory = new UnitFactory();
+            FileHandler fileHandler = new FileHandler();
             Army newArmy = new Army("TestingArmy");
             newArmy.add(new CommanderUnit("Town Chieftain", 250));
-            for (int i = 0; i < 10; i++){
-                newArmy.add(new InfantryUnit("Town Swordsmen", 100));
-                newArmy.add(new CavalryUnit("Hussars", 150));
-                newArmy.add(new RangedUnit("Novice Archers", 50));
-            }
-
-            newArmy.saveArmy();
+            newArmy.addAll(factory.getMultipleUnits("Infantry", 10, "Town Guard", 100));
+            newArmy.addAll(factory.getMultipleUnits("Cavalry", 10, "Horse Guard", 150));
+            newArmy.addAll(factory.getMultipleUnits("Infantry", 10, "Archer", 75));
+            fileHandler.saveArmy(newArmy);
             assertTrue(true);
         } catch (Exception e){
-            fail("could not save to file");
+            fail("savingAnArmyFile threw error when not supposed to");
         }
     }
 
-
+    /**
+     * Load army Saved in Previous Test
+     */
     @Test
     @DisplayName("Tests that it is possible to load a file")
     public void loadFileTest(){
-        Army newArmy = new Army("TestingArmy");
-        newArmy.add(new InfantryUnit("Swordsman", 100));
         try {
-            assertTrue(newArmy.loadArmy());
+            FileHandler fileHandler = new FileHandler();
+            Army loadedArmy = fileHandler.loadArmy("TestingArmy");
+
+            // 10 Infantry + 10 Cavalry + 10 Ranged + 1 Commander = 31 Units Combined
+            assertEquals(31, loadedArmy.getAllUnits().size());
         } catch (Exception e){
-            fail(e.getMessage());
+            fail("loadFileTest() threw an exception when not expected to");
         }
     }
 
     @Test
     @DisplayName("Tests that a loaded army will be identical to the source army")
     public void armyLoadingWillBeEqualToSource(){
+        FileHandler fileHandler = new FileHandler();
         Army army1 = new Army("Army One");
         army1.add(new CommanderUnit("Town Chieftain", 250));
         for (int i = 0; i < 5; i++){
@@ -51,35 +61,33 @@ public class FileHandlerTest {
             army1.add(new CavalryUnit("Hussars", 150));
             army1.add(new RangedUnit("Novice Archers", 50));
         }
-        army1.saveArmy();
-        Army army2 = new Army("Army Two");
+        fileHandler.saveArmy(army1);
+        try{
+            Army army2 = fileHandler.loadArmy(army1.getName());
+            assertEquals(army1.getAllUnits().toString(), army2.getAllUnits().toString());
+        } catch (Exception e){
+            fail("armyLoadingWillBeEqualToSource threw error when not supposed to");
+        }
 
-        army2.loadArmy("Army One");
-        assertEquals(army1.getAllUnits().toString(), army2.getAllUnits().toString());
     }
 
     @Test
     @DisplayName("Tests that it is possible to delete a saved army")
     public void deletingAnArmy(){
+        FileHandler fileHandler = new FileHandler();
+        UnitFactory factory = new UnitFactory();
         Army army = new Army("DeleteThisArmy");
-        for(int i = 0; i < 20; i++){
-            army.add(new InfantryUnit("Swordsman", 100));
-        }
-        army.saveArmy();
-
-        //Checks that army is deleted
-        assertTrue(army.deleteArmy());
-        }
-
-    @AfterAll
-    public static void removingFileUsedForTesting(){
-        Army army1 = new Army("TestingArmy");
-        Army army2 = new Army("Army Two");
+        army.addAll(factory.getMultipleUnits("Infantry", 20, "Spearman", 100));
+        //Save army
         try {
-            army1.deleteArmy();
-            army2.deleteArmy();
-        } catch (Exception e){
-            fail("Could not remove file");
+            // Save army
+            fileHandler.saveArmy(army);
+
+            // Tries to delete army
+            assertTrue(fileHandler.deleteArmy(army.getName()));
+        } catch (Exception e) {
+            fail("deletingAnArmy");
         }
+
     }
 }
