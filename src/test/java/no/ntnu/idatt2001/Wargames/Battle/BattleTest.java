@@ -5,11 +5,14 @@ import no.ntnu.idatt2001.Wargames.Units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BattleTest {
     @Nested
-    @DisplayName("Testing Battle Mechanics")
+    @DisplayName("Core Battle Mechanics")
     class testingBattleMechanics{
         @Test
         @DisplayName("Testing a battle which the Orks should win")
@@ -100,6 +103,43 @@ public class BattleTest {
         }
     }
 
-    //TODO
-    // Add exeption handling tests
+    @Nested
+    @DisplayName("Weather Effects work as intended")
+    class testingThatWeatherEffectsWorksAsIntended{
+
+    }
+
+    @Nested
+    @DisplayName("TestException Handling")
+    class testingExceptionHandling{
+        @Test
+        @DisplayName("Throws Exception when using ")
+        public void testingUsingEmptyArmiesInBattle(){
+            Army army1 = new Army("Army1", new ArrayList<Unit>());
+            Army army2 = new Army("Army2", new ArrayList<Unit>());
+            try {
+                Battle battle = new Battle(army1, army2, Terrain.FOREST, Weather.Sunny);
+                battle.simulate();
+                fail("testingUsingEmptyArmiesInBattle() did not throw Exception when expected to");
+            } catch (Exception e){
+                assertEquals("At least one army must have units", e.getMessage());
+            }
+        }
+
+        @Test
+        @DisplayName("Throws Exception when using ")
+        public void testingUsingEqualArmies(){
+            UnitFactory factory = new UnitFactory();
+            ArrayList<Unit> units = factory.getMultipleUnits("Infantry", 10, "Swordman", 100);
+            Army army1 = new Army("Army1", units);
+            Army army2 = new Army("Army1", units);
+            try {
+                Battle battle = new Battle(army1, army2, Terrain.FOREST, Weather.Sunny);
+                battle.simulate();
+                fail("testingUsingEmptyArmiesInBattle() did not throw Exception when expected to");
+            } catch (Exception e){
+                assertEquals("Armies must be different", e.getMessage());
+            }
+        }
+    }
 }

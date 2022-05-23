@@ -1,9 +1,7 @@
 package no.ntnu.idatt2001.Wargames.Army;
 import no.ntnu.idatt2001.Wargames.Units.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,19 +30,19 @@ public class FileHandler {
         return fixedFileLocation;
     }
 
-    public Army loadArmy(String armyName) throws Exception{
+    public Army loadArmy(String armyName) throws IllegalArgumentException, FileNotFoundException {
         //Making a fileLocation to the given name
-        String fileLocation = testFileLocation(armyName);
+        if (armyName.isBlank()){
+            throw new IllegalArgumentException("File name cannot be empty");
+        }
 
+        String fileLocation = testFileLocation(armyName);
         FileInputStream fileInput = new FileInputStream(fileLocation);
         Scanner scanner = new Scanner(fileInput);
         List<Unit> newUnits = new ArrayList<>();
 
         //Creating army with name
         String name = scanner.nextLine();
-        if(name.isBlank()){
-            throw new IllegalArgumentException("The army name is Blank");
-        }
 
         //Adding saved units
         while(scanner.hasNextLine())
@@ -86,22 +84,17 @@ public class FileHandler {
      * The army will be saved in the resources/armyFiles folder
      * @param army that should be saved
      */
-    public boolean saveArmy(Army army){
+    public boolean saveArmy(Army army) throws FileNotFoundException {
         String name = army.getName();
         List<Unit> units = army.getAllUnits();
         String fileLocation = testFileLocation(name.trim());
-        try{
-            PrintWriter writer = new PrintWriter(fileLocation);
-            writer.println(name);
-            for (Unit unit : units){
-                writer.println(String.format("%s,%s,%s", unit.getClass().getSimpleName(), unit.getName(), unit.getHealth()));
-            }
-            writer.close();
-            return true;
-        } catch (IOException e){
-            System.out.println(e.getMessage());
-            return false;
+        PrintWriter writer = new PrintWriter(fileLocation);
+        writer.println(name);
+        for (Unit unit : units){
+            writer.println(String.format("%s,%s,%s", unit.getClass().getSimpleName(), unit.getName(), unit.getHealth()));
         }
+        writer.close();
+        return true;
     }
 
     /**
@@ -112,6 +105,7 @@ public class FileHandler {
     public boolean deleteArmy(String fileLocation) throws IllegalArgumentException {
         String fixedFileLocation = testFileLocation(fileLocation);
         File file = new File(fixedFileLocation);
+
         // Will try to remove file, if not possible, it will throw new Exception
         if (!file.delete()) {
             throw new IllegalArgumentException("Failed to delete the file");

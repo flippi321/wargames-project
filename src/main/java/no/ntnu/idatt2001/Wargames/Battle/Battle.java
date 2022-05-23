@@ -70,14 +70,6 @@ public class Battle {
                         log.add("[Blizzard Hits! All units take 1 damage]");
                         armyOne.damageAll(1);
                         armyTwo.damageAll(1);
-                        for (Unit unit : armyOne.getAllUnits()){
-                            if (unit.getHealth() <= 0);
-                            armyOne.remove(unit);
-                        }
-                        for (Unit unit : armyTwo.getAllUnits()){
-                            if (unit.getHealth() <= 0);
-                            armyOne.remove(unit);
-                        }
                     }
                     // Heavy Fog: There is a 5% chance that all cavalry units gets lost in the fog
                     case "Heavy_Fog" -> {

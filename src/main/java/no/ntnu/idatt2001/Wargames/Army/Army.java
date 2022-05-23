@@ -211,6 +211,9 @@ public class Army {
     public void damageAll(int damage){
         for(Unit unit : getAllUnits()){
             unit.setHealth(unit.getHealth()-2);
+            if(unit.getHealth()<=0){
+                units.remove(unit);
+            }
         }
     }
 

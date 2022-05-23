@@ -234,4 +234,6 @@ public class ArmyTest {
             assertEquals(25,newArmy.getRangedUnits().size());
         }
     }
+
+    // TODO TEST Exception Handling
 }

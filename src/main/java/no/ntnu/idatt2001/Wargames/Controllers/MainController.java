@@ -25,6 +25,7 @@ import no.ntnu.idatt2001.Wargames.Units.UnitFactory;
 import no.ntnu.idatt2001.Wargames.Units.UnitType;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -183,19 +184,19 @@ public class MainController implements Initializable {
         }
 
         if (infantry > 0) {
-            army.addAll(unitFactory.getMultipleUnits("Infantry", infantry,
+            army.addAll(unitFactory.getMultipleUnits(UnitType.INFANTRY.name(), infantry,
                     infantryName, 100*quality));
         }
         if (cavalry > 0) {
-            army.addAll(unitFactory.getMultipleUnits("Cavalry", cavalry,
+            army.addAll(unitFactory.getMultipleUnits(UnitType.CAVALRY.name(), cavalry,
                     cavalryName, 150*quality));
         }
         if (ranged > 0) {
-            army.addAll(unitFactory.getMultipleUnits("Ranged", ranged,
+            army.addAll(unitFactory.getMultipleUnits(UnitType.RANGED.name(), ranged,
                     rangedName, 75*quality));
         }
         if (commander > 0) {
-            army.addAll(unitFactory.getMultipleUnits("Commander", commander,
+            army.addAll(unitFactory.getMultipleUnits(UnitType.COMMANDER.name(), commander,
                     commanderName, 300*quality));
         }
         return army;
@@ -280,7 +281,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public boolean saveArmy1(ActionEvent actionEvent) {
+    public boolean saveArmy1(ActionEvent actionEvent) throws FileNotFoundException {
         errorMessage.setText("");
         if (army1Name.getText().isBlank()) {
             errorMessage.setText("Army name is empty");
@@ -297,7 +298,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public boolean saveArmy2(ActionEvent actionEvent) throws IllegalArgumentException{
+    public boolean saveArmy2(ActionEvent actionEvent) throws IllegalArgumentException, FileNotFoundException {
         errorMessage.setText("");
         if (army2Name.getText().isBlank()) {
             errorMessage.setText("Army name is empty");
@@ -309,6 +310,7 @@ public class MainController implements Initializable {
             wargamesAdmin.setArmy2(generateArmy2());
             army2Defined = true;
         }
+
         return fileHandler.saveArmy(wargamesAdmin.getArmy2());
     }
 
