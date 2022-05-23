@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.PostBattleController">
+<BorderPane maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.WinnerPageController">
     <top>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Battle over!" BorderPane.alignment="CENTER">
             <font>
@@ -35,8 +36,8 @@
                 </AnchorPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Replay" />
-                  <Button mnemonicParsing="false" text="See Log" />
+                  <Button fx:id="replayBattle" mnemonicParsing="false" text="Replay" />
+                  <Button mnemonicParsing="false" onAction="#seeLog" text="See Log" />
                </children>
             </HBox>
             </children>

@@ -49,20 +49,20 @@ public class Battle {
         while (armyOne.hasUnits() && armyTwo.hasUnits()){
             round++;
             // Every 50 rounds, the weather will affect the units
-            if (round%50==0 | !weather.name().equals("Sunny")){
+            if (round%50==0 & !weather.name().equals("Sunny")){
                 switch (weather.name()){
                     // Rainstorm: Lightning kills 1 random unit from each army
                     default -> {
                         Unit unitOne = armyOne.getRandom();
                         Unit unitTwo = armyTwo.getRandom();
-                        log.add(String.format("[Lightning Hits! %10s and %10s are killed]",
+                        log.add(String.format("Lightning Hits! %10s and %10s are killed",
                                 unitOne.getName(), unitTwo.getName()));
                         armyOne.remove(unitTwo);
                         armyTwo.remove(unitTwo);
                     }
                     // Blizzard: All units take damage from frostbite
                     case "Blizzard" -> {
-                        log.add("[Blizzard Hits! All units take 2 damage]");
+                        log.add("Blizzard Hits! All units take 2 damage");
                         armyOne.damageAll(2);
                         armyTwo.damageAll(2);
                     }
@@ -86,7 +86,6 @@ public class Battle {
 
             //Checks that neither of the Armies are wiped out by the weather effects
             if(armyOne.hasUnits() && armyTwo.hasUnits()){
-
                 // One unit from armyOne attacks one from armyTwo
                 Unit unitOne = armyOne.getRandom();
                 Unit unitTwo = armyTwo.getRandom();
@@ -97,7 +96,9 @@ public class Battle {
                     armyOne.addKill();
                     armyTwo.addLoss();
                     armyTwo.remove(unitTwo);
-
+                    log.add(unitOne.getName() + " killed " + unitTwo.getName());
+                } else {
+                    log.add(unitOne.getName() + " damaged " + unitTwo.getName());
                 }
 
                 // The second army can't counterattack if wiped out from the attack
@@ -112,6 +113,9 @@ public class Battle {
                         armyTwo.addKill();
                         armyOne.addLoss();
                         armyOne.remove(unitThree);
+                        log.add(unitThree.getName() + " killed " + unitFour.getName());
+                    } else {
+                        log.add(unitThree.getName() + " damaged " + unitFour.getName());
                     }
                 }
             }
@@ -123,6 +127,10 @@ public class Battle {
             return armyTwo;
         }
         return null;
+    }
+
+    public ArrayList<String> getLog() {
+        return log;
     }
 
     @Override

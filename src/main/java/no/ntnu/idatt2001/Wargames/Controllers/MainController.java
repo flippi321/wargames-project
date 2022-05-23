@@ -207,6 +207,7 @@ public class MainController implements Initializable {
             wargamesAdmin.setArmy2(generateArmy2());
             battle = new Battle(wargamesAdmin.getArmy1(), wargamesAdmin.getArmy2(), decideTerrain(), decideWeather());
             Army winner = battle.simulate();
+            wargamesAdmin.setBattleLog(battle.getLog());
 
             //Update values to reflect on the battle outcome
             wargamesAdmin.setWinnerArmy(winner);

@@ -48,7 +48,7 @@ public abstract class Unit {
     public void attack(Unit opponent, String terrain, String weather){
         int Defence = opponent.getArmour() + opponent.getResistBonus(terrain, weather);
         int Attack = this.getAttack() + this.getAttackBonus(terrain, weather);
-        int newHealth = opponent.getHealth() + Defence - Attack;
+        int newHealth = opponent.getHealth() - Attack + Defence;
         opponent.setHealth(newHealth);
     }
 

@@ -1,19 +1,20 @@
 package no.ntnu.idatt2001.Wargames.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PostBattleController implements Initializable {
+public class WinnerPageController implements Initializable {
     @FXML
     private TextField winnerKills;
     @FXML
@@ -28,10 +29,8 @@ public class PostBattleController implements Initializable {
         winnerLosses.setText(String.valueOf(wargamesAdmin.getWinnerArmy().getLosses()));
     }
 
-    @FXML
-    public void seeBattleLog(ActionEvent actionEvent) {
+    public void seeLog(ActionEvent actionEvent) {
         try {
-            //Open Battle Log Screen
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Battle-Log.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Battle Results");
@@ -42,7 +41,17 @@ public class PostBattleController implements Initializable {
         }
     }
 
-    @FXML
+
+    /*
     public void replayBattle(ActionEvent actionEvent) {
     }
+
+    public void seeLog(ActionEvent actionEvent) throws IOException {
+        //Open Battle Log Screen
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Battle-Log.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Battle Results");
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    } */
 }
