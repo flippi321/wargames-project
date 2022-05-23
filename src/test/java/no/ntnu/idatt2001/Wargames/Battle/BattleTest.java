@@ -110,23 +110,31 @@ public class BattleTest {
         @Test
         @DisplayName("Testing Withcer Victory")
         public void checkWitcherVictory(){
-            Army witchers = new Army("Witchers");
-            Army ghouls = new Army("Ghoul Army");
-            witchers.loadArmy();
-            ghouls.loadArmy();
-            Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST, Weather.Sunny);
-            assertEquals(witchers.getName(),witcherGhoulBattle.simulate().getName());
+            try {
+                Army witchers = new Army("Witchers");
+                Army ghouls = new Army("Ghoul Army");
+                witchers.loadArmy();
+                ghouls.loadArmy();
+                Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST, Weather.Sunny);
+                assertEquals(witchers.getName(),witcherGhoulBattle.simulate().getName());
+            } catch (Exception e){
+                fail("checkWitcherVictory failed");
+            }
         }
 
         @Test
         @DisplayName("Testing Ghoul Victory")
         public void checkGhoulVictory(){
-            Army witchers = new Army("Witchers");
-            Army ghouls = new Army("Ghoul Armada");
-            witchers.loadArmy();
-            ghouls.loadArmy();
-            Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST, Weather.Sunny);
-            assertEquals(ghouls.getName(),witcherGhoulBattle.simulate().getName());
+            try {
+                Army witchers = new Army("Witchers");
+                Army ghouls = new Army("Ghoul Armada");
+                witchers.loadArmy();
+                ghouls.loadArmy();
+                Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST, Weather.Sunny);
+                assertEquals(ghouls.getName(),witcherGhoulBattle.simulate().getName());
+            } catch (Exception e){
+                fail("checkGhoulVictory failed");
+            }
         }
     }
 

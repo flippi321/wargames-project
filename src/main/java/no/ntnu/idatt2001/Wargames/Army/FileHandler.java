@@ -17,8 +17,8 @@ public class FileHandler {
      * @param fileLocation the file location, may only be the name of the file or the full location and type
      * @return a sorted and corrected file location, type only using '/'
      */
-    private String testFileLocation(String fileLocation){
-        String fixedFileLocation = fileLocation;
+    private String testFileLocation(String armyName){
+        String fixedFileLocation = armyName;
         //Making sure the location ends with .csv
         if (!fixedFileLocation.endsWith(".csv")){
             fixedFileLocation = (fixedFileLocation + ".csv");
@@ -27,18 +27,20 @@ public class FileHandler {
         if (!fixedFileLocation.startsWith("src/main/resources/ArmyFiles/")){
             fixedFileLocation = ("src/main/resources/ArmyFiles/"  + fixedFileLocation);
         }
+
+        //TODO FIX
         /*
         //Using '/' instead of '\' so that the application can be used on Linux and MacOS
         if(fixedFileLocation.contains("\\")){
-            throw new IllegalArgumentException("You used \\ when / was applicable, please change this");
+            fixedFileLocation.replace('\\', '/');
         }
-         */
+        */
         return fixedFileLocation;
     }
 
-    public Army loadArmy(String fileLocation) throws Exception{
+    public Army loadArmy(String armyName) throws Exception{
         //Fixing potential errors with the location
-        fileLocation = testFileLocation(fileLocation);
+        String fileLocation = testFileLocation(armyName);
 
         FileInputStream fileInput = new FileInputStream(fileLocation);
         Scanner scanner = new Scanner(fileInput);
@@ -56,7 +58,7 @@ public class FileHandler {
         {
             String thisLine = scanner.nextLine();
             String[] lineVariables = thisLine.split(",");
-            if(lineVariables.length>1 && !thisLine.isBlank()){
+            if(lineVariables.length > 1 && !thisLine.isBlank()){
                 // Making the unit
                 switch (lineVariables[0].trim()) {
                     case "InfantryUnit" -> {

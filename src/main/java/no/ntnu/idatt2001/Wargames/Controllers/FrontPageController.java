@@ -4,18 +4,27 @@ import javafx.application.Application;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import no.ntnu.idatt2001.Wargames.WargamesApplication;
 
 import javax.print.attribute.standard.Media;
-import java.io.File;
+import javafx.scene.media.AudioClip;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class FrontPageController {
     @FXML
+    private Button mainButton;
+
+    @FXML
     public void startApplication(Event event) {
         try {
+            //Open main page
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Main-Page.fxml"));
             Stage stage = new Stage();      // TODO (Stage) WargamesApplication.getScene().getWindow
             stage.setTitle("Wargames Launcher");
@@ -24,8 +33,8 @@ public class FrontPageController {
             stage.setMinHeight(500);
             stage.show();
 
-            //TODO
-            // Music?
+            //Close page
+            mainButton.getScene().getWindow().hide();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

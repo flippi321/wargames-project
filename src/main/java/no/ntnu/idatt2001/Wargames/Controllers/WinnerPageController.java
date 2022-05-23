@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import no.ntnu.idatt2001.Wargames.Battle.Battle;
+import no.ntnu.idatt2001.Wargames.Battle.Terrain;
+import no.ntnu.idatt2001.Wargames.Battle.Weather;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,17 +21,71 @@ public class WinnerPageController implements Initializable {
     @FXML
     private TextField winnerKills;
     @FXML
-    private TextField winnerName;
-    @FXML
     private TextField winnerLosses;
+    @FXML
+    private TextField army2Commander;
+    @FXML
+    private TextField army2Ranged;
+    @FXML
+    private TextField army2Infantry;
+    @FXML
+    private TextField army1Cavalry;
+    @FXML
+    private TextField army2Cavalry;
+    @FXML
+    private TextField army1Infantry;
+    @FXML
+    private TextField army1Ranged;
+    @FXML
+    private TextField army1Commander;
+    @FXML
+    private TextField winnerName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateValues();
+    }
+
+    @FXML
+    public void replayBattle(ActionEvent actionEvent) {
+        try {
+            wargamesAdmin.setArmy1(wargamesAdmin.getPreBattleArmy1());
+            wargamesAdmin.setArmy2(wargamesAdmin.getPreBattleArmy2());
+            Terrain terrain = wargamesAdmin.getBattle().getTerrain();
+            Weather weather = wargamesAdmin.getBattle().getWeather();
+
+            //Simulate Battle
+            wargamesAdmin.setBattle(new Battle(wargamesAdmin.getArmy1(), wargamesAdmin.getArmy2(), terrain, weather));
+            wargamesAdmin.setWinnerArmy(wargamesAdmin.getBattle().simulate());
+            wargamesAdmin.setBattleLog(wargamesAdmin.getBattle().getLog());
+
+            //Update values on screen
+            updateValues();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void updateValues(){
+        System.out.println("Updated");
         winnerName.setText(wargamesAdmin.getWinnerArmy().getName());
         winnerKills.setText(String.valueOf(wargamesAdmin.getWinnerArmy().getKills()));
         winnerLosses.setText(String.valueOf(wargamesAdmin.getWinnerArmy().getLosses()));
+
+        //Army 1
+        army1Infantry.setText(String.valueOf(wargamesAdmin.getArmy1().getInfantryUnits().size()));
+        army1Cavalry.setText(String.valueOf(wargamesAdmin.getArmy1().getCavalryUnits().size()));
+        army1Ranged.setText(String.valueOf(wargamesAdmin.getArmy1().getRangedUnits().size()));
+        army1Commander.setText(String.valueOf(wargamesAdmin.getArmy1().getCommanderUnits().size()));
+
+        //Army 2
+        army2Infantry.setText(String.valueOf(wargamesAdmin.getArmy2().getInfantryUnits().size()));
+        army2Cavalry.setText(String.valueOf(wargamesAdmin.getArmy2().getCavalryUnits().size()));
+        army2Ranged.setText(String.valueOf(wargamesAdmin.getArmy2().getRangedUnits().size()));
+        army2Commander.setText(String.valueOf(wargamesAdmin.getArmy2().getCommanderUnits().size()));
     }
 
+    @FXML
     public void seeLog(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Battle-Log.fxml"));
@@ -36,22 +93,10 @@ public class WinnerPageController implements Initializable {
             stage.setTitle("Battle Results");
             stage.setScene(new Scene(loader.load()));
             stage.show();
+
+            winnerKills.getScene().getWindow().hide();
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
     }
-
-
-    /*
-    public void replayBattle(ActionEvent actionEvent) {
-    }
-
-    public void seeLog(ActionEvent actionEvent) throws IOException {
-        //Open Battle Log Screen
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Battle-Log.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Battle Results");
-        stage.setScene(new Scene(loader.load()));
-        stage.show();
-    } */
 }

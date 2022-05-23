@@ -211,9 +211,6 @@ public class Army {
     public void damageAll(int damage){
         for(Unit unit : getAllUnits()){
             unit.setHealth(unit.getHealth()-2);
-            if (unit.getHealth()<1){
-                remove(unit);
-            }
         }
     }
 
@@ -257,6 +254,14 @@ public class Army {
         }
     }
 
+    public double getArmyValue(){
+        double armyValue = 0;
+        for (Unit unit : getAllUnits()){
+            armyValue += (unit.getHealth() * (unit.getArmour() + unit.getAttack()));
+        }
+        return armyValue;
+    }
+
     /**
      * Method used to represent an army's information in the form of a string
      * @return a string of information relating to the army
@@ -266,7 +271,7 @@ public class Army {
         int i = 1;
         StringBuilder sb = new StringBuilder();
         ArrayList<Unit> newList = new ArrayList<>(getAllUnits());
-        String startMessage = ("ARMY INFO:\n" + "This army is called" + name + "\nIt consists of " + units.size() +
+        String startMessage = ("ARMY INFO:\n" + "This army is called " + name + "\nIt consists of " + units.size() +
                 " units, divided into:\n" +
                 "    -" + getInfantryUnits().size() + " infantry units\n" +
                 "    -" + getRangedUnits().size() + " ranged units\n" +
@@ -280,6 +285,14 @@ public class Army {
             i++;
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Army army = (Army) o;
+        return Objects.equals(name, army.name);
     }
 
     @Override

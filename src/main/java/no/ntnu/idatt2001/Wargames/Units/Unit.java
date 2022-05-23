@@ -32,6 +32,9 @@ public abstract class Unit {
         if (armour <= 0){
             throw new IllegalArgumentException("Must have an armour value above 0");
         }
+        if (attack <= 0){
+            throw new IllegalArgumentException("Must have an attack value above 0");
+        }
 
         this.name = name;
         this.health = health;

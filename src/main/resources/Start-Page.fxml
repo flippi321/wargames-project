@@ -18,7 +18,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="60.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button defaultButton="true" minHeight="50.0" mnemonicParsing="false" onAction="#startApplication" opacity="0.75" prefWidth="200.0" text="Start">
+            <Button fx:id="mainButton" defaultButton="true" minHeight="50.0" mnemonicParsing="false" onAction="#startApplication" opacity="0.75" prefWidth="200.0" text="Start">
                <font>
                   <Font size="24.0" />
                </font></Button>

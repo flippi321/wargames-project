@@ -5,10 +5,10 @@ module no.ntnu.idatt2001.Wargames {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
+    requires javafx.media;
 
     opens no.ntnu.idatt2001.Wargames to javafx.fxml;
     exports no.ntnu.idatt2001.Wargames;
-
     opens no.ntnu.idatt2001.Wargames.Controllers to javafx.fxml;
     exports no.ntnu.idatt2001.Wargames.Controllers;
 }

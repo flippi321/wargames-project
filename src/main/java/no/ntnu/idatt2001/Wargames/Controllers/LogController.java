@@ -21,7 +21,7 @@ public class LogController implements Initializable {
         ArrayList<String> log = wargamesAdmin.getBattleLog();
         sb.append("The battle lasted for ").append(log.size()).append(" rounds:\n\n");
         for (String event : log) {
-            sb.append("Round ").append(i).append("\n").append(event).append("\n\n");
+            sb.append(event).append("\n");
             i++;
         }
         battleLog.setText(sb.toString());

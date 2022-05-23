@@ -39,7 +39,10 @@ public class Battle {
      * Method to simulate a battle between army1 and army2
      * @return the army that wins the battle
      */
-    public Army simulate(){
+    public Army simulate() throws Exception{
+        if(armyOne == null | armyTwo == null){
+            throw new IllegalArgumentException("Armies must be defined");
+        }
         if(!armyOne.hasUnits() & !armyTwo.hasUnits()){
             throw new IllegalArgumentException("At least one army must have units");
         }
@@ -48,85 +51,102 @@ public class Battle {
         }
         while (armyOne.hasUnits() && armyTwo.hasUnits()){
             round++;
+            log.add("\nRound " + round +":");
+
             // Every 50 rounds, the weather will affect the units
-            if (round%50==0 & !weather.name().equals("Sunny")){
+            if ((round%50==0 & !weather.name().equals("Sunny") & armyOne.hasUnits() & armyTwo.hasUnits())){
                 switch (weather.name()){
                     // Rainstorm: Lightning kills 1 random unit from each army
                     default -> {
                         Unit unitOne = armyOne.getRandom();
                         Unit unitTwo = armyTwo.getRandom();
-                        log.add(String.format("Lightning Hits! %10s and %10s are killed",
+                        log.add(String.format("[Lightning Hits! %10s and %10s are killed]",
                                 unitOne.getName(), unitTwo.getName()));
                         armyOne.remove(unitTwo);
                         armyTwo.remove(unitTwo);
                     }
                     // Blizzard: All units take damage from frostbite
                     case "Blizzard" -> {
-                        log.add("Blizzard Hits! All units take 2 damage");
-                        armyOne.damageAll(2);
-                        armyTwo.damageAll(2);
+                        log.add("[Blizzard Hits! All units take 1 damage]");
+                        armyOne.damageAll(1);
+                        armyTwo.damageAll(1);
+                        for (Unit unit : armyOne.getAllUnits()){
+                            if (unit.getHealth() <= 0);
+                            armyOne.remove(unit);
+                        }
+                        for (Unit unit : armyTwo.getAllUnits()){
+                            if (unit.getHealth() <= 0);
+                            armyOne.remove(unit);
+                        }
                     }
                     // Heavy Fog: There is a 5% chance that all cavalry units gets lost in the fog
-                    case "Heavy_fog" -> {
+                    case "Heavy_Fog" -> {
                         log.add("[Heavy fog hits]");
                         int ranNum = random.nextInt(20);
                         if (ranNum == 19){
                             armyOne.removeAllCavalry();
-                            log.add(String.format("[Heavy Fog! %s cavalry division gets lost]", armyOne.getName()));
+                            System.out.println();
+                            log.add(String.format("[Heavy Fog! %s's cavalry division gets lost]", armyOne.getName()));
                         } else if (ranNum == 18){
-                            armyOne.removeAllCavalry();
-                            log.add(String.format("[Heavy Fog! %s cavalry division gets lost]", armyTwo.getName()));
+                            armyTwo.removeAllCavalry();
+                            log.add(String.format("[Heavy Fog! %s's cavalry division gets lost]", armyTwo.getName()));
                         };
                     }
                 }
-            }
-
-            //TODO
-            // Optimize
-
-            //Checks that neither of the Armies are wiped out by the weather effects
-            if(armyOne.hasUnits() && armyTwo.hasUnits()){
-                // One unit from armyOne attacks one from armyTwo
-                Unit unitOne = armyOne.getRandom();
-                Unit unitTwo = armyTwo.getRandom();
-                unitOne.attack(unitTwo, terrain.name(), weather.name());
-
-                // Checks if the unit is wiped out
-                if (unitTwo.getHealth() <= 0){
-                    armyOne.addKill();
-                    armyTwo.addLoss();
-                    armyTwo.remove(unitTwo);
-                    log.add(unitOne.getName() + " killed " + unitTwo.getName());
-                } else {
-                    log.add(unitOne.getName() + " damaged " + unitTwo.getName());
-                }
-
-                // The second army can't counterattack if wiped out from the attack
-                if (armyTwo.hasUnits()){
-                    // One unit from armyTwo attacks one from armyOne
-                    Unit unitThree = armyOne.getRandom();
-                    Unit unitFour = armyTwo.getRandom();
-                    unitFour.attack(unitThree, terrain.name(), weather.name());
+            } else {
+                //TODO
+                // Optimize
+                //Checks that neither of the Armies are wiped out by the weather effects
+                if(armyOne.hasUnits() && armyTwo.hasUnits()){
+                    // One unit from armyOne attacks one from armyTwo
+                    Unit unitOne = armyOne.getRandom();
+                    Unit unitTwo = armyTwo.getRandom();
+                    unitOne.attack(unitTwo, terrain.name(), weather.name());
 
                     // Checks if the unit is wiped out
-                    if (unitThree.getHealth() <= 0){
-                        armyTwo.addKill();
-                        armyOne.addLoss();
-                        armyOne.remove(unitThree);
-                        log.add(unitThree.getName() + " killed " + unitFour.getName());
+                    if (unitTwo.getHealth() <= 0){
+                        armyOne.addKill();
+                        armyTwo.addLoss();
+                        armyTwo.remove(unitTwo);
+                        log.add(unitOne.getName() + " killed " + unitTwo.getName());
                     } else {
-                        log.add(unitThree.getName() + " damaged " + unitFour.getName());
+                        log.add(unitOne.getName() + " damaged " + unitTwo.getName());
+                    }
+
+                    // The second army can't counterattack if wiped out from the attack
+                    if (armyTwo.hasUnits()){
+                        // One unit from armyTwo attacks one from armyOne
+                        Unit unitThree = armyOne.getRandom();
+                        Unit unitFour = armyTwo.getRandom();
+                        unitFour.attack(unitThree, terrain.name(), weather.name());
+
+                        // Checks if the unit is wiped out
+                        if (unitThree.getHealth() <= 0){
+                            armyTwo.addKill();
+                            armyOne.addLoss();
+                            armyOne.remove(unitThree);
+                            log.add(unitFour.getName() + " killed " + unitThree.getName());
+                        } else {
+                            log.add(unitFour.getName() + " damaged " + unitThree.getName());
+                        }
                     }
                 }
             }
         }
         if (armyOne.hasUnits()){
             return armyOne;
-        }
-        if (armyTwo.hasUnits()){
+        } if (armyTwo.hasUnits()){
             return armyTwo;
         }
-        return null;
+        return new Army("Draw");
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    public Weather getWeather() {
+        return weather;
     }
 
     public ArrayList<String> getLog() {

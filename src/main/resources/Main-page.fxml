@@ -10,11 +10,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.ntnu.idatt2001.Wargames.Controllers.MainController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The WARGAMES" BorderPane.alignment="CENTER">
          <font>
-            <Font name="Copperplate Gothic Bold" size="50.0" />
+            <Font name="Copperplate Gothic Bold" size="60.0" />
          </font>
       </Text>
    </top>
@@ -49,6 +49,13 @@
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Units:                   " />
+                  <TextField fx:id="army1Total" editable="false" prefWidth="50.0" promptText="0" text="0" />
+               </children>
+            </HBox>
+            <Line endX="100.0" startX="-100.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:" />
             <HBox />
             <Slider fx:id="army1Quality" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
@@ -66,6 +73,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="src\main\resources\ArmyFiles" />
             <Line endX="100.0" startX="-100.0" />
             <Button mnemonicParsing="false" onAction="#clearArmy1" text="Clear" textFill="RED" />
          </children>
@@ -105,6 +113,13 @@
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Units:                   " />
+                  <TextField fx:id="army1Total" editable="false" prefWidth="50.0" promptText="0" text="0" />
+               </children>
+            </HBox>
+            <Line endX="100.0" startX="-100.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:" />
             <Slider fx:id="army2Quality" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
             <HBox />
@@ -122,6 +137,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="src\main\resources\ArmyFiles" />
             <Line endX="100.0" startX="-100.0" />
             <Button mnemonicParsing="false" onAction="#clearArmy2" text="Clear" textFill="RED" />
          </children>
@@ -141,16 +157,22 @@
             </Button>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="275.0" spacing="5.0">
                <children>
-                  <ChoiceBox fx:id="terrain" prefWidth="130.0" />
-                  <ChoiceBox fx:id="weather" prefWidth="130.0" />
+                  <ChoiceBox fx:id="terrain" prefWidth="150.0" />
+                  <ChoiceBox fx:id="weather" prefWidth="150.0" />
                   <Button mnemonicParsing="false" onAction="#updateValuesButton" text="Update" />
                </children>
             </HBox>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chosen Terrain:" />
-            <ImageView fx:id="mainImage" fitHeight="250.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="mainImage" fitHeight="250.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Size Comparison" />
-            <ProgressBar fx:id="armyComparison" prefWidth="350.0" progress="0.53" />
-            <Button mnemonicParsing="false" onAction="#updateSizeComparisonButton" text="Compute" />
+            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="474.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army 1 " />
+                  <ProgressBar fx:id="armyComparison" prefWidth="350.0" progress="0.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Army 2" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#updateSizeComparisonButton" text="Compute Strenght" />
          </children>
       </VBox>
    </center>

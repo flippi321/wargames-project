@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CommanderUnitTest {
+    /**
+     * Makes sure that the unit is created as intended
+     */
     @Nested
     @DisplayName("Constructors")
     class constructors{
@@ -44,6 +47,68 @@ public class CommanderUnitTest {
         }
     }
 
+    /**
+     * Makes sure that invalid inputs are handled correctly
+     */
+    @Nested
+    @DisplayName("Error Handling")
+    class errorHandling{
+        @Test
+        @DisplayName("Can't have an empty name")
+        public void checkInfantryNameWithSpace() {
+            try {
+                Unit newCommander = new CommanderUnit(" ", 100);
+                fail("checkInfantryNameWithSpace should have thrown an Exception, but did not");
+            } catch (Exception e) {
+                assertEquals("Must have a name", e.getMessage());
+            }
+        }
+
+        @Test
+        @DisplayName("Can't have a comma in the name")
+        public void checkInfantryNameWithComma() {
+            try {
+                Unit newCommander = new CommanderUnit(",", 100);
+                fail("checkInfantryNameWithComma should have thrown an Exception, but did not");
+            } catch (Exception e) {
+                assertEquals("The name cannot contain a comma", e.getMessage());
+            }
+        }
+        @Test
+        @DisplayName("Health must be above 0")
+        public void checkInfantryWithInvalidHealth() {
+            try {
+                Unit newCommander = new CommanderUnit("General", 0);
+                fail("checkInfantryWithInvalidHealth should have thrown an Exception, but did not");
+            } catch (Exception e) {
+                assertEquals("Must have a health value above 0", e.getMessage());
+            }
+        }
+        @Test
+        @DisplayName("Health must be above 0")
+        public void checkInfantryWithInvalidAttack() {
+            try {
+                Unit newCommander = new CommanderUnit("General", 100, 0, 15);
+                fail("checkInfantryWithInvalidAttack should have thrown an Exception, but did not");
+            } catch (Exception e) {
+                assertEquals("Must have an attack value above 0", e.getMessage());
+            }
+        }
+        @Test
+        @DisplayName("Health must be above 0")
+        public void checkInfantryWithInvalidArmour() {
+            try {
+                Unit newCommander = new CommanderUnit("General", 100, 15, 0);
+                fail("checkInfantryNameWithInvalidArmour should have thrown an Exception, but did not");
+            } catch (Exception e) {
+                assertEquals("Must have an armour value above 0", e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Makes sure that unit fights as expected
+     */
     @Nested
     @DisplayName("Combat Stats")
     class combatStats   {
@@ -58,6 +123,57 @@ public class CommanderUnitTest {
                 assertTrue((commanderDefender.getHealth() < originalHealth));
             } catch (Exception e) {
                 fail("checkInfantryName failed");
+            }
+        }
+    }
+
+    /**
+     * Makes sure that all Bonuses have been successfully inherited
+     */
+    @Nested
+    @DisplayName("Terrain, Weather and bonuses")
+    class terrainValues {
+        @Test
+        @DisplayName("Default attack bonus on Hill")
+        public void checkAttackBonusOutsidePlains() {
+            try {
+                Unit newCommander = new CommanderUnit("General", 100);
+                assertEquals(6, newCommander.getAttackBonus("Hill", "Sunny"));
+            } catch (Exception e) {
+                fail("checkAttackBonusOutsidePlains failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Attack bonus changes on Plains")
+        public void checkAttackBonusOnPlains() {
+            try {
+                Unit newCommander = new CommanderUnit("General", 100);
+                assertEquals(10, newCommander.getAttackBonus("Plains", "Sunny"));
+            } catch (Exception e) {
+                fail("checkAttackBonusOnPlains failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Default resist bonus on plains")
+        public void checkResistBonusOutsideForest() {
+            try {
+                Unit newCommander = new CommanderUnit("General", 100);
+                assertEquals(1, newCommander.getResistBonus("Plains", "Sunny"));
+            } catch (Exception e) {
+                fail("checkResistBonusOutsideForest failed");
+            }
+        }
+
+        @Test
+        @DisplayName("Resist bonus is 0 in forest")
+        public void checkResistBonusInForest() {
+            try {
+                Unit newCommander = new CommanderUnit("General", 100);
+                assertEquals(0, newCommander.getResistBonus("Forest", "Sunny"));
+            } catch (Exception e) {
+                fail("checkResistBonusInForest failed");
             }
         }
     }
