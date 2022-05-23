@@ -1,7 +1,6 @@
 package no.ntnu.idatt2001.Wargames.Battle;
 
 import no.ntnu.idatt2001.Wargames.Army.*;
-import no.ntnu.idatt2001.Wargames.Battle.*;
 import no.ntnu.idatt2001.Wargames.Units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -14,44 +13,26 @@ public class BattleTest {
     class testingBattleMechanics{
         @Test
         @DisplayName("Testing a battle which the Orks should win")
-        public void checkOrkishVicotry() {
+        public void checkOrkishVictory() {
+            UnitFactory factory = new UnitFactory();
+            Army orks = new Army("Horde");
+            Army humans = new Army("Alliance");
             try {
-                // Orkish army
-                Army armyOne = new Army("Horde");
-                int i = 0;
-                while (i < 500){
-                    armyOne.add(new InfantryUnit("Grunt", 100));
-                    if(i < 200){
-                        armyOne.add(new RangedUnit("Spearman", 100));
-                    }
-                    if(i < 100){
-                        armyOne.add(new CavalryUnit("Raider", 100));
-                    }
-                    if(i < 1){
-                        armyOne.add(new CommanderUnit("Gul'Dan", 180));
-                    }
-                    i++;
-                }
+                //Ork army
+                orks.addAll(factory.getMultipleUnits("Infantry", 500, "Grunt", 100));
+                orks.addAll(factory.getMultipleUnits("Ranged", 250, "Spearman", 150));
+                orks.addAll(factory.getMultipleUnits("Cavalry", 150, "Raider", 75));
+                orks.addAll(factory.getMultipleUnits("Commander", 1, "Gul'Dan", 300));
 
                 // Human army
-                Army armyTwo = new Army("Alliance");
-                i = 0;
-                while (i < 300) {
-                    armyOne.add(new InfantryUnit("Footman", 100));
-                    if (i < 100) {
-                        armyOne.add(new RangedUnit("Archer", 100));
-                    }
-                    if (i < 50) {
-                        armyOne.add(new CavalryUnit("Knight", 100));
-                    }
-                    if (i < 1) {
-                        armyOne.add(new CommanderUnit("Mountain King", 180));
-                    }
-                    i++;
-                }
+                humans.addAll(factory.getMultipleUnits("Infantry", 500, "Footman", 75));
+                humans.addAll(factory.getMultipleUnits("Ranged", 250, "Archer", 100));
+                humans.addAll(factory.getMultipleUnits("Cavalry", 150, "Knight", 50));
+                humans.addAll(factory.getMultipleUnits("Commander", 1, "Mountain King", 200));
+
                 //Battle
-                Battle epicBattle = new Battle(armyOne, armyTwo, Terrain.FOREST, Weather.Sunny);
-                assertEquals(armyOne, epicBattle.simulate());
+                Battle epicBattle = new Battle(orks, humans, Terrain.FOREST, Weather.Sunny);
+                assertEquals(orks.getName(), epicBattle.simulate().getName());
             } catch (Exception e) {
                 fail("checkHasUnitsWhenNotEmpty failed");
             }
@@ -60,44 +41,25 @@ public class BattleTest {
         @Test
         @DisplayName("Testing a battle which the Humans should win")
         public void checkHumanVicotry() {
+            UnitFactory factory = new UnitFactory();
+            Army orks = new Army("Horde");
+            Army humans = new Army("Alliance");
             try {
-                // Orkish army
-                Army armyOne = new Army("Horde");
-                int i = 0;
-                while (i < 300){
-                    armyOne.add(new InfantryUnit("Grunt", 100));
-                    if(i < 100){
-                        armyOne.add(new RangedUnit("Spearman", 100));
-                    }
-                    if(i < 50){
-                        armyOne.add(new CavalryUnit("Raider", 100));
-                    }
-                    if(i < 1){
-                        armyOne.add(new CommanderUnit("Gul'Dan", 180));
-                    }
-                    i++;
-                }
+                //Ork army
+                orks.addAll(factory.getMultipleUnits("Infantry", 500, "Grunt", 75));
+                orks.addAll(factory.getMultipleUnits("Ranged", 250, "Spearman", 100));
+                orks.addAll(factory.getMultipleUnits("Cavalry", 150, "Raider", 50));
+                orks.addAll(factory.getMultipleUnits("Commander", 1, "Gul'Dan", 200));
 
                 // Human army
-                Army armyTwo = new Army("Alliance");
-                i = 0;
-                while (i < 500) {
-                    armyOne.add(new InfantryUnit("Footman", 100));
-                    if (i < 200) {
-                        armyOne.add(new RangedUnit("Archer", 100));
-                    }
-                    if (i < 100) {
-                        armyOne.add(new CavalryUnit("Knight", 100));
-                    }
-                    if (i < 1) {
-                        armyOne.add(new CommanderUnit("Mountain King", 180));
-                    }
-                    i++;
-                }
-                //Battle
-                Battle epicBattle = new Battle(armyOne, armyTwo, Terrain.FOREST, Weather.Sunny);
-                assertEquals(armyOne, epicBattle.simulate());
+                humans.addAll(factory.getMultipleUnits("Infantry", 500, "Footman", 100));
+                humans.addAll(factory.getMultipleUnits("Ranged", 250, "Archer", 150));
+                humans.addAll(factory.getMultipleUnits("Cavalry", 150, "Knight", 75));
+                humans.addAll(factory.getMultipleUnits("Commander", 1, "Mountain King", 300));
 
+                //Battle
+                Battle epicBattle = new Battle(orks, humans, Terrain.FOREST, Weather.Sunny);
+                assertEquals(humans.getName(), epicBattle.simulate().getName());
             } catch (Exception e) {
                 fail("checkHasUnitsWhenNotEmpty failed");
             }

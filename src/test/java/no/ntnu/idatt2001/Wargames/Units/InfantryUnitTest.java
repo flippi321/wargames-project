@@ -1,6 +1,5 @@
 package no.ntnu.idatt2001.Wargames.Units;
 
-import no.ntnu.idatt2001.Wargames.Units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
