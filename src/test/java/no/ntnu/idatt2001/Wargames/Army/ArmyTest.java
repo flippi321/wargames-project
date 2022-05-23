@@ -37,7 +37,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("Adding and Removing Units")
-    class addingAndRemovingUnits{
+    class testingAddingAndRemovingUnits{
         @Test
         @DisplayName("Testing adding a new unit")
         public void checkAddingNewUnit() {
@@ -112,7 +112,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("hasUnits and Random")
-    class hasUnitsAndRandom   {
+    class testingHasUnitsAndRandom   {
         @Test
         @DisplayName("Testing hasUnits on empty list")
         public void checkHasUnitsWhenEmpty() {
@@ -170,8 +170,8 @@ public class ArmyTest {
     }
 
     @Nested
-    @DisplayName("Testing getUnit functions")
-    class getUnitFunctions  {
+    @DisplayName("getUnit functions")
+    class testingGetUnitFunctions  {
         @Test
         @DisplayName("Testing that getInfantry Function returns all infantry units")
         public void checkGetInfantryUnits(){
@@ -235,5 +235,18 @@ public class ArmyTest {
         }
     }
 
-    // TODO TEST Exception Handling
+    @Nested
+    @DisplayName("Exception Handling")
+    class testingExceptionHandling{
+        @Test
+        @DisplayName("Exception thrown when using empty Army name")
+        public void testingArmyCreationWithEmptyName(){
+            try{
+                Army army = new Army(" ");
+                fail("testingExceptionHandling() did not throw Exception when supposed to");
+            } catch (Exception e) {
+                assertEquals("Name cannot be blank", e.getMessage());
+            }
+        }
+    }
 }

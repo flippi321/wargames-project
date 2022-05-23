@@ -181,33 +181,6 @@ public class Army {
         this.units = units;
     }
 
-    /**
-     * Method to load an army from a file location
-     * The empty constructor will check for a file matching the name of the Army
-     * Will use fileHandler to get an army class from a file, and then change current values to old values
-     */
-    public boolean loadArmy(){
-        return loadArmy(name);
-    }
-
-    /**
-     * Method to load an army from a file location
-     * Will use fileHandler to get an army class from a file, and then change current values to old values
-     * @param name name of the Army
-     */
-    public boolean loadArmy(String name){
-        try {
-            units.clear();
-            setName(name);
-            Army newArmy = fileHandler.loadArmy(name);
-            setUnits(newArmy.getAllUnits());
-            return true;
-        } catch (Exception e) {
-           System.out.println(e.getMessage());
-        }
-        return false;
-    }
-
     public void damageAll(int damage){
         for(Unit unit : getAllUnits()){
             unit.setHealth(unit.getHealth()-2);
@@ -229,29 +202,6 @@ public class Army {
             }
         }
     }
-
-    /*
-    public boolean saveArmy(){
-        try {
-            fileHandler.saveArmy(name, units);
-            return true;
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
-
-    public boolean deleteArmy(){
-        try {
-            fileHandler.deleteArmy(name);
-            return true;
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    */
 
     public double getArmyValue(){
         double armyValue = 0;

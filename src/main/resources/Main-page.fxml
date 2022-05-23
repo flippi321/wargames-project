@@ -48,13 +48,7 @@
                   <TextField fx:id="army1Commander" prefWidth="50.0" promptText="0" text="0" />
                </children>
             </HBox>
-            <Line endX="100.0" startX="-100.0" />
-            <HBox>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Units:                   " />
-                  <TextField fx:id="army1Total" editable="false" prefWidth="50.0" promptText="0" text="0" />
-               </children>
-            </HBox>
+            <HBox />
             <Line endX="100.0" startX="-100.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:" />
             <HBox />
@@ -73,9 +67,10 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="src\main\resources\ArmyFiles" />
             <Line endX="100.0" startX="-100.0" />
             <Button mnemonicParsing="false" onAction="#clearArmy1" text="Clear" textFill="RED" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="File Path:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="src\main\resources\ArmyFiles" />
          </children>
          <BorderPane.margin>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
@@ -113,13 +108,6 @@
                </children>
             </HBox>
             <Line endX="100.0" startX="-100.0" />
-            <HBox>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Units:                   " />
-                  <TextField fx:id="army1Total" editable="false" prefWidth="50.0" promptText="0" text="0" />
-               </children>
-            </HBox>
-            <Line endX="100.0" startX="-100.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Army Quality:" />
             <Slider fx:id="army2Quality" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
             <HBox />
@@ -137,9 +125,10 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="src\main\resources\ArmyFiles" />
             <Line endX="100.0" startX="-100.0" />
             <Button mnemonicParsing="false" onAction="#clearArmy2" text="Clear" textFill="RED" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="File Path:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="src\main\resources\ArmyFiles" />
          </children>
          <padding>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />

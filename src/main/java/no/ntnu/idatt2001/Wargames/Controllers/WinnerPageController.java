@@ -51,23 +51,15 @@ public class WinnerPageController implements Initializable {
         try {
             wargamesAdmin.setArmy1(wargamesAdmin.getPreBattleArmy1());
             wargamesAdmin.setArmy2(wargamesAdmin.getPreBattleArmy2());
-            Terrain terrain = wargamesAdmin.getBattle().getTerrain();
-            Weather weather = wargamesAdmin.getBattle().getWeather();
 
-            //Simulate Battle
-            wargamesAdmin.setBattle(new Battle(wargamesAdmin.getArmy1(), wargamesAdmin.getArmy2(), terrain, weather));
-            wargamesAdmin.setWinnerArmy(wargamesAdmin.getBattle().simulate());
-            wargamesAdmin.setBattleLog(wargamesAdmin.getBattle().getLog());
-
-            //Update values on screen
-            updateValues();
+            //Close Winner Window so that the user may replay the battle
+            winnerName.getScene().getWindow().hide();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
     private void updateValues(){
-        System.out.println("Updated");
         winnerName.setText(wargamesAdmin.getWinnerArmy().getName());
         winnerKills.setText(String.valueOf(wargamesAdmin.getWinnerArmy().getKills()));
         winnerLosses.setText(String.valueOf(wargamesAdmin.getWinnerArmy().getLosses()));

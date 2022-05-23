@@ -22,7 +22,7 @@ public class FileHandler {
             fixedFileLocation = (fixedFileLocation + ".csv");
         }
         //Making sure the file ends up in the resources folder
-        if (!fixedFileLocation.startsWith("src/main/resources/ArmyFiles/")){
+        if (!fixedFileLocation.startsWith("src/main/resources/armyFiles/")){
             fixedFileLocation = ("src/main/resources/ArmyFiles/"  + fixedFileLocation);
         }
 

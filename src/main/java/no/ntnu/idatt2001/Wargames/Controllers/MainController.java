@@ -34,7 +34,7 @@ public class MainController implements Initializable {
     private Battle battle;
     private UnitFactory unitFactory;
     private String log;
-    FileHandler fileHandler;
+    FileHandler fileHandler = new FileHandler();
     private final String[] TERRAINS = {"Forest", "Hill", "Plains"};
     private final String[] WEATHERS = {"Sunny", "Rainstorm", "Blizzard", "Heavy Fog"};
     private final String[] ARMYNAMES = {"Human", "Orkish", "Elvish", "Dwarven"};
@@ -81,8 +81,6 @@ public class MainController implements Initializable {
     private ChoiceBox<String> army1NameType;
     @FXML
     private ChoiceBox<String> army2NameType;
-    @FXML
-    private TextField army1Total;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -189,7 +187,7 @@ public class MainController implements Initializable {
         }
         if (cavalry > 0) {
             army.addAll(unitFactory.getMultipleUnits(UnitType.CAVALRY.name(), cavalry,
-                    cavalryName, 150*quality));
+                    cavalryName, 125*quality));
         }
         if (ranged > 0) {
             army.addAll(unitFactory.getMultipleUnits(UnitType.RANGED.name(), ranged,
@@ -257,10 +255,6 @@ public class MainController implements Initializable {
             wargamesAdmin.setWinnerArmy(wargamesAdmin.getBattle().simulate());
             wargamesAdmin.setBattleLog(wargamesAdmin.getBattle().getLog());
 
-            //Update values to reflect on the battle outcome
-            updateArmy1();
-            updateArmy2();
-
             //Open Victory Screen
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Winner-Page.fxml"));
             Stage stage = new Stage();
@@ -316,53 +310,63 @@ public class MainController implements Initializable {
 
     @FXML
     public boolean loadArmy1(ActionEvent actionEvent) throws Exception {
-        // If there is an army with the right name saved, it will be loaded automatically
-        errorMessage.setText("");
-        if (!army1Name.getText().isBlank()) {
-            if (wargamesAdmin.getArmy1().loadArmy()) {
+        try {
+            wargamesAdmin.getArmy1().setName(army1Name.getText());
+            // If there is an army with the right name saved, it will be loaded automatically
+            errorMessage.setText("");
+            if (!army1Name.getText().isBlank()) {
+                wargamesAdmin.setArmy1(fileHandler.loadArmy(wargamesAdmin.getArmy1().getName()));
+                wargamesAdmin.setPreBattleArmy1(wargamesAdmin.getArmy1());
                 return updateArmy1();
             }
-        }
 
-        // If not you must find it manually
-        wargamesAdmin.setArmy1(getArmyFromFileChosen());
-        return updateArmy1();
+            // If not you must find it manually
+            wargamesAdmin.setArmy1(getArmyFromFileChosen());
+            return updateArmy1();
+        } catch (Exception e){
+            errorMessage.setText(e.getMessage());
+        }
+        return false;
     }
 
     @FXML
     public boolean loadArmy2(ActionEvent actionEvent) throws Exception {
-        // If there is an army with the right name saved, it will be loaded automatically
-        errorMessage.setText("");
-        if (!army2Name.getText().isBlank()) {
-            if (wargamesAdmin.getArmy2().loadArmy()) {
+        try {
+            wargamesAdmin.getArmy2().setName(army2Name.getText());
+            // If there is an army with the right name saved, it will be loaded automatically
+            errorMessage.setText("");
+            if (!army2Name.getText().isBlank()) {
+                wargamesAdmin.setArmy2(fileHandler.loadArmy(wargamesAdmin.getArmy2().getName()));
+                wargamesAdmin.setPreBattleArmy2(wargamesAdmin.getArmy2());
                 return updateArmy2();
             }
-        }
 
-        // If not you must find it manually
-        wargamesAdmin.setArmy2(getArmyFromFileChosen());
-        return updateArmy2();
+            // If not you must find it manually
+            wargamesAdmin.setArmy2(getArmyFromFileChosen());
+            return updateArmy2();
+        } catch (Exception e){
+            errorMessage.setText(e.getMessage());
+        }
+        return false;
     }
 
     private boolean updateArmy1() throws IllegalArgumentException {
-        Army army = wargamesAdmin.getArmy1();
+        Army army = wargamesAdmin.getPreBattleArmy1();
         army1Name.setText(wargamesAdmin.getArmy1().getName());
         army1Cavalry.setText(String.valueOf(army.getCavalryUnits().size()));
         army1Infantry.setText(String.valueOf(army.getInfantryUnits().size()));
         army1Ranged.setText(String.valueOf(army.getRangedUnits().size()));
         army1Commander.setText(String.valueOf(army.getCommanderUnits().size()));
-        army1Total.setText(String.valueOf(army.getAllUnits().size()));
         return true;
     }
 
     private boolean updateArmy2() throws IllegalArgumentException {
-        Army army = wargamesAdmin.getArmy2();
+        Army army = wargamesAdmin.getPreBattleArmy2();
         army2Name.setText(army.getName());
         army2Cavalry.setText(String.valueOf(army.getCavalryUnits().size()));
         army2Infantry.setText(String.valueOf(army.getInfantryUnits().size()));
         army2Ranged.setText(String.valueOf(army.getRangedUnits().size()));
         army2Commander.setText(String.valueOf(army.getCommanderUnits().size()));
-        army1Total.setText(String.valueOf(army.getAllUnits().size()));
         return true;
     }
 
@@ -410,8 +414,10 @@ public class MainController implements Initializable {
     @FXML
     public void viewArmy1Units(ActionEvent actionEvent) {
         try {
-            // Army will be updated if not already
-            if(wargamesAdmin.getArmy1().getAllUnits().size()==0){
+            //Update Army Values
+            if(wargamesAdmin.getPreBattleArmy1().hasUnits()){
+                wargamesAdmin.setArmy1(wargamesAdmin.getPreBattleArmy1());
+            } else if(wargamesAdmin.getArmy1().hasUnits()){
                 wargamesAdmin.setArmy1(generateArmy1());
             }
 
@@ -429,8 +435,10 @@ public class MainController implements Initializable {
     @FXML
     public void viewArmy2Units(ActionEvent actionEvent) {
         try {
-            // Army will be updated if not already
-            if(wargamesAdmin.getArmy2().getAllUnits().size()==0){
+            //Update Army Values
+            if(wargamesAdmin.getPreBattleArmy2().hasUnits()){
+                wargamesAdmin.setArmy2(wargamesAdmin.getPreBattleArmy2());
+            } else if(wargamesAdmin.getArmy2().hasUnits()){
                 wargamesAdmin.setArmy2(generateArmy2());
             }
 

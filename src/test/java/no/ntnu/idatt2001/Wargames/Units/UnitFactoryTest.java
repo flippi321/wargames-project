@@ -153,7 +153,7 @@ public class UnitFactoryTest{
         public void checkInfantryNameWithSpace() {
             try {
                 UnitFactory unitFactory = new UnitFactory();
-                Unit newUnit = unitFactory.getUnit("Infantry"," ", 100);
+                Unit newInfantry = unitFactory.getUnit("Infantry"," ", 100);
                 fail("checkInfantryNameWithSpace should have thrown an Exception, but did not");
             } catch (Exception e) {
                 assertEquals("Must have a name", e.getMessage());
@@ -171,6 +171,7 @@ public class UnitFactoryTest{
                 assertEquals("The name cannot contain a comma", e.getMessage());
             }
         }
+
         @Test
         @DisplayName("Health must be above 0")
         public void checkInfantryWithInvalidHealth() {
@@ -182,8 +183,9 @@ public class UnitFactoryTest{
                 assertEquals("Must have a health value above 0", e.getMessage());
             }
         }
+
         @Test
-        @DisplayName("Health must be above 0")
+        @DisplayName("Attack must be above 0")
         public void checkInfantryWithInvalidAttack() {
             try {
                 UnitFactory unitFactory = new UnitFactory();
@@ -193,8 +195,9 @@ public class UnitFactoryTest{
                 assertEquals("Must have an attack value above 0", e.getMessage());
             }
         }
+
         @Test
-        @DisplayName("Health must be above 0")
+        @DisplayName("Armour must be above 0")
         public void checkInfantryWithInvalidArmour() {
             try {
                 UnitFactory unitFactory = new UnitFactory();
@@ -204,16 +207,30 @@ public class UnitFactoryTest{
                 assertEquals("Must have an armour value above 0", e.getMessage());
             }
         }
+
         @Test
-        @DisplayName("Error is thrown with non exist Unit Type as input")
+        @DisplayName("Exception is thrown with non exist Unit Type as input")
         public void TestingErrorHandlingWithWrongInput() {
             try {
                 UnitFactory unitFactory = new UnitFactory();
                 CommanderUnit commanderUnit = new CommanderUnit("Commander Greievous", 250);
                 Unit unit = unitFactory.getUnit("SuperUnit", "Commander Greievous", 250);
-                fail("TestingErrorHandlingWithWrongInput() failed");
+                fail("TestingErrorHandlingWithWrongInput() did not throw exception when expected to");
             } catch (Exception e) {
                 assertEquals("The unit type does not exist", e.getMessage());
+            }
+        }
+
+        @Test
+        @DisplayName("Exception is thrown when trying to get negative amount of units")
+        public void TestingGetMultipleWithNegativeInput() {
+            try {
+                UnitFactory unitFactory = new UnitFactory();
+                ArrayList<Unit> units = unitFactory.getMultipleUnits("Infantry", -5, "Infantry", 100);
+
+                fail("TestingGetMultipleWithNegativeInput() did not throw exception when expected to");
+            } catch (Exception e) {
+                assertEquals("Number of Units must be above 0", e.getMessage());
             }
         }
     }

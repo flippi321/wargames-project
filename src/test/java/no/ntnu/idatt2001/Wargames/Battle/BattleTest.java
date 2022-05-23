@@ -76,10 +76,9 @@ public class BattleTest {
         @DisplayName("Testing Witcher Victory")
         public void checkWitcherVictory(){
             try {
-                Army witchers = new Army("Witchers");
-                Army ghouls = new Army("Ghoul Army");
-                witchers.loadArmy();
-                ghouls.loadArmy();
+                FileHandler fileHandler = new FileHandler();
+                Army witchers = fileHandler.loadArmy("Witchers");
+                Army ghouls =fileHandler.loadArmy("Ghoul Army");
                 Battle witchersVsGhouls = new Battle(witchers, ghouls, Terrain.FOREST, Weather.Heavy_Fog);
                 assertEquals(witchers.getName(), witchersVsGhouls.simulate().getName());
             } catch (Exception e){
@@ -91,10 +90,9 @@ public class BattleTest {
         @DisplayName("Testing Ghoul Victory")
         public void checkGhoulVictory(){
             try {
-                Army witchers = new Army("Witchers");
-                Army ghouls = new Army("Ghoul Armada");
-                witchers.loadArmy();
-                ghouls.loadArmy();
+                FileHandler fileHandler = new FileHandler();
+                Army witchers = fileHandler.loadArmy("Witchers");
+                Army ghouls =fileHandler.loadArmy("Ghoul Armada");
                 Battle witcherGhoulBattle = new Battle(witchers, ghouls, Terrain.FOREST, Weather.Sunny);
                 assertEquals(ghouls.getName(),witcherGhoulBattle.simulate().getName());
             } catch (Exception e){
