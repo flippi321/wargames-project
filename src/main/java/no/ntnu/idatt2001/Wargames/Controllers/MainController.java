@@ -183,19 +183,19 @@ public class MainController implements Initializable {
         }
 
         if (infantry > 0) {
-            army.addAll(unitFactory.getMultipleUnits(UnitType.INFANTRY, infantry,
+            army.addAll(unitFactory.getMultipleUnits("Infantry", infantry,
                     infantryName, 100*quality));
         }
         if (cavalry > 0) {
-            army.addAll(unitFactory.getMultipleUnits(UnitType.CAVALRY, cavalry,
+            army.addAll(unitFactory.getMultipleUnits("Cavalry", cavalry,
                     cavalryName, 150*quality));
         }
         if (ranged > 0) {
-            army.addAll(unitFactory.getMultipleUnits(UnitType.RANGED, ranged,
+            army.addAll(unitFactory.getMultipleUnits("Ranged", ranged,
                     rangedName, 75*quality));
         }
         if (commander > 0) {
-            army.addAll(unitFactory.getMultipleUnits(UnitType.COMMANDER, commander,
+            army.addAll(unitFactory.getMultipleUnits("Commander", commander,
                     commanderName, 300*quality));
         }
         return army;
