@@ -210,19 +210,6 @@ public class Army {
         }
     }
 
-    //TODO
-    // Optimize
-    public void removeAllCavalry(){
-        CavalryUnit cavalry = new CavalryUnit("Horse", 100);
-        for(Unit unit : getAllUnits()){
-            if(unit.getClass().equals(cavalry.getClass()))
-                unit.setHealth(unit.getHealth()-2);
-            if (unit.getHealth()<1){
-                remove(unit);
-            }
-        }
-    }
-
     public double getArmyValue(){
         double armyValue = 0;
         for (Unit unit : getAllUnits()){

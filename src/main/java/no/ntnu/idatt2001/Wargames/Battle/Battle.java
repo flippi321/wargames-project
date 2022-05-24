@@ -57,7 +57,6 @@ public class Battle {
                 switch (weather.name()){
                     // Rainstorm: Lightning kills 1 random unit from each army
                     default -> {
-                        System.out.println("Rain");
                         Unit unitOne = armyOne.getRandom();
                         Unit unitTwo = armyTwo.getRandom();
                         log.add(String.format("[Lightning Hits! %10s and %10s are killed]",
@@ -67,22 +66,24 @@ public class Battle {
                     }
                     // Blizzard: All units take damage from frostbite
                     case "Blizzard" -> {
-                        System.out.println("Blizzard");
                         log.add("[Blizzard Hits! All units take 10 damage]");
                         armyOne.damageAll(10);
                         armyTwo.damageAll(10);
                     }
                     // Heavy Fog: There is a 5% chance that all cavalry units gets lost in the fog
                     case "Heavy_Fog" -> {
-                        System.out.println("Fog");
-                        log.add("[Heavy fog hits]");
                         int ranNum = random.nextInt(20);
                         if (ranNum == 19){
-                            armyOne.removeAllCavalry();
-                            System.out.println();
-                            log.add(String.format("[Heavy Fog! %s's cavalry division gets lost]", armyOne.getName()));
+                            for(Unit unit : armyOne.getCavalryUnits()){
+                                armyOne.remove(unit);
+                            }
+                            armyOne.addLoss();
+                            log.add(String.format("[Heavy Fog! %s's cavalry division gets lost]", armyTwo.getName()));
                         } else if (ranNum == 18){
-                            armyTwo.removeAllCavalry();
+                            for(Unit unit : armyTwo.getCavalryUnits()){
+                                armyTwo.remove(unit);
+                            }
+                            armyTwo.addLoss();
                             log.add(String.format("[Heavy Fog! %s's cavalry division gets lost]", armyTwo.getName()));
                         }
                     }
