@@ -132,21 +132,38 @@ public class Battle {
         return new Army("Draw");
     }
 
+    /**
+     * Accessor method for Terrain value
+     * @return the terrain value for the battle
+     */
     public Terrain getTerrain() {
         return terrain;
     }
 
+    /**
+     * Accessor method for Weather value
+     * @return the weather value for the battle
+     */
     public Weather getWeather() {
         return weather;
     }
 
+    /**
+     * Accessor method for the battle Log
+     * @return the log of the battle
+     */
     public ArrayList<String> getLog() {
         return log;
     }
 
+    /**
+     * Method to display battle information about the battle
+     * @return the terrain value for the battle
+     */
     @Override
     public String toString() {
-        return "This battle is between" + armyOne +
-                " & " + armyTwo;
+        return "This battle is between" + armyOne.getName() +
+                " & " + armyTwo.getName() + " and includes " +
+                (armyOne.getAllUnits().size()+armyTwo.getAllUnits().size() + " units");
     }
 }
