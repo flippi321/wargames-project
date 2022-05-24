@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -100,6 +101,11 @@
                   <HBox prefHeight="0.0" prefWidth="150.0" />
                   <HBox prefHeight="0.0" prefWidth="150.0" />
                   <Line endX="50.0" startX="-100.0" />
+                  <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#seeRemainingArmy2" text="See Remaining" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children></VBox>
@@ -154,6 +160,11 @@
             <HBox prefHeight="0.0" prefWidth="150.0" />
             <HBox prefHeight="0.0" prefWidth="150.0" />
             <Line endX="50.0" startX="-100.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="157.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#seeRemainingArmy1" text="See Remaining" />
+               </children>
+            </HBox>
          </children></VBox>
     </left>
 </BorderPane>

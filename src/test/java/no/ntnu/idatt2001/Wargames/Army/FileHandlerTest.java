@@ -44,7 +44,7 @@ public class FileHandlerTest {
         public void loadFileTest(){
             try {
                 FileHandler fileHandler = new FileHandler();
-                Army loadedArmy = fileHandler.loadArmy("TestingArmy");
+                Army loadedArmy = fileHandler.loadArmyFromName("TestingArmy");
 
                 // 10 Infantry + 10 Cavalry + 10 Ranged + 1 Commander = 31 Units Combined
                 assertEquals(31, loadedArmy.getAllUnits().size());
@@ -67,7 +67,7 @@ public class FileHandlerTest {
 
             try{
                 fileHandler.saveArmy(army1);
-                Army army2 = fileHandler.loadArmy(army1.getName());
+                Army army2 = fileHandler.loadArmyFromName(army1.getName());
                 assertEquals(army1.getAllUnits().toString(), army2.getAllUnits().toString());
             } catch (Exception e){
                 fail("armyLoadingWillBeEqualToSource threw error when not supposed to");
@@ -104,7 +104,7 @@ public class FileHandlerTest {
         public void loadingArmyWithBlankName(){
             try {
                 FileHandler fileHandler = new FileHandler();
-                Army loadedArmy = fileHandler.loadArmy(" ");
+                Army loadedArmy = fileHandler.loadArmyFromName(" ");
                 fail("loadingArmyWithBlankName did not throw an exception when expected to");
             } catch (Exception e){
                 assertEquals("File name cannot be empty", e.getMessage());

@@ -5,18 +5,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import no.ntnu.idatt2001.Wargames.Battle.Battle;
-import no.ntnu.idatt2001.Wargames.Battle.Terrain;
-import no.ntnu.idatt2001.Wargames.Battle.Weather;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * WinnarPageController Class
+ * @author  chribrev
+ * @version 1.0
+ */
 public class WinnerPageController implements Initializable {
     @FXML
     private TextField winnerKills;
@@ -88,6 +87,35 @@ public class WinnerPageController implements Initializable {
 
             winnerKills.getScene().getWindow().hide();
         } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    public void seeRemainingArmy1(ActionEvent actionEvent) {
+        try {
+            //Open Units Screen
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Army1_Units.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle(wargamesAdmin.getArmy1().getName() + " Units");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    @FXML
+    public void seeRemainingArmy2(ActionEvent actionEvent) {
+        try {
+            //Open Units Screen
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Army2_Units.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle(wargamesAdmin.getArmy2().getName() + " Units");
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }

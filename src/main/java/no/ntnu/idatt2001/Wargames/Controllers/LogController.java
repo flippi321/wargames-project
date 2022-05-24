@@ -9,6 +9,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * LogController Class
+ * @author  chribrev
+ * @version 1.0
+ */
 public class LogController implements Initializable {
 
     @FXML

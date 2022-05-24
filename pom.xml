@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>edu.ntnu.idatt2001.chribrev</groupId>
+    <groupId>edu.ntnu.idatt2001.Wargames</groupId>
     <artifactId>Wargames</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -107,7 +107,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>no.ntnu.idatt2001.WargamesApplication</mainClass>
+                            <mainClass>no.ntnu.idatt2001.Wargames.Main</mainClass>
                         </configuration>
                     </execution>
                 </executions>

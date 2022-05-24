@@ -1,8 +1,12 @@
 package no.ntnu.idatt2001.Wargames.Army;
 import no.ntnu.idatt2001.Wargames.Units.*;
-import java.io.*;
 import java.util.*;
 
+/**
+ * Army Class
+ * @author  chribrev
+ * @version 1.0
+ */
 public class Army {
     private String name;
     private int losses;
@@ -21,19 +25,8 @@ public class Army {
         this.name = name;
         this.units = new ArrayList<>();
         this.fileHandler = new FileHandler();
-    }
-
-    //TODO
-    // REMOVE?
-    /**
-     * Constructor for an object representing an empty army
-     * This constructor is used to copy another army
-     * @param army the army that should be copied
-     */
-    public Army(Army army) {
-        this.name = army.getName();
-        this.units = army.getAllUnits();
-        this.fileHandler = new FileHandler();
+        losses = 0;
+        kills = 0;
     }
 
     /**
@@ -45,38 +38,51 @@ public class Army {
         this.name = name;
         this.units = units;
         this.fileHandler = new FileHandler();
+        losses = 0;
+        kills = 0;
     }
 
     /**
-     * Method for acquiring the name of the army
+     * Accessor method for name
      * @return the name of the army
      */
     public String getName() {
         return name;
     }
 
-    //TODO
-    // JavaDoc
-
+    /**
+     * Accessor method for Losses
+     * @return the losses of the army
+     */
     public int getLosses() {
         return losses;
     }
 
+    /**
+     * Method for increasing losses value
+     */
     public void addLoss() {
         losses++;
     }
 
+    /**
+     * Accessor method for kills
+     * @return the kills of the army
+     */
     public int getKills() {
         return kills;
     }
 
+    /**
+     * Method for increasing kill value
+     */
     public void addKill() {
         kills++;
     }
 
     /**
-     * Method to add a new unit to the army
-     * @param unit the unit which should be integrated in the army
+     * Method for adding a new unit to the army
+     * @param unit the unit which should be integrated into the army
      */
     public void add(Unit unit){
         units.add(unit);
@@ -84,7 +90,7 @@ public class Army {
 
     /**
      * Method to add a list of new units to the army
-     * @param units a list of units which should be integrated in the army
+     * @param units a list of units which should be integrated into the army
      */
     public void addAll(List<Unit> units){
         this.units.addAll(units);
@@ -108,7 +114,7 @@ public class Army {
 
     /**
      * Method for checking if the army has any units
-     * @return true if there are units, false if the army is empty
+     * @return true if there are units in the Army, false if the Army's unit list is empty
      */
     public boolean hasUnits(){
         return !units.isEmpty();
@@ -116,7 +122,7 @@ public class Army {
 
     /**
      * Method to acquire all units in the army
-     * @return all units in the army in a list
+     * @return all units in the army as a list
      */
     public List<Unit> getAllUnits(){
         return units;
@@ -181,11 +187,25 @@ public class Army {
         this.units = units;
     }
 
+    /**
+     * Method to reduce health of all units in the army
+     * Will remove units if they die
+     * @param damage the damage which all units will suffer
+     */
     public void damageAll(int damage){
         for(Unit unit : getAllUnits()){
-            unit.setHealth(unit.getHealth()-2);
-            if(unit.getHealth()<=0){
+            // Makes sure that damage is above 0
+            if (damage <= 0){
+                throw new IllegalArgumentException("Damage can not be below zero");
+            }
+            // If it is, the method will check if the damage kills the unit
+            if((unit.getHealth()-damage) <= 0){
                 units.remove(unit);
+            }
+            // If not, the unit will suffer damage
+            else {
+                int previousHealth = unit.getHealth();
+                unit.setHealth(previousHealth-damage);
             }
         }
     }
@@ -196,7 +216,7 @@ public class Army {
         CavalryUnit cavalry = new CavalryUnit("Horse", 100);
         for(Unit unit : getAllUnits()){
             if(unit.getClass().equals(cavalry.getClass()))
-            unit.setHealth(unit.getHealth()-2);
+                unit.setHealth(unit.getHealth()-2);
             if (unit.getHealth()<1){
                 remove(unit);
             }

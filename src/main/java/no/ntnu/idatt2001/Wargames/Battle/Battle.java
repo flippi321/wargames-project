@@ -1,10 +1,9 @@
 package no.ntnu.idatt2001.Wargames.Battle;
+
 import no.ntnu.idatt2001.Wargames.Army.Army;
 import no.ntnu.idatt2001.Wargames.Units.*;
-
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.stream.Stream;
 
 /**
  * Battle Class

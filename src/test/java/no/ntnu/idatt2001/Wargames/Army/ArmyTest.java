@@ -233,6 +233,24 @@ public class ArmyTest {
             }
             assertEquals(25,newArmy.getRangedUnits().size());
         }
+
+        @Test
+        @DisplayName("Testing that damageAll works as intended")
+        public void testingDamageAllWithRightValues(){
+            try{
+                UnitFactory factory = new UnitFactory();
+                Army army = new Army("Test1");
+                army.addAll(factory.getMultipleUnits(
+                        "Infantry", 10, "Swordmen", 100));
+                army.damageAll(50);
+                Army rightArmy = new Army("Test1");
+                rightArmy.addAll(factory.getMultipleUnits(
+                        "Infantry", 10, "Swordmen", 50));
+                assertEquals(rightArmy.toString(), army.toString());
+            } catch (Exception e) {
+                fail("testingDamageAllWithRightValues() threw Exception when not supposed to");
+            }
+        }
     }
 
     @Nested
@@ -246,6 +264,20 @@ public class ArmyTest {
                 fail("testingExceptionHandling() did not throw Exception when supposed to");
             } catch (Exception e) {
                 assertEquals("Name cannot be blank", e.getMessage());
+            }
+        }
+
+        @Test
+        @DisplayName("Exception thrown when using damageAll with negative damage")
+        public void testingDamageAllWithNegativeValues(){
+            try{
+                UnitFactory factory = new UnitFactory();
+                Army army = new Army("Test1");
+                army.addAll(factory.getMultipleUnits("Infantry", 10, "Swordmen", 100));
+                army.damageAll(-5);
+                fail("testingDamageAllWithNegativeValues() did not throw Exception when supposed to");
+            } catch (Exception e) {
+                assertEquals("Damage can not be below zero", e.getMessage());
             }
         }
     }

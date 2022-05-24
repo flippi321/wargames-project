@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * FileHandler Class
+ * @author  chribrev
+ * @version 1.0
+ */
 public class FileHandler {
     public FileHandler() {
     }
@@ -30,13 +35,36 @@ public class FileHandler {
         return fixedFileLocation;
     }
 
-    public Army loadArmy(String armyName) throws IllegalArgumentException, FileNotFoundException {
-        //Making a fileLocation to the given name
+    /**
+     * Method to generate an Army from a file location
+     * @param armyName the name of the Army
+     * @return an army matching the name
+     * @throws IllegalArgumentException thrown if army name is empty
+     * @throws FileNotFoundException thrown if a file matching the name is not found.
+     */
+    public Army loadArmyFromName(String armyName) throws IllegalArgumentException, FileNotFoundException {
         if (armyName.isBlank()){
             throw new IllegalArgumentException("File name cannot be empty");
         }
 
+        //Making a fileLocation to the given name
         String fileLocation = testFileLocation(armyName);
+        return loadArmyFromLocation(fileLocation);
+    }
+
+    /**
+     * Method to generate an Army from a file location
+     * @param fileLocation the location of the Army file
+     * @return an army matching the location
+     * @throws IllegalArgumentException thrown if army name is empty
+     * @throws FileNotFoundException thrown if a file matching the name is not found
+     */
+    public Army loadArmyFromLocation(String fileLocation) throws IllegalArgumentException, FileNotFoundException {
+        //Making a fileLocation to the given name
+        if (fileLocation.isBlank()){
+            throw new IllegalArgumentException("File name cannot be empty");
+        }
+
         FileInputStream fileInput = new FileInputStream(fileLocation);
         Scanner scanner = new Scanner(fileInput);
         List<Unit> newUnits = new ArrayList<>();
@@ -76,7 +104,7 @@ public class FileHandler {
         scanner.close();
 
         // Returning Army
-        return new Army(armyName, newUnits);
+        return new Army(name, newUnits);
     }
 
     /**
