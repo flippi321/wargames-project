@@ -17,6 +17,10 @@ public class FrontPageController {
     @FXML
     private Button mainButton;
 
+    /**
+     * Method which opens Main Page as a new window
+     * @param event when Start button is clicked
+     */
     @FXML
     public void startApplication(Event event) {
         try {

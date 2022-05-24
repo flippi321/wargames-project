@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -86,7 +87,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Play backround music
         try {
-            AudioClip theme = new AudioClip(getClass().getResource("/music/WargamesTheme.mp3").toExternalForm());
+            AudioClip theme = new AudioClip(Objects.requireNonNull(getClass().getResource("/music/WargamesTheme.mp3")).toExternalForm());
             theme.setVolume(0.5);
             theme.setCycleCount(AudioClip.INDEFINITE);
             theme.play();
@@ -111,20 +112,40 @@ public class MainController implements Initializable {
         changeImage();
     }
 
+    /**
+     * Turn TextField into an int
+     * @param text textField in the GUI
+     * @return int value in textField
+     */
     private int valueOf(TextField text) {
         return Integer.parseInt(text.getText());
     }
 
+    /**
+     * Method to generate army1 based on values in text boxes
+     * @return Army generated using generateArmy() method with textField values
+     * @throws IllegalArgumentException thrown if invalid values are inputted in generateArmy method
+     */
     private Army generateArmy1() throws IllegalArgumentException{
         return generateArmy(army1Name, army1Infantry, army1Cavalry, army1Ranged,
                 army1Commander, army1Quality, army1NameType);
     }
 
+    /**
+     * Method to generate army2 based on values in text boxes
+     * @return Army generated using generateArmy() method with textField values
+     * @throws IllegalArgumentException thrown if invalid values are inputted in generateArmy method
+     */
     private Army generateArmy2() throws IllegalArgumentException{
         return generateArmy(army2Name, army2Infantry, army2Cavalry, army2Ranged,
                 army2Commander, army2Quality, army2NameType);
     }
 
+    /**
+     * Method to generate an Army with TextFields
+     * @return Army generated from textField values
+     * @throws IllegalArgumentException thrown if invalid values are inputted
+     */
     private Army generateArmy(TextField armyName, TextField infantryValue, TextField cavalryValue, TextField rangedValue,
                               TextField commanderValue, Slider armyQuality, ChoiceBox<String> namingConvention)
             throws IllegalArgumentException{
@@ -200,6 +221,10 @@ public class MainController implements Initializable {
         return army;
     }
 
+    /**
+     * Method to get a terrain object depending on the value chosen in choiceBox
+     * @return the terrain chosen in the choiceBox
+     */
     private Terrain decideTerrain() {
         switch (terrain.getValue()) {
             default -> {
@@ -214,6 +239,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method to get a weather object depending on the value chosen in choiceBox
+     * @return the weather chosen in the choiceBox
+     */
     private Weather decideWeather() {
         switch (weather.getValue()) {
             default -> {
@@ -231,6 +260,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method to start simulate the battle between the two armies
+     * @param actionEvent starts when button Fight is clicked
+     */
     @FXML
     private void Simulate(ActionEvent actionEvent) {
         errorMessage.setText("");
@@ -266,6 +299,11 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method to open File manager and get an Army from a .csv value chosen
+     * @return Army generated from .csv file chosen
+     * @throws Exception if invalid or no file is chosen
+     */
     private Army getArmyFromFileChosen() throws Exception {
         fileHandler = new FileHandler();
         FileChooser fileChooser = new FileChooser();
@@ -274,6 +312,12 @@ public class MainController implements Initializable {
         return fileHandler.loadArmyFromLocation(path);
     }
 
+    /**
+     * Method to save army1 on a local file
+     * @param actionEvent starts when save button is pressed
+     * @return true if army has been successfully saved, false if not
+     * @throws FileNotFoundException thrown if saving the file does not work
+     */
     @FXML
     public boolean saveArmy1(ActionEvent actionEvent) throws FileNotFoundException {
         errorMessage.setText("");
@@ -291,6 +335,12 @@ public class MainController implements Initializable {
         return fileHandler.saveArmy(wargamesAdmin.getArmy1());
     }
 
+    /**
+     * Method to save army2 on a local file
+     * @param actionEvent starts when save button is pressed
+     * @return true if army has been successfully saved, false if not
+     * @throws FileNotFoundException thrown if saving the file does not work
+     */
     @FXML
     public boolean saveArmy2(ActionEvent actionEvent) throws IllegalArgumentException, FileNotFoundException {
         errorMessage.setText("");
@@ -308,8 +358,13 @@ public class MainController implements Initializable {
         return fileHandler.saveArmy(wargamesAdmin.getArmy2());
     }
 
+    /**
+     * Method to load army 1
+     * @param actionEvent starts when load button is pressed
+     * @return true if army has been successfully loaded, false if not
+     */
     @FXML
-    public boolean loadArmy1(ActionEvent actionEvent) throws Exception {
+    public boolean loadArmy1(ActionEvent actionEvent) {
         try {
             wargamesAdmin.getArmy1().setName(army1Name.getText());
             errorMessage.setText("");
@@ -331,8 +386,13 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method to load army 2
+     * @param actionEvent starts when load button is pressed
+     * @return true if army has been successfully loaded, false if not
+     */
     @FXML
-    public boolean loadArmy2(ActionEvent actionEvent) throws Exception {
+    public boolean loadArmy2(ActionEvent actionEvent) {
         try {
             wargamesAdmin.getArmy2().setName(army2Name.getText());
             errorMessage.setText("");
@@ -354,6 +414,11 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method to update army1 textFields with army values
+     * @return true if update is successfully, exception thrown when not
+     * @throws IllegalArgumentException thrown if update is not possible due to invalid values
+     */
     private boolean updateArmy1() throws IllegalArgumentException {
         Army army = wargamesAdmin.getPreBattleArmy1();
         army1Name.setText(wargamesAdmin.getArmy1().getName());
@@ -364,6 +429,11 @@ public class MainController implements Initializable {
         return true;
     }
 
+    /**
+     * Method to update army2 textFields with army values
+     * @return true if update is successfully, exception thrown when not
+     * @throws IllegalArgumentException thrown if update is not possible due to invalid values
+     */
     private boolean updateArmy2() throws IllegalArgumentException {
         Army army = wargamesAdmin.getPreBattleArmy2();
         army2Name.setText(army.getName());
@@ -415,6 +485,10 @@ public class MainController implements Initializable {
         mainImage.setImage(loadedImage);
     }
 
+    /**
+     * Method to see all units in army1 in a new window
+     * @param actionEvent will start when Units button is pressed
+     */
     @FXML
     public void viewArmy1Units(ActionEvent actionEvent) {
         try {
@@ -436,6 +510,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method to see all units in army2 in a new window
+     * @param actionEvent will start when Units button is pressed
+     */
     @FXML
     public void viewArmy2Units(ActionEvent actionEvent) {
         try {
@@ -456,11 +534,19 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Method to update image based on weather and terrain
+     * @param event starts when Update button is pressed
+     */
     @FXML
     public void updateValuesButton(Event event) {
         changeImage();
     }
 
+    /**
+     * Method to clear army2 values in Admin file and GUI
+     * @param actionEvent will start if Clear button is pressed
+     */
     @FXML
     public void clearArmy2(ActionEvent actionEvent) {
         wargamesAdmin.setArmy2(new Army("Army 1"));
@@ -468,6 +554,10 @@ public class MainController implements Initializable {
         army1Defined = false;
     }
 
+    /**
+     * Method to clear army1 values in Admin file and GUI
+     * @param actionEvent will start if Clear button is pressed
+     */
     @FXML
     public void clearArmy1(ActionEvent actionEvent) {
         wargamesAdmin.setArmy1(new Army("Army 1"));
@@ -475,6 +565,10 @@ public class MainController implements Initializable {
         army2Defined = false;
     }
 
+    /**
+     * Method to update slider to show army the difference in army unit values
+     * @param actionEvent will start if Compute Strength button is pressed
+     */
     @FXML
     public void updateSizeComparisonButton(ActionEvent actionEvent) {
         try {
