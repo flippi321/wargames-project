@@ -67,8 +67,14 @@ public class Battle {
                     // Blizzard: All units take damage from frostbite
                     case "Blizzard" -> {
                         log.add("[Blizzard Hits! All units take 10 damage]");
-                        armyOne.damageAll(10);
-                        armyTwo.damageAll(10);
+                        for (Unit unit : armyOne.getAllUnits()){
+                            int health = unit.getHealth();
+                            unit.setHealth(health - 10);
+                        }
+                        for (Unit unit : armyTwo.getAllUnits()){
+                            int health = unit.getHealth();
+                            unit.setHealth(health - 10);
+                        }
                     }
                     // Heavy Fog: There is a 5% chance that all cavalry units gets lost in the fog
                     case "Heavy_Fog" -> {

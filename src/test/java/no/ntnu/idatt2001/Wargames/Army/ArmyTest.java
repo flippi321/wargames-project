@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ArmyTest {
     @Nested
     @DisplayName("Constructors")
-    class constructors  {
+    class constructors {
         @Test
         @DisplayName("Testing that the constructor can work with just the name")
         public void checkWithOnlyName() {
@@ -37,7 +37,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("Adding and Removing Units")
-    class testingAddingAndRemovingUnits{
+    class testingAddingAndRemovingUnits {
         @Test
         @DisplayName("Testing adding a new unit")
         public void checkAddingNewUnit() {
@@ -112,7 +112,7 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("hasUnits and Random")
-    class testingHasUnitsAndRandom   {
+    class testingHasUnitsAndRandom {
         @Test
         @DisplayName("Testing hasUnits on empty list")
         public void checkHasUnitsWhenEmpty() {
@@ -156,8 +156,8 @@ public class ArmyTest {
                 int i = 0;
                 boolean different = false;
                 //T
-                while (i < 10 && !different){
-                    if(!newArmy.getRandom().equals(newArmy.getRandom())){
+                while (i < 10 && !different) {
+                    if (!newArmy.getRandom().equals(newArmy.getRandom())) {
                         different = true;
                     }
                     i++;
@@ -171,113 +171,81 @@ public class ArmyTest {
 
     @Nested
     @DisplayName("getUnit functions")
-    class testingGetUnitFunctions  {
+    class testingGetUnitFunctions {
         @Test
         @DisplayName("Testing that getInfantry Function returns all infantry units")
-        public void checkGetInfantryUnits(){
+        public void checkGetInfantryUnits() {
             Army newArmy = new Army("Confederacy of Independent States");
             Unit newInfantry = new InfantryUnit("Robot knights", 100);
             Unit newRanged = new RangedUnit("Naval Artillery", 50);
             Unit newCavalry = new CavalryUnit("Speed Bikes", 250);
-            for (int i = 0; i < 10; i++){
+            for (int i = 0; i < 10; i++) {
                 newArmy.add(newInfantry);
                 newArmy.add(newCavalry);
                 newArmy.add(newRanged);
             }
-            assertEquals(10,newArmy.getInfantryUnits().size());
+            assertEquals(10, newArmy.getInfantryUnits().size());
         }
 
         @Test
         @DisplayName("Testing that getCavalry Function returns all cavalry units")
-        public void checkGetCavalryUnits(){
+        public void checkGetCavalryUnits() {
             Army newArmy = new Army("Confederacy of Independent States");
             Unit newInfantry = new InfantryUnit("Robot knights", 100);
             Unit newRanged = new RangedUnit("Naval Artillery", 50);
             Unit newCavalry = new CavalryUnit("Speed Bikes", 250);
-            for (int i = 0; i < 5; i++){
+            for (int i = 0; i < 5; i++) {
                 newArmy.add(newInfantry);
                 newArmy.add(newCavalry);
                 newArmy.add(newRanged);
             }
-            assertEquals(5,newArmy.getCavalryUnits().size());
+            assertEquals(5, newArmy.getCavalryUnits().size());
         }
 
         @Test
         @DisplayName("Testing that getCommander Function returns the commander unit")
-        public void checkGetCommanderUnits(){
+        public void checkGetCommanderUnits() {
             Army newArmy = new Army("Confederacy of Independent States");
             Unit newInfantry = new InfantryUnit("Robot knights", 100);
             Unit newRanged = new RangedUnit("Naval Artillery", 50);
             Unit newCavalry = new CavalryUnit("Speed Bikes", 250);
             Unit newCommander = new CommanderUnit("Commander Grievous", 300);
             newArmy.add(newCommander);
-            for (int i = 0; i < 5; i++){
+            for (int i = 0; i < 5; i++) {
                 newArmy.add(newInfantry);
                 newArmy.add(newCavalry);
                 newArmy.add(newRanged);
             }
-            assertEquals(1,newArmy.getCommanderUnits().size());
+            assertEquals(1, newArmy.getCommanderUnits().size());
         }
 
         @Test
         @DisplayName("Testing that getRanged Function returns all infantry units")
-        public void checkGetRangedUnits(){
+        public void checkGetRangedUnits() {
             Army newArmy = new Army("Confederacy of Independent States");
             Unit newInfantry = new InfantryUnit("Robot knights", 100);
             Unit newRanged = new RangedUnit("Naval Artillery", 50);
             Unit newCavalry = new CavalryUnit("Speed Bikes", 250);
-            for (int i = 0; i < 25; i++){
+            for (int i = 0; i < 25; i++) {
                 newArmy.add(newInfantry);
                 newArmy.add(newCavalry);
                 newArmy.add(newRanged);
             }
-            assertEquals(25,newArmy.getRangedUnits().size());
+            assertEquals(25, newArmy.getRangedUnits().size());
         }
 
-        @Test
-        @DisplayName("Testing that damageAll works as intended")
-        public void testingDamageAllWithRightValues(){
-            try{
-                UnitFactory factory = new UnitFactory();
-                Army army = new Army("Test1");
-                army.addAll(factory.getMultipleUnits(
-                        "Infantry", 10, "Swordmen", 100));
-                army.damageAll(50);
-                Army rightArmy = new Army("Test1");
-                rightArmy.addAll(factory.getMultipleUnits(
-                        "Infantry", 10, "Swordmen", 50));
-                assertEquals(rightArmy.toString(), army.toString());
-            } catch (Exception e) {
-                fail("testingDamageAllWithRightValues() threw Exception when not supposed to");
-            }
-        }
-    }
-
-    @Nested
-    @DisplayName("Exception Handling")
-    class testingExceptionHandling{
-        @Test
-        @DisplayName("Exception thrown when using empty Army name")
-        public void testingArmyCreationWithEmptyName(){
-            try{
-                Army army = new Army(" ");
-                fail("testingExceptionHandling() did not throw Exception when supposed to");
-            } catch (Exception e) {
-                assertEquals("Name cannot be blank", e.getMessage());
-            }
-        }
-
-        @Test
-        @DisplayName("Exception thrown when using damageAll with negative damage")
-        public void testingDamageAllWithNegativeValues(){
-            try{
-                UnitFactory factory = new UnitFactory();
-                Army army = new Army("Test1");
-                army.addAll(factory.getMultipleUnits("Infantry", 10, "Swordmen", 100));
-                army.damageAll(-5);
-                fail("testingDamageAllWithNegativeValues() did not throw Exception when supposed to");
-            } catch (Exception e) {
-                assertEquals("Damage can not be below zero", e.getMessage());
+        @Nested
+        @DisplayName("Exception Handling")
+        class testingExceptionHandling {
+            @Test
+            @DisplayName("Exception thrown when using empty Army name")
+            public void testingArmyCreationWithEmptyName() {
+                try {
+                    Army army = new Army(" ");
+                    fail("testingExceptionHandling() did not throw Exception when supposed to");
+                } catch (Exception e) {
+                    assertEquals("Name cannot be blank", e.getMessage());
+                }
             }
         }
     }

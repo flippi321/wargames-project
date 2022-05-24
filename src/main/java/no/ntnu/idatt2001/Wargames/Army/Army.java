@@ -187,29 +187,6 @@ public class Army {
         this.units = units;
     }
 
-    /**
-     * Method to reduce health of all units in the army
-     * Will remove units if they die
-     * @param damage the damage which all units will suffer
-     */
-    public void damageAll(int damage){
-        for(Unit unit : getAllUnits()){
-            // Makes sure that damage is above 0
-            if (damage <= 0){
-                throw new IllegalArgumentException("Damage can not be below zero");
-            }
-            // If it is, the method will check if the damage kills the unit
-            if((unit.getHealth()-damage) <= 0){
-                units.remove(unit);
-            }
-            // If not, the unit will suffer damage
-            else {
-                int previousHealth = unit.getHealth();
-                unit.setHealth(previousHealth-damage);
-            }
-        }
-    }
-
     public double getArmyValue(){
         double armyValue = 0;
         for (Unit unit : getAllUnits()){
