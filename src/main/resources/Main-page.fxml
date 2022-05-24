@@ -161,7 +161,7 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Army 2" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#updateSizeComparisonButton" text="Compute Strenght" />
+            <Button mnemonicParsing="false" onAction="#updateSizeComparisonButton" text="Compute Strength" />
          </children>
       </VBox>
    </center>
