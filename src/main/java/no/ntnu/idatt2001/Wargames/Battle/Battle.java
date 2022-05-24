@@ -38,7 +38,7 @@ public class Battle {
      * Method to simulate a battle between army1 and army2
      * @return the army that wins the battle
      */
-    public Army simulate() throws Exception{
+    public Army simulate() {
         if(armyOne == null | armyTwo == null){
             throw new IllegalArgumentException("Armies must be defined");
         }
@@ -53,10 +53,11 @@ public class Battle {
             log.add("\nRound " + round +":");
 
             // Every 50 rounds, the weather will affect the units
-            if ((round%50==0 & !weather.name().equals("Sunny") & armyOne.hasUnits() & armyTwo.hasUnits())){
+            if (round%50==0 & !weather.name().equals("Sunny")){
                 switch (weather.name()){
                     // Rainstorm: Lightning kills 1 random unit from each army
                     default -> {
+                        System.out.println("Rain");
                         Unit unitOne = armyOne.getRandom();
                         Unit unitTwo = armyTwo.getRandom();
                         log.add(String.format("[Lightning Hits! %10s and %10s are killed]",
@@ -66,12 +67,14 @@ public class Battle {
                     }
                     // Blizzard: All units take damage from frostbite
                     case "Blizzard" -> {
-                        log.add("[Blizzard Hits! All units take 1 damage]");
-                        armyOne.damageAll(1);
-                        armyTwo.damageAll(1);
+                        System.out.println("Blizzard");
+                        log.add("[Blizzard Hits! All units take 10 damage]");
+                        armyOne.damageAll(10);
+                        armyTwo.damageAll(10);
                     }
                     // Heavy Fog: There is a 5% chance that all cavalry units gets lost in the fog
                     case "Heavy_Fog" -> {
+                        System.out.println("Fog");
                         log.add("[Heavy fog hits]");
                         int ranNum = random.nextInt(20);
                         if (ranNum == 19){
@@ -81,14 +84,12 @@ public class Battle {
                         } else if (ranNum == 18){
                             armyTwo.removeAllCavalry();
                             log.add(String.format("[Heavy Fog! %s's cavalry division gets lost]", armyTwo.getName()));
-                        };
+                        }
                     }
                 }
             } else {
-                //TODO
-                // Optimize
                 //Checks that neither of the Armies are wiped out by the weather effects
-                if(armyOne.hasUnits() && armyTwo.hasUnits()){
+                if(armyOne.hasUnits() & armyTwo.hasUnits()){
                     // One unit from armyOne attacks one from armyTwo
                     Unit unitOne = armyOne.getRandom();
                     Unit unitTwo = armyTwo.getRandom();
